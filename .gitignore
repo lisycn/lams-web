@@ -1,0 +1,7 @@
+# Eclipse
+.project
+.settings/
+*/target/*
+*/logs/*
+target
+.classpath
