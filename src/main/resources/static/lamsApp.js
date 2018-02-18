@@ -56,8 +56,8 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 
 app.run([ '$rootScope', '$state', '$stateParams','$http','$timeout',"$interval","$cookieStore","$q",
 	function($rootScope, $state, $stateParams,$http,$timeout,$interval,$cookieStore,$q) {
-//    $rootScope.state = $state;
-//    $rootScope.stateParams = $stateParams;
+    $rootScope.state = $state;
+    $rootScope.stateParams = $stateParams;
     $rootScope.isEmpty = function(data) {
 		return (data == null || data == undefined || data == ""
 				|| data == "null" || data == "undefined"
