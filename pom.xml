@@ -5,7 +5,6 @@
 	<artifactId>lams-web</artifactId>
 	<version>0.0.1</version>
 	<name>LAMS WEB</name>
-	<description>		</description>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

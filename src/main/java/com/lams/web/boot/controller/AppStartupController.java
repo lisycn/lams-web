@@ -1,4 +1,4 @@
-package com.lams.web.boot;
+package com.lams.web.boot.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
