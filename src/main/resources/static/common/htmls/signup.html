@@ -1,0 +1,76 @@
+<div class="wrapper">
+	<div class="main-panel">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-2"></div>
+					<div class="col-md-6">
+						<div class="card">
+							<div class="card-header" data-background-color="purple">
+								<h4 class="title">
+									<b>Signup </b> <a href="javascript:void(0)" class="pull-right"
+										data-ui-sref="login"><b>Already Done ? Login Here</b></a>
+								</h4>
+								<p class="category">
+									<b>Complete Signup Process</b>
+								</p>
+							</div>
+							<div class="card-content">
+								<form name="userForm" novalidate>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group label-floating">
+												<!-- <label class="control-label">Company (disabled)</label> -->
+												<select data-ng-model="user.userType"
+													data-ng-options="user.id as user.value for user in userTypes"
+													class="form-control">
+													<option value="">Select User</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group label-floating">
+												<label class="control-label">Full Name</label> <input
+													type="text" class="form-control" data-ng-model="user.name">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group label-floating">
+												<label class="control-label">Email address</label> <input
+													type="email" class="form-control"
+													data-ng-model="user.email">
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group label-floating">
+												<label class="control-label">Mobile</label> <input
+													type="email" class="form-control"
+													data-ng-model="user.mobile">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-8">
+											<div class="form-group">
+												<label class="">Accept Terms and
+													Conditions</label>&nbsp;&nbsp; <input type="checkbox"
+													data-ng-model="user.isAcceptTermCondition">
+											</div>
+										</div>
+										<div class="col-md-4 ">
+											<button type="submit" class="btn btn-primary pull-right">Sign
+												Up</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
