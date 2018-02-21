@@ -1,12 +1,13 @@
 /**
  * ROUTER CONFIGURATION
  */
-var app = angular.module("lams",['ui.router','ngMessages','ngCookies']);
+var app = angular.module("lams",['ui.router','ngMessages','toastr']);
 getUrls().then(bootstrapApplication);
 function getUrls() {
     var initInjector = angular.injector(["ng"]);
     var $http = initInjector.get("$http");
     return $http.get("web/get_urls").then(function(response) {
+    	console.log(response.data)
         app.constant("URLS", response.data);
     }, function(errorResponse) {
         console.log("Something went wrong")
@@ -54,8 +55,8 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 	$urlRouterProvider.otherwise("login");
 }]);
 
-app.run([ '$rootScope', '$state', '$stateParams','$http','$timeout',"$interval","$cookieStore","$q",
-	function($rootScope, $state, $stateParams,$http,$timeout,$interval,$cookieStore,$q) {
+app.run([ '$rootScope', '$state', '$stateParams','$http','$timeout',"$interval","$q",
+	function($rootScope, $state, $stateParams,$http,$timeout,$interval,$q) {
     $rootScope.state = $state;
     $rootScope.stateParams = $stateParams;
     $rootScope.isEmpty = function(data) {

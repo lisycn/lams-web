@@ -16,7 +16,7 @@
 								</p>
 							</div>
 							<div class="card-content">
-								<form name="userForm" novalidate>
+								<form name="userForm" ng-submit="doRegister()" novalidate>
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group label-floating">
@@ -47,8 +47,25 @@
 										<div class="col-md-6">
 											<div class="form-group label-floating">
 												<label class="control-label">Mobile</label> <input
-													type="email" class="form-control"
+													type="number" class="form-control"
 													data-ng-model="user.mobile">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group label-floating">
+												<label class="control-label">Password</label> <input
+													type="password" class="form-control"
+													data-ng-model="user.password">
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group label-floating">
+												<label class="control-label">Confirm password</label> <input
+													type="password" class="form-control"
+													data-ng-model="cnfrmPassword">
 											</div>
 										</div>
 									</div>
