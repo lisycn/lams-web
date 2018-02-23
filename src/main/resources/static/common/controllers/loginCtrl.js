@@ -1,5 +1,5 @@
-app.controller("loginCtrl",["$scope", "$http","$rootScope","userService","Constant","$state","Notification",
-		function($scope,$http,$rootScope,userService,Constant,$state,Notification) {
+app.controller("loginCtrl",["$scope", "$http","$rootScope","userService","Constant","$state","Notification","$cookieStore",
+		function($scope,$http,$rootScope,userService,Constant,$state,Notification,$cookieStore) {
 	$scope.login = {};
 	$scope.msg = null;
 	$scope.doLogin = function(){
@@ -11,17 +11,13 @@ app.controller("loginCtrl",["$scope", "$http","$rootScope","userService","Consta
 		userService.login($scope.login).then(
 	            function(success) {
 	            	if(success.data.status == 200){
+	            		$cookieStore.put(Constant.TOKEN,success.data.token);
 	            		$state.go("lams.dashboard");
 	                }else{
 	                	Notification.error(success.data.message);
 	                }
 	            }, function(error) {
-	                if(error.status == 401){
-	                    $rootScope.logout();
-	                }
-	                else{
-	                	msg = Constant.ErrorMessage.SOMETHING_WENT_WRONG;
-	                }
+	                Notification.error(Constant.ErrorMessage.SOMETHING_WENT_WRONG);
 	     });		
 		
 	}

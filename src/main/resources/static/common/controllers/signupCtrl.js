@@ -23,14 +23,14 @@ app.controller("signupCtrl",["$scope", "$http","$rootScope","Constant","userServ
 	                }else if(success.data.status == 400){
 	                	Notification.error(success.data.message);
 	                }else{
-	                	msg = Constant.ErrorMessage.SOMETHING_WENT_WRONG;
+	                	Notification.success(Constant.ErrorMessage.SOMETHING_WENT_WRONG);
 	                }
 	            }, function(error) {
 	                if(error.status == 401){
 	                    $rootScope.logout();
 	                }
 	                else{
-	                	msg = Constant.ErrorMessage.SOMETHING_WENT_WRONG;
+	                	Notification.success(Constant.ErrorMessage.SOMETHING_WENT_WRONG);
 	                }
 	     });		
 		

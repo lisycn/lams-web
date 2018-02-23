@@ -11,5 +11,6 @@ app.constant('Constant', {
 	},
 	ErrorMessage : {
 		SOMETHING_WENT_WRONG : "Something Went Wrong !"
-	}
+	},
+	TOKEN : "TOKEN"
 });

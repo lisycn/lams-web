@@ -6,10 +6,14 @@ app.service("userService", [ 'httpService', 'URLS', "$rootScope","$http",
 			};
 
 			this.register = function(data) {
-				return httpService.post('http://localhost:8181/lams/registration', data);
+				return httpService.post(URLS.user + '/registration', data);
 			};
 
 			this.login = function(data) {
-				return httpService.post('http://localhost:8181/lams/login', data);
+				return httpService.post(URLS.user + '/login', data);
+			};
+			
+			this.logout = function() {
+				return httpService.get(URLS.user + '/logout');
 			};
 		} ]);

@@ -1,7 +1,7 @@
 /**
  * ROUTER CONFIGURATION
  */
-var app = angular.module("lams",['ui.router','ngMessages','toastr']);
+var app = angular.module("lams",['ui.router','ngMessages','toastr','ngCookies']);
 getUrls().then(bootstrapApplication);
 function getUrls() {
     var initInjector = angular.injector(["ng"]);
@@ -48,15 +48,19 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
         }
 	}).state("lams.dashboard", {
         	url : '/dashboard',
-    		templateUrl : 'dashboard/dashboard.html',
-    		controller: 'dashboardCtrl',
-    		data : {pageTitle : "Lams | Dashboard"}
+        	views :  {
+        		'content' :  {
+        			templateUrl : 'dashboard/dashboard.html',
+            		controller: 'dashboardCtrl',
+            		data : {pageTitle : "Lams | Dashboard"}        			
+        		}
+        	}
 	});
 	$urlRouterProvider.otherwise("login");
 }]);
 
-app.run([ '$rootScope', '$state', '$stateParams','$http','$timeout',"$interval","$q",
-	function($rootScope, $state, $stateParams,$http,$timeout,$interval,$q) {
+app.run([ '$rootScope', '$state', '$stateParams','$http','$timeout',"$interval","$q","userService","$cookieStore","Constant",
+	function($rootScope, $state, $stateParams,$http,$timeout,$interval,$q,userService,$cookieStore,Constant) {
     $rootScope.state = $state;
     $rootScope.stateParams = $stateParams;
     $rootScope.isEmpty = function(data) {
@@ -64,6 +68,21 @@ app.run([ '$rootScope', '$state', '$stateParams','$http','$timeout',"$interval",
 				|| data == "null" || data == "undefined"
 				|| data == '' || data == [] || data == {});
 	}
+    
+    $rootScope.doLogout = function(){
+		userService.logout().then(
+	            function(success) {
+	            	$cookieStore.remove(Constant.TOKEN);
+	            	$state.go("login");
+	            }, function(error) {
+	            	$cookieStore.remove(Constant.TOKEN);
+	            	$state.go("login");
+	     });		
+		
+	}
+    if($rootScope.isEmpty($cookieStore.get(Constant.TOKEN))){
+    	$rootScope.doLogout();
+    }
 //    $state.go("login");
 
 }]);

@@ -32,21 +32,20 @@
 <script src="../assets/js/demo.js"></script>
 <script src="../assets/js/angular/angular.min.js"></script>
 <script src="../assets/js/angular/angular-ui-router.min.js"></script>
-<!-- <script src="../assets/js/angular/angular-cookies.js"></script> -->
+<script src="../assets/js/angular/angular-cookies.js"></script>
 <script src="../assets/js/angular/angular-messages.js"></script>
 <script src="lamsApp.js"></script>
 <script src="common/controllers/loginCtrl.js"></script>
 <script src="common/controllers/signupCtrl.js"></script>
 <script src="common/utils/lamsConstant.js"></script>
-<script src="common/services/httpService.js"></script>
 <script src="common/services/userService.js"></script>
+<script src="common/services/httpService.js"></script>
 <script src="common/services/commonServices.js"></script>
 
 <script src="common/directives/commonDirectives.js"></script>
 <script src="dashboard/dashboardCtrl.js"></script>
-
-<script src="https://unpkg.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css" />
+<script src="../assets/js/angular/angular-toastr.tpls.js"></script>
+<link rel="stylesheet" href="../assets/css/angular-toastr.css" />
 
 
 <script type="text/ng-template" id="error-messages">
@@ -141,13 +140,13 @@
 		<div class="main-panel">
 			<nav class="navbar navbar-transparent navbar-absolute"
 				data-ui-view="header"></nav>
-<!-- 			<div class="content" data-ui-view> -->
-<!-- 				<div class="container-fluids"> -->
-<!-- 					<h2> -->
-<!-- 						<b>Welcome to Loan Application Management System</b> -->
-<!-- 					</h2> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+			<div class="content" data-ui-view="content">
+				<div class="container-fluids">
+					<h2>
+						<b>Welcome to Loan Application Management System</b>
+					</h2>
+				</div>
+			</div>
 			<footer class="footer" data-ui-view="footer"> </footer>
 		</div>
 	</div>
