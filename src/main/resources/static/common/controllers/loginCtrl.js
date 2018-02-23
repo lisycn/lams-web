@@ -1,9 +1,8 @@
-app.controller("loginCtrl",["$scope", "$http","$rootScope","userService","Constant","$state",
-		function($scope,$http,$rootScope,userService,Constant,$state) {
+app.controller("loginCtrl",["$scope", "$http","$rootScope","userService","Constant","$state","Notification",
+		function($scope,$http,$rootScope,userService,Constant,$state,Notification) {
 	$scope.login = {};
 	$scope.msg = null;
 	$scope.doLogin = function(){
-		$state.go("lams.dashboard");
 		if($scope.loginForm.$invalid){
 			$scope.loginForm.$submitted = true;
 			console.warn("Invalid Form Details");
@@ -11,11 +10,10 @@ app.controller("loginCtrl",["$scope", "$http","$rootScope","userService","Consta
 		}
 		userService.login($scope.login).then(
 	            function(success) {
-	            	if(success.data.status == 200 && !$rootScope.isEmpty(success.data.data)){
-	                }else if(success.data.status == 400){
-	                	msg = success.data.message;
+	            	if(success.data.status == 200){
+	            		$state.go("lams.dashboard");
 	                }else{
-	                	msg = Constant.ErrorMessage.SOMETHING_WENT_WRONG;
+	                	Notification.error(success.data.message);
 	                }
 	            }, function(error) {
 	                if(error.status == 401){
