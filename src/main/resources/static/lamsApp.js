@@ -31,25 +31,28 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 		templateUrl : 'common/htmls/signup.html',
 		controller: 'signupCtrl',
 		data : {pageTitle : "Lams | Signup"}
+	}).state("web", {
+    	url : '',
+    	templateUrl : 'web.html',
 	})
-	.state("lams", {
+	.state("web.lams", {
 		url : '/lams',
 		abstract: true,
         views: {
-            'header': {
+            'header@web': {
                 templateUrl: 'common/htmls/header.html',
             },
-            'footer': {
+            'footer@web': {
                 templateUrl: 'common/htmls/footer.html',
             },
-            'sidebar': {
+            'sidebar@web': {
                 templateUrl: 'common/htmls/sidebar.html',
             }
         }
-	}).state("lams.dashboard", {
+	}).state("web.lams.dashboard", {
         	url : '/dashboard',
         	views :  {
-        		'content' :  {
+        		'content@web' :  {
         			templateUrl : 'dashboard/dashboard.html',
             		controller: 'dashboardCtrl',
             		data : {pageTitle : "Lams | Dashboard"}        			
