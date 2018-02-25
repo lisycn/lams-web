@@ -13,9 +13,10 @@ app.constant('Constant', {
 			value : 'All'
 		}
 	},
-	NA  : 'NA',
 	ErrorMessage : {
-		SOMETHING_WENT_WRONG : "Something Went Wrong !"
+		SOMETHING_WENT_WRONG : "Something Went Wrong !",
+		UN_AUTHORIZED : "Unauthorized ! Please Login Again.",
+		BAD_REQUEST : "Invalid Request !"
 	},
 	TOKEN : "TOKEN"
 });

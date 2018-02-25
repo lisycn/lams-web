@@ -62,8 +62,8 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 	$urlRouterProvider.otherwise("login");
 }]);
 
-app.run([ '$rootScope', '$state', '$stateParams','$http','$timeout',"$interval","$q","userService","$cookieStore","Constant",
-	function($rootScope, $state, $stateParams,$http,$timeout,$interval,$q,userService,$cookieStore,Constant) {
+app.run([ '$rootScope', '$state', '$stateParams','$http','$timeout',"$interval","$q","userService","$cookieStore","Constant","Notification",
+	function($rootScope, $state, $stateParams,$http,$timeout,$interval,$q,userService,$cookieStore,Constant,Notification) {
     $rootScope.state = $state;
     $rootScope.stateParams = $stateParams;
     $rootScope.isEmpty = function(data) {
@@ -86,8 +86,27 @@ app.run([ '$rootScope', '$state', '$stateParams','$http','$timeout',"$interval",
     if($rootScope.isEmpty($cookieStore.get(Constant.TOKEN))){
     	$rootScope.doLogout();
     }
-//    $state.go("login");
 
+    $rootScope.validateErrorResponse = function(error){
+    	if(error.status == 401){
+        	Notification.error(Constant.ErrorMessage.UN_AUTHORIZED);
+            $rootScope.doLogout();
+        }else if(error.status == 500){
+        	if(!$rootScope.isEmpty(error.data)){
+        		var errorRes = error.data.message.split(" ")[0];
+        		if(errorRes == 401){
+        			Notification.error(Constant.ErrorMessage.UN_AUTHORIZED);	
+        			$rootScope.doLogout();
+        		}
+        	}else{
+        		Notification.error(Constant.ErrorMessage.SOMETHING_WENT_WRONG);	
+        	}
+        } else if(error.status == 400){
+        	Notification.error(Constant.ErrorMessage.BAD_REQUEST);
+        }else{
+        	Notification.error(Constant.ErrorMessage.SOMETHING_WENT_WRONG);
+        }
+    }
 }]);
 
 //app.config(['$stateProvider', '$httpProvider', '$locationProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$ocLazyLoadProvider',
