@@ -12,13 +12,13 @@ app.controller("loginCtrl",["$scope", "$http","$rootScope","userService","Consta
 	            function(success) {
 	            	if(success.data.status == 200){
 	            		$cookieStore.put(Constant.TOKEN,success.data.token);
+	            		$rootScope.loadMasters()
 	            		$state.go("web.lams.dashboard");
 	                }else{
 	                	Notification.error(success.data.message);
 	                }
 	            }, function(error) {
-	                Notification.error(Constant.ErrorMessage.SOMETHING_WENT_WRONG);
+	            	$rootScope.validateErrorResponse(error);
 	     });		
-		
 	}
 }]);

@@ -24,14 +24,14 @@
 				data-toggle="dropdown"> <i class="material-icons">person</i>
 					<p class="hidden-lg hidden-md">Profile</p>
 			</a></li> -->
-			<li class="nav-item dropdown">
+			<li class="nav-item dropdown" title="{{user.name}}">
 				<div class="dropdown">
 					<button class="btn btn-primary dropdown-toggle" type="button"
 						data-toggle="dropdown">
 						<i class="material-icons">person</i> <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						<li><a href="javascript:void(0)">Profile</a></li>
+						<li><a href="javascript:void(0)" data-ui-sref="web.lams.brProfile">Profile</a></li>
 						<li><a href="javascript:void(0)" data-ng-click="doLogout()">Logout</a></li>
 					</ul>
 				</div>
