@@ -1,7 +1,7 @@
 /**
  * ROUTER CONFIGURATION
  */
-var app = angular.module("lams",['ui.router','ngMessages','toastr','ngCookies']);
+var app = angular.module("lams",['ui.router','ngMessages','toastr','ngCookies','ui.bootstrap']);
 getUrls().then(bootstrapApplication);
 function getUrls() {
     var initInjector = angular.injector(["ng"]);
@@ -67,8 +67,16 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
     		}
     	},
     	data : {pageTitle : "Lams | Profile"}
-});
-	console.log("$urlRouterProvider===>",$urlRouterProvider);
+	}).state("web.lams.application", {
+    	url : '/application',
+    	views :  {
+    		'content@web' :  {
+    			templateUrl : 'application/application.html',
+        		controller: 'applicationCtrl'
+    		}
+    	},
+    	data : {pageTitle : "Lams | Application"}
+	});
 	$urlRouterProvider.otherwise("login");
 }]);
 
