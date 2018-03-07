@@ -1,5 +1,5 @@
-<uib-tabset active="activeJustified" justified="true"> <uib-tab
-	index="0" heading="Personal Details"
+<uib-tabset active="selectedTab" justified="true"> <uib-tab
+	active="selectedTab == 1" heading="Personal Details"
 	ng-click="getUsers(Constant.UserType.LENDER.id)">
 <div>
 	<br />
@@ -20,47 +20,6 @@
 					<div class="card-content">
 						<form name="userForm" data-ng-submit="updateUserDetail()"
 							novalidate>
-							<div class="row">
-								<div class="col-md-2">
-									<div class="form-group">
-										<label class="control-label">User Type</label> <input
-											type="text" class="form-control"
-											data-ng-model="userData.userTypName" disabled>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="form-group">
-										<label class="control-label">Email address</label> <input
-											type="email" class="form-control"
-											data-ng-model="userData.email" disabled>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="form-group">
-										<label class="control-label">Mobile</label> <input type="text"
-											class="form-control" data-ng-model="userData.mobile" disabled>
-									</div>
-								</div>
-
-								<div class="col-md-3">
-									<div class="form-group">
-										<label class="control-label">Gender</label><br> <br>
-										<div data-ng-repeat="gender in genders" style="float: left;">
-											<input type="radio" name="rdoGender"
-												data-ng-model="userData.gender"
-												data-ng-value="{{gender.id}}">&nbsp;{{gender.value}}&nbsp;
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-2">
-									<div class="form-group">
-										<label class="control-label">Date Of Birth</label> <input
-											type="date" name="rdoGender" class="form-control"
-											data-ng-model="userData.birthDate">
-									</div>
-								</div>
-							</div>
 							<div class="row">
 								<div class="col-md-3">
 									<div class="form-group">
@@ -96,9 +55,67 @@
 									</div>
 								</div>
 							</div>
+							<div class="row">
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="control-label">Gender</label><br> <br>
+										<div data-ng-repeat="gender in genders" style="float: left;">
+											<label><input type="radio" name="rdoGender"
+												data-ng-model="userData.gender"
+												data-ng-value="{{gender.id}}">&nbsp;{{gender.value}}&nbsp;</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="control-label">Date Of Birth</label> <input
+											type="date" name="rdoGender" class="form-control"
+											data-ng-model="userData.birthDate">
+									</div>
+								</div>
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="control-label">Pan Card</label> <input
+											type="text" class="form-control"
+											data-ng-model="userData.panCard">
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="control-label">Aadhar Card Number</label> <input
+											type="text" class="form-control"
+											data-ng-model="userData.aadharCardNo">
+									</div>
+								</div>
+
+
+							</div>
+							<div class="row">
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="control-label">Education Qualification</label> <input
+											type="text" class="form-control"
+											data-ng-model="userData.panCard">
+									</div>
+								</div>
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="control-label">Contact Number</label> <input
+											type="text" class="form-control"
+											data-ng-model="userData.panCard">
+									</div>
+								</div>
+							</div>
+
 
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-3">
+									<label style="color: #555;"><b>Permanent Address</b></label>
 									<div class="form-group">
 										<label class="control-label">Premises No &amp; Street
 											Name.</label> <input type="text" class="form-control"
@@ -106,7 +123,26 @@
 									</div>
 								</div>
 
-								<div class="col-md-6">
+								<div class="col-md-3">
+									<label style="color: #555;">&nbsp;&nbsp;</label>
+									<div class="form-group">
+										<label class="control-label">LandMark</label> <input
+											type="text" class="form-control"
+											data-ng-model="userData.address.landMark">
+									</div>
+								</div>
+								<div class="col-md-3">
+									<label style="color: #555;"><b>Communication
+											Address</b></label>
+									<div class="form-group">
+										<label class="control-label">Premises No &amp; Street
+											Name.</label> <input type="text" class="form-control"
+											data-ng-model="userData.address.streetName">
+									</div>
+								</div>
+
+								<div class="col-md-3">
+									<label style="color: #555;">&nbsp;&nbsp;</label>
 									<div class="form-group">
 										<label class="control-label">LandMark</label> <input
 											type="text" class="form-control"
@@ -138,7 +174,49 @@
 										</select>
 									</div>
 								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="control-label">Country </label> <select
+											class="form-control"
+											data-ng-model="userData.address.country.id"
+											data-ng-options="coun.id as coun.name for coun in countries"
+											data-ng-change="getStates(userData.address.country.id)">
+											<option value="">Select Country</option>
+										</select>
+									</div>
+								</div>
 
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="control-label">State </label> <select
+											class="form-control"
+											data-ng-model="userData.address.state.id"
+											data-ng-options="state.id as state.name for state in states"
+											data-ng-change="getCities(userData.address.state.id)">
+											<option value="">Select State</option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="control-label">City </label> <select
+											class="form-control" data-ng-model="userData.address.city.id"
+											data-ng-options="city.id as city.name for city in cities">
+											<option value="">Select City</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="control-label">Pincode </label> <input
+											type="text" class="form-control"
+											data-ng-model="userData.address.landMark">
+									</div>
+								</div>
 								<div class="col-md-3">
 									<div class="form-group">
 										<label class="control-label">City </label> <select
@@ -159,9 +237,19 @@
 							</div>
 
 							<div class="row">
+								<div class="col-md-6"></div>
+								<div class="col-md-6">
+									<input type="checkbox"> &nbsp;<label>Same as
+										Permanent Address</label>
+								</div>
+
+							</div>
+
+							<div class="row">
 								<div class="col-md-8"></div>
 								<div class="col-md-4 ">
-									<button type="submit" class="btn btn-primary pull-right">Submit</button>
+									<button type="button" class="btn btn-primary pull-right"
+										ng-click="changeTab(2)">Next</button>
 								</div>
 							</div>
 						</form>
@@ -171,7 +259,7 @@
 		</div>
 	</div>
 </div>
-</uib-tab> <uib-tab index="1" heading="Employment"
+</uib-tab> <uib-tab active="selectedTab == 2" heading="Employment"
 	ng-click="getUsers(Constant.UserType.BORROWER.id)">
 
 <div>
@@ -282,7 +370,11 @@
 							<div class="row">
 								<div class="col-md-8"></div>
 								<div class="col-md-4 ">
-									<button type="submit" class="btn btn-primary pull-right">Submit</button>
+
+									<button type="button" class="btn btn-primary pull-right"
+										ng-click="changeTab(3)">Next</button>
+									<button type="button" class="btn btn-primary pull-right"
+										ng-click="changeTab(1)">Previous</button>
 								</div>
 							</div>
 						</form>
@@ -295,7 +387,7 @@
 
 
 
-</uib-tab> <uib-tab index="2" heading="Loans"
+</uib-tab> <uib-tab active="selectedTab == 3" heading="Loans"
 	ng-click="getUsers(Constant.UserType.BORROWER.id)">
 
 
@@ -324,10 +416,12 @@
 								<div class="col-md-12">
 									<div class="panel panel-default">
 										<div class="panel-header">
-											<h4><b>&nbsp;&nbsp;Existing Loans</b></h4>
+											<h4>
+												<b>&nbsp;&nbsp;Existing Loans</b>
+											</h4>
 										</div>
 										<div class="panel-body">
-											
+
 											<div class="row">
 												<div class="col-md-3">
 													<div class="form-group">
@@ -346,29 +440,30 @@
 												</div>
 												<div class="col-md-2">
 													<div class="form-group">
-														<label class="control-label">Outstanding</label> 
-														<input type="text" class="form-control"
+														<label class="control-label">Outstanding</label> <input
+															type="text" class="form-control"
 															data-ng-model="loans.outstanding">
 													</div>
 												</div>
 												<div class="col-md-2">
 													<div class="form-group">
-														<label class="control-label">EMI</label> 
-														<input type="text" class="form-control"
+														<label class="control-label">EMI</label> <input
+															type="text" class="form-control"
 															data-ng-model="loans.emi">
 													</div>
 												</div>
 												<div class="col-md-2">
 													<div class="form-group">
-														<label class="control-label">Balance Tenure</label> 
-														<input type="text" class="form-control"
+														<label class="control-label">Balance Tenure</label> <input
+															type="text" class="form-control"
 															data-ng-model="loans.balanceTenure">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
-														<label class="control-label">Planning to close before Disbursement</label> 
-														<select class="form-control" ng-model="loand.planningToCloseDis">
+														<label class="control-label">Planning to close
+															before Disbursement</label> <select class="form-control"
+															ng-model="loand.planningToCloseDis">
 															<option value="">Select Loan Type</option>
 															<option value="1">Yes</option>
 															<option value="2">No</option>
@@ -381,22 +476,24 @@
 									</div>
 									<div class="panel panel-default">
 										<div class="panel-header">
-											<h4><b>&nbsp;&nbsp;Current Loans</b></h4>
+											<h4>
+												<b>&nbsp;&nbsp;Current Loans</b>
+											</h4>
 										</div>
 										<div class="panel-body">
-											
+
 											<div class="row">
 												<div class="col-md-2">
 													<div class="form-group">
-														<label class="control-label">Loan Amount</label> 
-														<input type="text" class="form-control"
+														<label class="control-label">Loan Amount</label> <input
+															type="text" class="form-control"
 															data-ng-model="loans.loanAmount">
 													</div>
 												</div>
 												<div class="col-md-2">
 													<div class="form-group">
-														<label class="control-label">Tenure</label> 
-														<input type="text" class="form-control"
+														<label class="control-label">Tenure</label> <input
+															type="text" class="form-control"
 															data-ng-model="loans.tenure">
 													</div>
 												</div>
@@ -417,16 +514,16 @@
 												</div>
 												<div class="col-md-2">
 													<div class="form-group">
-														<label class="control-label">Property Cost</label> 
-														<input type="text" class="form-control"
+														<label class="control-label">Property Cost</label> <input
+															type="text" class="form-control"
 															data-ng-model="loans.propertyCost">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
-														<label class="control-label">Property Address</label>
-														<input type="text" class="form-control"
-															data-ng-model="loand.propertyAdd"> 
+														<label class="control-label">Property Address</label> <input
+															type="text" class="form-control"
+															data-ng-model="loand.propertyAdd">
 													</div>
 												</div>
 											</div>
@@ -435,22 +532,24 @@
 									</div>
 									<div class="panel panel-default">
 										<div class="panel-header">
-											<h4><b>&nbsp;&nbsp;Bank Account</b></h4>
+											<h4>
+												<b>&nbsp;&nbsp;Bank Account</b>
+											</h4>
 										</div>
 										<div class="panel-body">
-											
+
 											<div class="row">
 												<div class="col-md-3">
 													<div class="form-group">
-														<label class="control-label">Bank Name</label> 
-														<input type="text" class="form-control"
+														<label class="control-label">Bank Name</label> <input
+															type="text" class="form-control"
 															data-ng-model="loans.bankName">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
-														<label class="control-label">Bank Account Number</label> 
-														<input type="text" class="form-control"
+														<label class="control-label">Bank Account Number</label> <input
+															type="text" class="form-control"
 															data-ng-model="loans.accNumber">
 													</div>
 												</div>
@@ -458,13 +557,15 @@
 
 										</div>
 									</div>
-									
+
 									<div class="panel panel-default">
 										<div class="panel-header">
-											<h4><b>&nbsp;&nbsp;Closed Loan</b></h4>
+											<h4>
+												<b>&nbsp;&nbsp;Closed Loan</b>
+											</h4>
 										</div>
 										<div class="panel-body">
-											
+
 											<div class="row">
 												<div class="col-md-3">
 													<div class="form-group">
@@ -483,15 +584,15 @@
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
-														<label class="control-label">Bank Name</label> 
-														<input type="text" class="form-control"
+														<label class="control-label">Bank Name</label> <input
+															type="text" class="form-control"
 															data-ng-model="loans.bankName">
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
-														<label class="control-label">Loan Account Number If Available</label> 
-														<input type="text" class="form-control"
+														<label class="control-label">Loan Account Number
+															If Available</label> <input type="text" class="form-control"
 															data-ng-model="loans.accNumber">
 													</div>
 												</div>
@@ -506,7 +607,10 @@
 							<div class="row">
 								<div class="col-md-8"></div>
 								<div class="col-md-4 ">
-									<button type="submit" class="btn btn-primary pull-right">Submit</button>
+									<button type="button" class="btn btn-primary pull-right"
+										ng-click="changeTab(4)">Next</button>
+									<button type="button" class="btn btn-primary pull-right"
+										ng-click="changeTab(2)">Previous</button>
 								</div>
 							</div>
 						</form>
@@ -518,9 +622,15 @@
 </div>
 
 
-</uib-tab> <uib-tab index="3" heading="Documents"
-	ng-click="getUsers(Constant.UserType.BORROWER.id)"> 
-	
-	<h2>Comming Soon</h2>
-	
-	</uib-tab> </uib-tabset>
+</uib-tab> <uib-tab active="selectedTab == 4" heading="Documents"
+	ng-click="getUsers(Constant.UserType.BORROWER.id)">
+
+<h2>Comming Soon</h2>
+<div class="row">
+	<div class="col-md-8"></div>
+	<div class="col-md-4 ">
+		<button type="button" class="btn btn-primary pull-right"
+			ng-click="changeTab(3)">Previous</button>
+	</div>
+</div>
+</uib-tab> </uib-tabset>
