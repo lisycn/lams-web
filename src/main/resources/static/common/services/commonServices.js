@@ -71,6 +71,18 @@ app.service("masterService", [ 'httpService','URLS',"$http",
 			return httpService.get(URLS.user + '/master/get_city_by_state_id/' + stateId);
 		};
 		
+		this.applicationType = function(mode) {
+			return httpService.get(URLS.user + '/master/get_application_type/' + mode);
+		};
+		
+		this.loanType = function(mode) {
+			return httpService.get(URLS.user + '/master/get_loan_type/' + mode);
+		};
+		
+		this.yesNoList = function() {
+			return httpService.get(URLS.user + '/master/get_yes_no_list');
+		};
+		
 		
 		
 	} ]);
