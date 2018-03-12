@@ -30,5 +30,9 @@ app.constant('Constant', {
 		UN_AUTHORIZED : "Unauthorized ! Please Login Again.",
 		BAD_REQUEST : "Invalid Request !"
 	},
-	TOKEN : "TOKEN"
+	TOKEN : "TOKEN",
+	AddressType : {
+		PERMANENT : 1,
+		COMMUNICATION : 2
+	}
 });

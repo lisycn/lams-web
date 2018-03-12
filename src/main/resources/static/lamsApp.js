@@ -84,6 +84,7 @@ app.run([ '$rootScope', '$state', '$stateParams','$http','$timeout',"$interval",
 	function($rootScope, $state, $stateParams,$http,$timeout,$interval,$q,userService,$cookieStore,Constant,Notification,masterService) {
     $rootScope.state = $state;
     $rootScope.stateParams = $stateParams;
+    $rootScope.Constant = Constant;
     $rootScope.isEmpty = function(data) {
 		return (data == null || data == undefined || data == ""
 				|| data == "null" || data == "undefined"
