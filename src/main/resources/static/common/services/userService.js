@@ -25,18 +25,9 @@ app.service("userService", [ 'httpService', 'URLS', "$rootScope","$http",
 				return httpService.post(URLS.user + '/update_user_details',userObj);
 			};
 			
-			this.countries = function(mode) {
-				return httpService.get(URLS.user + '/master/get_country/'  + mode);
-			};
-			
-			this.states = function(countryId) {
-				return httpService.get(URLS.user + '/master/get_state_by_country_id/' + countryId);
-			};
-			
-			this.cities = function(stateId) {
-				return httpService.get(URLS.user + '/master/get_city_by_state_id/' + stateId);
-			};
-			
+//			this.verifyAccount = function(email) {
+//				return httpService.get(URLS.user + "/verify_account/" + email);
+//			};
 			
 			
 		} ]);
