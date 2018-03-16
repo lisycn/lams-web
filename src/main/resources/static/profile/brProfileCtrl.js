@@ -8,6 +8,26 @@ app.controller("brProfileCtrl",["$scope", "$http","$rootScope","Constant","userS
 			city : {}
 		}};		
 	}
+	
+	$scope.employmentType = [
+		{id : 1, name : "Salaried"},
+		{id : 2, name : "Self Employed"}
+	];
+	
+	$scope.selfEmploymentType = [
+		{id : 1, name : "Self Employed Business"},
+		{id : 2, name : "Self Employed Professional"}
+	];
+	
+	$scope.entityType = [
+		{id : 1, name : "Sole Proprietor"},
+		{id : 2, name : "Partnership"},
+		{id : 3, name : "Private Limited Company"},
+		{id : 4, name : "Public Limited Company"},
+		{id : 5, name : "Limited Liabiliy Partnership"}
+		
+	];
+	
 	$scope.initUserObj();
 	$scope.updateUserDetail = function(){
 		userService.updateUserDetail($scope.userData).then(
