@@ -13,6 +13,15 @@ app.constant('Constant', {
 			value : 'All'
 		}
 	},
+	Template : {
+		SMS  : "sms.ftl"
+	},
+	OTPType : {
+		Registration : {
+			id : 26,
+			Value : "Registration"
+		}
+	},
 	Mode : {
 		ACTIVE :{
 			id : 0,
