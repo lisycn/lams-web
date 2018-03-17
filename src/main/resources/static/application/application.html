@@ -27,10 +27,10 @@
 												({{application.leadReferenceNo || 'NA'}})</b>
 										</h4> <small class="pull-right">{{application.createdDate |
 											date : 'dd-MM-yyyy'}}</small>
-										<p class="list-group-item-text">{{application.loanTypeName}}</p>
+										<p class="list-group-item-text"><b>Amount:</b> {{application.loanAmount | number}}</p>
 									</a>
 								</div>
-								<div class="list-group" ng-if="applicationList.length < 1">
+								<div class="list-group" ng-if="existingAppCount < 1">
 									No Applications Available</div>
 								<div class="row" ng-show="!showExistingApplication">
 									<div class="col-md-8"></div>
@@ -79,7 +79,7 @@
 													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.PERSONAL_LOAN">
 													<div class="form-group">
 														<label class="control-label">Reason for Personal Loan</label> <input
-															type="number" class="form-control" ng-required="true"
+															type="text" class="form-control" ng-required="true"
 															data-ng-model="existingObj.reasonForPl"
 															name="reasonForPl">
 													</div>
@@ -165,10 +165,10 @@
 												({{application.leadReferenceNo || 'NA'}})</b>
 										</h4> <small class="pull-right">{{application.createdDate |
 											date : 'dd-MM-yyyy'}}</small>
-										<p class="list-group-item-text">{{application.loanTypeName}}</p>
+										<p class="list-group-item-text"><b>Amount:</b> {{application.loanAmount | number}}</p>
 									</a>
 								</div>
-								<div class="list-group" ng-if="applicationList.length < 1">
+								<div class="list-group" ng-if="curentAppCount < 1">
 									No Applications Available</div>
 								<div class="row" ng-show="!showCurrentApplication">
 									<div class="col-md-8"></div>
@@ -217,7 +217,7 @@
 													ng-if="currentObj.applicationTypeId == Constant.ApplicationType.PERSONAL_LOAN">
 													<div class="form-group">
 														<label class="control-label">Reason for Personal
-															Loan</label> <input type="number" class="form-control"
+															Loan</label> <input type="text" class="form-control"
 															ng-required="true" data-ng-model="currentObj.reasonForPl"
 															name="reasonForPl">
 													</div>
@@ -304,10 +304,10 @@
 												({{application.leadReferenceNo || 'NA'}})</b>
 										</h4> <small class="pull-right">{{application.createdDate |
 											date : 'dd-MM-yyyy'}}</small>
-										<p class="list-group-item-text">{{application.loanTypeName}}</p>
+										<p class="list-group-item-text"><b>Amount:</b> {{application.loanAmount | number}}</p>
 									</a>
 								</div>
-								<div class="list-group" ng-if="applicationList.length < 1">
+								<div class="list-group" ng-if="closedAppCount < 1">
 									No Applications Available</div>
 								<div class="row" ng-show="!showClosedApplication">
 									<div class="col-md-8"></div>
@@ -355,7 +355,7 @@
 													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.PERSONAL_LOAN">
 													<div class="form-group">
 														<label class="control-label">Reason for Personal
-															Loan</label> <input type="number" class="form-control"
+															Loan</label> <input type="text" class="form-control"
 															ng-required="true" data-ng-model="closedObj.reasonForPl"
 															name="reasonForPl">
 													</div>

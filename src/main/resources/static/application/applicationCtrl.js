@@ -1,19 +1,31 @@
-app.controller("applicationCtrl", [ "$scope", "masterService", "$rootScope", "Notification", "applicationService", "Constant",
-	function($scope, masterService, $rootScope, Notification, applicationService, Constant) {
+app.controller("applicationCtrl", [ "$scope", "masterService", "$rootScope", "Notification", "applicationService", "Constant","$filter",
+	function($scope, masterService, $rootScope, Notification, applicationService, Constant,$filter) {
 
 		$scope.showExistingApplication = false;
 		$scope.showCurrentApplication = false;
 		$scope.showClosedApplication = false;
+		
+		$scope.existingObj = {};
+		$scope.currentObj = {};
+		$scope.closedObj = {};
 
-
-
+		$scope.existingAppCount = 0;
+		$scope.curentAppCount = 0;
+		$scope.closedAppCount = 0;
+		
+		$scope.applicationList = [];
 		$scope.applicationTypeList = [];
+		$scope.loanTypeList = [];
+		
 		$scope.getApplications = function() {
 
 			applicationService.getAll().then(
 				function(success) {
 					if (success.data.status == 200) {
 						$scope.applicationList = success.data.data;
+						$scope.existingAppCount = $filter('filter')($scope.applicationList,{loanTypeId : Constant.LoanType.EXISTING_LOAN}).length;
+						$scope.curentAppCount = $filter('filter')($scope.applicationList,{loanTypeId : Constant.LoanType.CURRENT_LOAN}).length;
+						$scope.closedAppCount = $filter('filter')($scope.applicationList,{loanTypeId : Constant.LoanType.CLOSED_LOAN}).length;
 					} else {
 						Notification.warning(success.data.message);
 					}
@@ -26,17 +38,17 @@ app.controller("applicationCtrl", [ "$scope", "masterService", "$rootScope", "No
 		$scope.hideDiv = function(type) {
 			$scope.appObj = {};
 			if (type == Constant.LoanType.EXISTING_LOAN) {
+				$scope.existingObj = {};
 				$scope.showExistingApplication = !$scope.showExistingApplication;
 			} else if (type == Constant.LoanType.CURRENT_LOAN) {
+				$scope.currentObj = {};
 				$scope.showCurrentApplication = !$scope.showCurrentApplication;
 			} else if (type == Constant.LoanType.CLOSED_LOAN) {
+				$scope.closedObj = {};
 				$scope.showClosedApplication = !$scope.showClosedApplication;
 			}
 		}
 
-		$scope.existingObj = {};
-		$scope.currentObj = {};
-		$scope.closedObj = {};
 		$scope.existingLoanSave = function() {
 			if ($scope.existingForm.$invalid) {
 				Notification.warning("Please fill all mandatory fields !!");
@@ -59,8 +71,6 @@ app.controller("applicationCtrl", [ "$scope", "masterService", "$rootScope", "No
 			$scope.saveApplication($scope.closedObj,Constant.LoanType.CLOSED_LOAN);
 		}
 
-
-
 		$scope.saveApplication = function(appObj,type) {
 			var data = {};
 			data.applicationTypeId = appObj.applicationTypeId;
@@ -80,8 +90,6 @@ app.controller("applicationCtrl", [ "$scope", "masterService", "$rootScope", "No
 				});
 		}
 
-
-		$scope.applicationTypeList = [];
 		$scope.getApplicationType = function() {
 			if ($scope.applicationTypeList.length > 0) {
 				return;
@@ -90,6 +98,7 @@ app.controller("applicationCtrl", [ "$scope", "masterService", "$rootScope", "No
 				function(success) {
 					if (success.data.status == 200) {
 						$scope.applicationTypeList = success.data.data;
+						
 					} else {
 						Notification.warning(success.data.message);
 					}
@@ -99,7 +108,6 @@ app.controller("applicationCtrl", [ "$scope", "masterService", "$rootScope", "No
 		}
 		$scope.getApplicationType();
 
-		$scope.loanTypeList = [];
 		$scope.getLoanType = function() {
 			if ($scope.loanTypeList.length > 0) {
 				return;
