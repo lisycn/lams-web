@@ -13,64 +13,426 @@
 						</p>
 					</div>
 					<div class="card-content">
-						<div class="list-group" ng-repeat="application in applicationList">
-							<a href="#"
-								class="list-group-item list-group-item-action flex-column align-items-start">
-								<h4 class="list-group-item-heading">
-									<b>{{application.applicationTypeName}}</b>
-								</h4> <small class="pull-right">{{application.createdDate}}</small>
-								<p class="list-group-item-text">{{application.loanTypeName}}</p>
-							</a>
-						</div>
-						<div class="list-group" ng-if="applicationList.length < 1">
-							No Application Found
-						</div>
-						<div class="row" ng-show="!showApplicationForm">
-							<div class="col-md-8"></div>
-							<div class="col-md-4 ">
-								<button type="button" class="btn btn-primary pull-right"
-									ng-click="showApplicationForm =! showApplicationForm">Add
-									New Loan</button>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<b>Existing Loan</b>
 							</div>
-						</div>
-						<div class="panel panel-default" ng-show="showApplicationForm">
-
 							<div class="panel-body">
-								<form name="applicationForm" novalidate>
-									<div class="row">
-										<div class="col-md-3">
-											<div class="form-group">
-												<label class="control-label">Application Type</label> <select
-													class="form-control" data-ng-model="appObj.applicationTypeId"
-													name="salutation"
-													data-ng-options="applicationTyp.id as applicationTyp.name for applicationTyp in applicationTypeList">
-													<option value="">Select Application Type</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="form-group">
-												<label class="control-label">Loan Type</label> <select
-													class="form-control" data-ng-model="appObj.loanTypeId"
-													name="salutation"
-													data-ng-options="loanType.id as loanType.name for loanType in loanTypeList">
-													<option value="">Select Loan Type</option>
-												</select>
-											</div>
-										</div>
+								<div class="list-group"
+									ng-repeat="application in applicationList | filter : {loanTypeId : Constant.LoanType.EXISTING_LOAN}">
+									<a href="#"
+										class="list-group-item list-group-item-action flex-column align-items-start">
+										<h4 class="list-group-item-heading">
+											<b>{{application.applicationTypeName}}
+												({{application.leadReferenceNo || 'NA'}})</b>
+										</h4> <small class="pull-right">{{application.createdDate |
+											date : 'dd-MM-yyyy'}}</small>
+										<p class="list-group-item-text"><b>Amount:</b> {{application.loanAmount | number}}</p>
+									</a>
+								</div>
+								<div class="list-group" ng-if="existingAppCount < 1">
+									No Applications Available</div>
+								<div class="row" ng-show="!showExistingApplication">
+									<div class="col-md-8"></div>
+									<div class="col-md-4 ">
+										<button type="button" class="btn btn-primary pull-right"
+											ng-click="hideDiv(Constant.LoanType.EXISTING_LOAN)">Add
+											Existing Loan</button>
 									</div>
-									<div class="row">
-										<div class="col-md-8"></div>
-										<div class="col-md-4 ">
-											<button type="button" class="btn btn-primary pull-right"
-												ng-click="saveApplication()">Submit</button>
-										</div>
-									</div>
-								</form>
-							</div>
+								</div>
+								<div class="panel panel-default"
+									ng-show="showExistingApplication">
 
+									<div class="panel-body">
+										<form name="existingForm" novalidate>
+											<div class="row">
+												<div class="col-md-3">
+													<div class="form-group">
+														<label class="control-label">Application Type</label> <select
+															class="form-control"
+															data-ng-model="existingObj.applicationTypeId"
+															name="salutation" ng-required="true"
+															data-ng-options="applicationTyp.id as applicationTyp.name for applicationTyp in applicationTypeList">
+															<option value="">Select Application Type</option>
+														</select>
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label class="control-label">Loan Amount</label> <input
+															type="number" class="form-control"
+															data-ng-model="existingObj.loanAmount" name="loanAmount"
+															ng-required="true">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label class="control-label">Tenure</label> <input
+															type="number" class="form-control"
+															data-ng-model="existingObj.tenure" name="tenure"
+															ng-required="true">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-3"
+													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.PERSONAL_LOAN">
+													<div class="form-group">
+														<label class="control-label">Reason for Personal Loan</label> <input
+															type="text" class="form-control" ng-required="true"
+															data-ng-model="existingObj.reasonForPl"
+															name="reasonForPl">
+													</div>
+												</div>
+												<div class="col-md-3"
+													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.HOME_LOAN">
+													<div class="form-group">
+														<label class="control-label">Property Cost</label> <input
+															type="number" class="form-control" ng-required="true"
+															data-ng-model="existingObj.propertyCost"
+															name="propertyCost">
+													</div>
+												</div>
+												<div class="col-md-3"
+													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.HOME_LOAN
+												|| existingObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
+													<div class="form-group">
+														<label class="control-label">Property Address</label> <input
+															type="text" class="form-control" ng-required="true"
+															data-ng-model="existingObj.propertyAddress"
+															name="propertyAddress">
+													</div>
+												</div>
+												<div class="col-md-3"
+													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
+													<div class="form-group">
+														<label class="control-label">Property Market Value</label>
+														<input type="number" class="form-control"
+															ng-required="true"
+															data-ng-model="existingObj.propertyMarketValue"
+															name="propertyMarketValue">
+													</div>
+												</div>
+												<div class="col-md-3"
+													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
+													<div class="form-group">
+														<label class="control-label">Reason For Lap</label> <input
+															type="text" class="form-control" ng-required="true"
+															data-ng-model="existingObj.reasonForLap"
+															name="reasonForLap">
+													</div>
+												</div>
+												<div class="col-md-3"
+													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.CAR_LOAN">
+													<div class="form-group">
+														<label class="control-label">Car Cost</label> <input
+															type="text" class="form-control" ng-required="true"
+															data-ng-model="existingObj.carCost" name="carCost">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-8"></div>
+												<div class="col-md-4 ">
+													<button type="button" class="btn btn-primary pull-right"
+														ng-click="hideDiv(Constant.LoanType.EXISTING_LOAN)">Cancel</button>
+													<button type="button" class="btn btn-primary pull-right"
+														ng-click="existingLoanSave()">Submit</button>
+												</div>
+											</div>
+										</form>
+									</div>
+
+								</div>
+
+							</div>
 						</div>
 
+
+
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<b>New Loan</b>
+							</div>
+							<div class="panel-body">
+								<div class="list-group"
+									ng-repeat="application in applicationList  | filter : {loanTypeId : Constant.LoanType.CURRENT_LOAN}">
+									<a href="#"
+										class="list-group-item list-group-item-action flex-column align-items-start">
+										<h4 class="list-group-item-heading">
+											<b>{{application.applicationTypeName}}
+												({{application.leadReferenceNo || 'NA'}})</b>
+										</h4> <small class="pull-right">{{application.createdDate |
+											date : 'dd-MM-yyyy'}}</small>
+										<p class="list-group-item-text"><b>Amount:</b> {{application.loanAmount | number}}</p>
+									</a>
+								</div>
+								<div class="list-group" ng-if="curentAppCount < 1">
+									No Applications Available</div>
+								<div class="row" ng-show="!showCurrentApplication">
+									<div class="col-md-8"></div>
+									<div class="col-md-4 ">
+										<button type="button" class="btn btn-primary pull-right"
+											ng-click="hideDiv(Constant.LoanType.CURRENT_LOAN)">Add
+											New Loan</button>
+									</div>
+								</div>
+								<div class="panel panel-default"
+									ng-show="showCurrentApplication">
+
+									<div class="panel-body">
+										<form name="currentForm" novalidate>
+											<div class="row">
+												<div class="col-md-3">
+													<div class="form-group">
+														<label class="control-label">Application Type</label> <select
+															class="form-control"
+															data-ng-model="currentObj.applicationTypeId"
+															name="salutation" ng-required="true"
+															data-ng-options="applicationTyp.id as applicationTyp.name for applicationTyp in applicationTypeList">
+															<option value="">Select Application Type</option>
+														</select>
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label class="control-label">Loan Amount</label> <input
+															type="number" class="form-control"
+															data-ng-model="currentObj.loanAmount" name="loanAmount"
+															ng-required="true">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label class="control-label">Tenure</label> <input
+															type="number" class="form-control"
+															data-ng-model="currentObj.tenure" name="tenure"
+															ng-required="true">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-3"
+													ng-if="currentObj.applicationTypeId == Constant.ApplicationType.PERSONAL_LOAN">
+													<div class="form-group">
+														<label class="control-label">Reason for Personal
+															Loan</label> <input type="text" class="form-control"
+															ng-required="true" data-ng-model="currentObj.reasonForPl"
+															name="reasonForPl">
+													</div>
+												</div>
+												<div class="col-md-3"
+													ng-if="currentObj.applicationTypeId == Constant.ApplicationType.HOME_LOAN">
+													<div class="form-group">
+														<label class="control-label">Property Cost</label> <input
+															type="number" class="form-control" ng-required="true"
+															data-ng-model="currentObj.propertyCost"
+															name="propertyCost">
+													</div>
+												</div>
+												<div class="col-md-3"
+													ng-if="currentObj.applicationTypeId == Constant.ApplicationType.HOME_LOAN
+												|| currentObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
+													<div class="form-group">
+														<label class="control-label">Property Address</label> <input
+															type="text" class="form-control" ng-required="true"
+															data-ng-model="currentObj.propertyAddress"
+															name="propertyAddress">
+													</div>
+												</div>
+												<div class="col-md-3"
+													ng-if="currentObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
+													<div class="form-group">
+														<label class="control-label">Property Market Value</label>
+														<input type="number" class="form-control"
+															ng-required="true"
+															data-ng-model="currentObj.propertyMarketValue"
+															name="propertyMarketValue">
+													</div>
+												</div>
+												<div class="col-md-3"
+													ng-if="currentObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
+													<div class="form-group">
+														<label class="control-label">Reason For Lap</label> <input
+															type="text" class="form-control"
+															data-ng-model="currentObj.reasonForLap"
+															name="reasonForLap">
+													</div>
+												</div>
+												<div class="col-md-3"
+													ng-if="currentObj.applicationTypeId == Constant.ApplicationType.CAR_LOAN">
+													<div class="form-group">
+														<label class="control-label">Car Cost</label> <input
+															type="text" class="form-control" ng-required="true"
+															data-ng-model="currentObj.carCost" name="carCost">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-8"></div>
+												<div class="col-md-4 ">
+													<button type="button" class="btn btn-primary pull-right"
+														ng-click="hideDiv(Constant.LoanType.CURRENT_LOAN)">Cancel</button>
+													<button type="button" class="btn btn-primary pull-right"
+														ng-click="currentLoanSave()">Submit</button>
+
+												</div>
+											</div>
+										</form>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+
+
+
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<b>Closed Loan</b>
+							</div>
+							<div class="panel-body">
+								<div class="list-group"
+									ng-repeat="application in applicationList  | filter : {loanTypeId : Constant.LoanType.CLOSED_LOAN}">
+									<a href="#"
+										class="list-group-item list-group-item-action flex-column align-items-start">
+										<h4 class="list-group-item-heading">
+											<b>{{application.applicationTypeName}}
+												({{application.leadReferenceNo || 'NA'}})</b>
+										</h4> <small class="pull-right">{{application.createdDate |
+											date : 'dd-MM-yyyy'}}</small>
+										<p class="list-group-item-text"><b>Amount:</b> {{application.loanAmount | number}}</p>
+									</a>
+								</div>
+								<div class="list-group" ng-if="closedAppCount < 1">
+									No Applications Available</div>
+								<div class="row" ng-show="!showClosedApplication">
+									<div class="col-md-8"></div>
+									<div class="col-md-4 ">
+										<button type="button" class="btn btn-primary pull-right"
+											ng-click="hideDiv(Constant.LoanType.CLOSED_LOAN)">Add
+											Closed Loan</button>
+									</div>
+								</div>
+								<div class="panel panel-default" ng-show="showClosedApplication">
+
+									<div class="panel-body">
+										<form name="closedForm" novalidate>
+											<div class="row">
+												<div class="col-md-3">
+													<div class="form-group">
+														<label class="control-label">Application Type</label> <select
+															class="form-control"
+															data-ng-model="closedObj.applicationTypeId"
+															name="salutation" ng-required="true"
+															data-ng-options="applicationTyp.id as applicationTyp.name for applicationTyp in applicationTypeList">
+															<option value="">Select Application Type</option>
+														</select>
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label class="control-label">Loan Amount</label> <input
+															type="number" class="form-control"
+															data-ng-model="closedObj.loanAmount" name="loanAmount"
+															ng-required="true">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label class="control-label">Tenure</label> <input
+															type="number" class="form-control"
+															data-ng-model="closedObj.tenure" name="tenure"
+															ng-required="true">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-3"
+													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.PERSONAL_LOAN">
+													<div class="form-group">
+														<label class="control-label">Reason for Personal
+															Loan</label> <input type="text" class="form-control"
+															ng-required="true" data-ng-model="closedObj.reasonForPl"
+															name="reasonForPl">
+													</div>
+												</div>
+												<div class="col-md-3"
+													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.HOME_LOAN">
+													<div class="form-group">
+														<label class="control-label">Property Cost</label> <input
+															type="number" class="form-control" ng-required="true"
+															data-ng-model="closedObj.propertyCost"
+															name="propertyCost">
+													</div>
+												</div>
+												<div class="col-md-3"
+													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.HOME_LOAN
+												|| closedObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
+													<div class="form-group">
+														<label class="control-label">Property Address</label> <input
+															type="text" class="form-control" ng-required="true"
+															data-ng-model="closedObj.propertyAddress"
+															name="propertyAddress">
+													</div>
+												</div>
+												<div class="col-md-3"
+													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
+													<div class="form-group">
+														<label class="control-label">Property Market Value</label>
+														<input type="number" class="form-control"
+															ng-required="true"
+															data-ng-model="closedObj.propertyMarketValue"
+															name="propertyMarketValue">
+													</div>
+												</div>
+												<div class="col-md-3"
+													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
+													<div class="form-group">
+														<label class="control-label">Reason For Lap</label> <input
+															type="text" class="form-control" ng-required="true"
+															data-ng-model="closedObj.reasonForLap"
+															name="reasonForLap">
+													</div>
+												</div>
+												<div class="col-md-3"
+													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.CAR_LOAN">
+													<div class="form-group">
+														<label class="control-label">Car Cost</label> <input
+															type="text" class="form-control" ng-required="true"
+															data-ng-model="closedObj.carCost" name="carCost">
+													</div>
+												</div>
+												<!-- <div class="col-md-3">
+													<div class="form-group">
+														<label class="control-label">Loan Type</label> <select
+															class="form-control" data-ng-model="appObj.loanTypeId"
+															name="salutation"
+															data-ng-options="loanType.id as loanType.name for loanType in loanTypeList">
+															<option value="">Select Loan Type</option>
+														</select>
+													</div>
+												</div> -->
+											</div>
+											<div class="row">
+												<div class="col-md-8"></div>
+												<div class="col-md-4 ">
+													<button type="button" class="btn btn-primary pull-right"
+														ng-click="hideDiv(Constant.LoanType.CLOSED_LOAN)">Cancel</button>
+													<button type="button" class="btn btn-primary pull-right"
+														ng-click="closedLoanSave()">Submit</button>
+												</div>
+											</div>
+										</form>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
