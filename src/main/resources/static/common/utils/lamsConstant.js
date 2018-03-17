@@ -19,7 +19,8 @@ app.constant('Constant', {
 	OTPType : {
 		Registration : {
 			id : 26,
-			Value : "Registration"
+			Value : "Registration",
+			code : "RG"
 		}
 	},
 	Mode : {

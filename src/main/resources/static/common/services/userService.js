@@ -18,11 +18,15 @@ app.service("userService", [ 'httpService', 'URLS', "$rootScope","$http",
 			};
 			
 			this.verifyOTP = function(data,otpType) {
-				return httpService.get(URLS.user + '/verify_otp/' + otpType,data);
+				return httpService.post(URLS.user + '/verify_otp/' + otpType,data);
 			};
 			
 			this.resendOTP = function(data,otpType,templateName) {
-				return httpService.get(URLS.user + '/resend_otp/' + otpType + "/templateName",data);
+				return httpService.post(URLS.user + '/resend_otp/' + otpType + "/" + templateName,data);
+			};
+			
+			this.changePassword = function(data) {
+				return httpService.post(URLS.user + '/change_password',data);
 			};
 			
 			this.getLoggedInUserDetail = function() {
