@@ -77,15 +77,24 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
     		}
     	},
     	data : {pageTitle : "Lams | Profile"}
+	}).state("web.lams.applicationList", {
+    	url : '/applicationList',
+    	views :  {
+    		'content@web' :  {
+    			templateUrl : 'application/applicationList.html',
+        		controller: 'applicationListCtrl'
+    		}
+    	},
+    	data : {pageTitle : "Lams | Applications"}
 	}).state("web.lams.application", {
-    	url : '/application',
+    	url : '/application/:appCode/:appId',
     	views :  {
     		'content@web' :  {
     			templateUrl : 'application/application.html',
         		controller: 'applicationCtrl'
     		}
     	},
-    	data : {pageTitle : "Lams | Application"}
+    	data : {pageTitle : "Lams | Applications"}
 	});
 	$urlRouterProvider.otherwise("login");
 }]);
