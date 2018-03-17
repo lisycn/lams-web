@@ -1,7 +1,7 @@
 app.controller("signupCtrl",["$scope", "$http","$rootScope","Constant","userService","Notification","$state",
 		function($scope, $http,$rootScope,Constant, userService, Notification, $state) {
-	$scope.user = {};
-	$scope.userTypes = [Constant.UserType.LENDER,Constant.UserType.BORROWER];
+	$scope.user = {userType : Constant.UserType.BORROWER.id};
+	$scope.userTypes = [Constant.UserType.BORROWER];
 	
 	$scope.doRegister = function(){
 		if($scope.userForm.$invalid){
@@ -19,7 +19,13 @@ app.controller("signupCtrl",["$scope", "$http","$rootScope","Constant","userServ
 	            function(success) {
 	            	if(success.data.status == 200){
 	            		Notification.success(success.data.message);
-	            		$state.go("login");
+	            		var data = success.data.data;
+	            		if(!$rootScope.isEmpty(data)){
+	            			if(!$rootScope.isEmpty(data)){
+		            			
+		            		}	
+	            		}
+//	            		$state.go("login");
 	                }else if(success.data.status == 400){
 	                	Notification.error(success.data.message);
 	                }else{

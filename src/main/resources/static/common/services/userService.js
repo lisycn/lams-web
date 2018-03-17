@@ -17,6 +17,14 @@ app.service("userService", [ 'httpService', 'URLS', "$rootScope","$http",
 				return httpService.get(URLS.user + '/logout');
 			};
 			
+			this.verifyOTP = function(data,otpType) {
+				return httpService.get(URLS.user + '/verify_otp/' + otpType,data);
+			};
+			
+			this.resendOTP = function(data,otpType,templateName) {
+				return httpService.get(URLS.user + '/resend_otp/' + otpType + "/templateName",data);
+			};
+			
 			this.getLoggedInUserDetail = function() {
 				return httpService.get(URLS.user + '/get_user_details');
 			};
