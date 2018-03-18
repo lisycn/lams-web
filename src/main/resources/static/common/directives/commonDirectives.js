@@ -1,7 +1,7 @@
 /**
  * 
  */
-app.directive('title', ['$rootScope', '$timeout',
+angular.module("lams").directive('title', ['$rootScope', '$timeout',
 	  function($rootScope, $timeout) {
 	    return {
 	      link: function() {
