@@ -9,7 +9,6 @@ angular.module("lams").controller("otpVerificationCtrl",["$scope","$rootScope","
 	}
 	
 	$scope.user.id = atob($stateParams.data);
-	console.log("$scope.user===============>",$scope.user);
 	$scope.verifyOTP = function(){
 		if($rootScope.isEmpty($scope.user.otp)){
 			Notification.warning("Please Enter OTP");
