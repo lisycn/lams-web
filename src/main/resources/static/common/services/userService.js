@@ -41,5 +41,11 @@ app.service("userService", [ 'httpService', 'URLS', "$rootScope","$http",
 				return httpService.get(URLS.user + "/verify_email/" + link);
 			};
 			
+			this.sendForgotPasswordLink = function(data) {
+				return httpService.post(URLS.user + "/send_link", data);
+			};
 			
+			this.resetPassword = function(data,link) {
+				return httpService.post(URLS.user + "/reset_password/" + link, data);
+			};
 		} ]);

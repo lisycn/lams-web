@@ -4,7 +4,7 @@
 			<div class="container-fluid">
 				<div class="col-md-3"></div>
 				<div class="col-md-4">
-					<div class="card">
+					<div class="card" data-ng-show="isLoginVisible">
 						<div class="card-header" data-background-color="purple">
 							<h4 class="title">
 								<b>Login</b> <a href="javascript:void(0)" class="pull-right"
@@ -41,12 +41,50 @@
 								</div>
 								<div class="row">
 									<div class="col-md-8">
-										<a href="javascript:void(0)"> <b>Forgot Password ?
-												Reset Here.</b></a>
+										<a href="javascript:void(0)"
+											data-ng-click="isLoginVisible = !isLoginVisible"> <b>Forgot
+												Password ? Reset Here.</b></a>
 									</div>
 									<div class="col-md-4">
 										<button type="submit" class="btn btn-primary pull-right"
-											data-ng-click="doLogin()">Login</button>
+											data-ng-click="doLogin()" data-ng-disabled="isDisable">Login</button>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</form>
+						</div>
+					</div>
+					<div class="card" data-ng-show="!isLoginVisible">
+						<div class="card-header" data-background-color="purple">
+							<h4 class="title">
+								<b>Forgot Password</b> <a href="javascript:void(0)" class="pull-right"
+									data-ui-sref="signup"> <b>New User ? Click Here to
+										Signup</b></a>
+							</h4>
+							<p class="category">Email Verification Process</p>
+						</div>
+
+						<div class="card-content">
+							<form name="sendLinkForm" novalidate>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label">Email Address</label> <input
+												type="email" class="form-control" data-ng-model="login.email"
+												name="userOrEmail" required> <span
+												data-ng-if="sendLinkForm.userOrEmail.$invalid && (sendLinkForm.userOrEmail.$touched || sendLinkForm.$submitted)"
+												class="error-msg-style">Enter Valid Email</span>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-8">
+										<a href="javascript:void(0)"
+											data-ng-click="isLoginVisible = !isLoginVisible"> <b>Click to Login</b></a>
+									</div>
+									<div class="col-md-4">
+										<button type="submit" class="btn btn-primary pull-right"
+											data-ng-click="sendLink()" data-ng-disabled="isDisable">Submit</button>
 									</div>
 								</div>
 								<div class="clearfix"></div>
