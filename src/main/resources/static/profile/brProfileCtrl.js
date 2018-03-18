@@ -1,4 +1,4 @@
-app.controller("brProfileCtrl",["$scope", "$http","$rootScope","Constant","userService","Notification","masterService","$filter",
+angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope","Constant","userService","Notification","masterService","$filter",
 		function($scope, $http, $rootScope,Constant,userService,Notification,masterService,$filter) {
 	
 	$scope.initUserObj = function(){

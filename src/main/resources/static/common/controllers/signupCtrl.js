@@ -1,4 +1,4 @@
-app.controller("signupCtrl",["$scope", "$http","$rootScope","Constant","userService","Notification","$state",
+angular.module("lams").controller("signupCtrl",["$scope", "$http","$rootScope","Constant","userService","Notification","$state",
 		function($scope, $http,$rootScope,Constant, userService, Notification, $state) {
 	$scope.user = {userType : Constant.UserType.BORROWER.id};
 	$scope.userTypes = [Constant.UserType.BORROWER];
