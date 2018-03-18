@@ -1,5 +1,6 @@
-app.controller("otpVerificationCtrl",["$scope","$rootScope","userService","Constant","$state","Notification","$cookieStore",'$stateParams',
+angular.module("lams").controller("otpVerificationCtrl",["$scope","$rootScope","userService","Constant","$state","Notification","$cookieStore",'$stateParams',
 		function($scope,$rootScope,userService,Constant,$state,Notification,$cookieStore,$stateParams) {
+	
 	$scope.user = {};
 	console.log("$stateParams=====>",$stateParams);
 	if($rootScope.isEmpty($stateParams.data)){

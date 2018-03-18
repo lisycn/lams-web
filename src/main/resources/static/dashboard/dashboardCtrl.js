@@ -1,3 +1,3 @@
-app.controller("dashboardCtrl",["$scope", "$http","$rootScope","Constant",
+angular.module("lams").controller("dashboardCtrl",["$scope", "$http","$rootScope","Constant",
 		function($scope, $rootScope,Constant) {
 }]);
