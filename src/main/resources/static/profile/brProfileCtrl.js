@@ -1,6 +1,7 @@
 angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope","Constant","userService","Notification","masterService","$filter",
 		function($scope, $http, $rootScope,Constant,userService,Notification,masterService,$filter) {
-	
+
+	$scope.isDisable = false;
 	$scope.initUserObj = function(){
 		$scope.userData = { address : {
 			country : {},
@@ -30,8 +31,10 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 	
 	$scope.initUserObj();
 	$scope.updateUserDetail = function(){
+		$scope.isDisable = true;
 		userService.updateUserDetail($scope.userData).then(
 	            function(success) {
+	            	$scope.isDisable = false;
 	            	if(success.data.status == 200){
 	            		Notification.info("Successfully Updated !");
 	            		$rootScope.user = success.data.data;
@@ -39,7 +42,8 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 	                	Notification.error(success.data.message);
 	                }
 	            }, function(error) {
-	            	$rootScope.validateErrorResponse();
+	            	$scope.isDisable = false;
+	            	$rootScope.validateErrorResponse(error);
 	     });		
 	}
 	
@@ -73,7 +77,7 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 	                	Notification.error(success.data.message);
 	                }
 	            }, function(error) {
-	            	$rootScope.validateErrorResponse();
+	            	$rootScope.validateErrorResponse(error);
 	     });		
 	}
 	
@@ -124,7 +128,7 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 	            		Notification.warning(success.data.message);
 	            	}
 	            }, function(error) {
-	            	$rootScope.validateErrorResponse();
+	            	$rootScope.validateErrorResponse(error);
 	     });		
 	}
 	
@@ -154,7 +158,7 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 	            		Notification.warning(success.data.message);
 	            	}
 	            }, function(error) {
-	            	$rootScope.validateErrorResponse();
+	            	$rootScope.validateErrorResponse(error);
 	     });		
 	}
 	$scope.getUserDetail();

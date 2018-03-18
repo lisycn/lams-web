@@ -20,7 +20,7 @@
 										<div class="form-group label-floating">
 											<label class="control-label">Enter OTP </label> <input
 												type="text" class="form-control" data-ng-model="user.otp"
-												name="otp" required> <span
+												name="otp" maxlength="6" required> <span
 												data-ng-if="loginForm.userOrEmail.$invalid && (loginForm.userOrEmail.$touched || loginForm.$submitted)"
 												class="error-msg-style">Enter Valid Email</span>
 										</div>
@@ -28,13 +28,13 @@
 								</div>
 								<div class="row">
 									<div class="col-md-8">
-										<a href="javascript:void(0)" data-ng-click="resendOTP()">
+										<a href="javascript:void(0)" data-ng-click="resendOTP()" data-ng-disabled="isDisable">
 											<b>Not Received Yet ? Click Here to Resend</b>
 										</a>
 									</div>
 									<div class="col-md-4">
 										<button type="submit" class="btn btn-primary pull-right"
-											data-ng-click="verifyOTP()">Verify OTP</button>
+											data-ng-click="verifyOTP()" data-ng-disabled="isDisable">Verify OTP</button>
 									</div>
 								</div>
 								<div class="clearfix"></div>

@@ -70,12 +70,23 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 	}).state("email", {
 		url : '/email-verification/:data',
 		templateUrl : 'common/htmls/account-verification.html',
-		controller: 'signupCtrl',
+		controller: 'accountVerificationCtrl',
 		data : {pageTitle : "Lams | Email Verification"},
 		resolve: {
             lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
                 return $ocLazyLoad.load({files: [
                         'common/controllers/accountVerificationCtrl.js']});
+            }]
+		}
+	}).state("resetpassword", {
+		url : '/reset-password/:data',
+		templateUrl : 'common/htmls/reset-password.html',
+		controller: 'resetPasswordCtrl',
+		data : {pageTitle : "Lams | Reset Password"},
+		resolve: {
+            lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load({files: [
+                        'common/controllers/resetPasswordCtrl.js']});
             }]
 		}
 	}).state("web", {
