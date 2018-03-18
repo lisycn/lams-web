@@ -37,9 +37,9 @@ app.service("userService", [ 'httpService', 'URLS', "$rootScope","$http",
 				return httpService.post(URLS.user + '/update_user_details',userObj);
 			};
 			
-//			this.verifyAccount = function(email) {
-//				return httpService.get(URLS.user + "/verify_account/" + email);
-//			};
+			this.verifyEmail = function(link) {
+				return httpService.get(URLS.user + "/verify_email/" + link);
+			};
 			
 			
 		} ]);

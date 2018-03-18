@@ -1,4 +1,4 @@
-app.controller("changePasswordCtrl", [ "$scope", "$http", "$rootScope", "userService", "Constant", "$state", "Notification", "$cookieStore",
+angular.module("lams").controller("changePasswordCtrl", [ "$scope", "$http", "$rootScope", "userService", "Constant", "$state", "Notification", "$cookieStore",
 	function($scope, $http, $rootScope, userService, Constant, $state, Notification, $cookieStore) {
 		$scope.user = {};
 		$scope.changePassword = function() {

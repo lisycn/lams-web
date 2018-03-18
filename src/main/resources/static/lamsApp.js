@@ -75,7 +75,7 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 		resolve: {
             lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
                 return $ocLazyLoad.load({files: [
-                        'common/controllers/signupCtrl.js']});
+                        'common/controllers/accountVerificationCtrl.js']});
             }]
 		}
 	}).state("web", {
@@ -136,6 +136,12 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 		},
 		data : {
 			pageTitle : "Lams | Change Password"
+		},
+    	resolve: {
+            lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load({files: [
+                        'common/controllers/changePasswordCtrl.js']});
+            }]
 		}
 	}).state("web.lams.applicationList", {
 		url : '/applicationList',
@@ -147,6 +153,12 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 		},
 		data : {
 			pageTitle : "Lams | Applications"
+		},
+    	resolve: {
+            lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load({files: [
+                        'application/applicationListCtrl.js']});
+            }]
 		}
 	}).state("web.lams.application", {
     	url : '/application',

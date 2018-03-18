@@ -6,7 +6,11 @@
 				<div class="col-md-4">
 					<div class="card">
 						<div class="card-header" data-background-color="purple">
-							<h2 class="title">Login</h2>
+							<h4 class="title">
+								<b>Login</b> <a href="javascript:void(0)" class="pull-right"
+									data-ui-sref="signup"> <b>New User ? Click Here to
+										Signup</b></a>
+							</h4>
 							<p class="category">Complete Authentication Process</p>
 						</div>
 						<div class="card-content">
@@ -28,7 +32,8 @@
 										<div class="form-group label-floating">
 											<label class="control-label">Password</label> <input
 												type="password" class="form-control"
-												data-ng-model="login.password" name="password" required> <span
+												data-ng-model="login.password" name="password" required>
+											<span
 												data-ng-if="loginForm.password.$invalid && (loginForm.password.$touched || loginForm.$submitted)"
 												class="error-msg-style">Enter password</span>
 										</div>
@@ -36,9 +41,8 @@
 								</div>
 								<div class="row">
 									<div class="col-md-8">
-										<a href="javascript:void(0)" data-ui-sref="signup"> <b>New
-												User ? Click Here to Signup</b></a>
-
+										<a href="javascript:void(0)"> <b>Forgot Password ?
+												Reset Here.</b></a>
 									</div>
 									<div class="col-md-4">
 										<button type="submit" class="btn btn-primary pull-right"

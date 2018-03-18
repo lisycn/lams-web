@@ -13,22 +13,16 @@ angular.module("lams").controller("loginCtrl", [ "$scope", "$http", "$rootScope"
 					console.log("success.data==>",success.data);
 					if (success.data.status == 200) {
 						var data = success.data.data;
+						console.log("data.isEmailVerified===>",data.isEmailVerified);
+						console.log("data.isSent===>",data.isSent);
 						if (!$rootScope.isEmpty(data)) {
 							if ((!data.isOtpVerified) && (!$rootScope.isEmpty(data.isSent) && (data.isSent || data.isSent == "true"))) {
-								$state.go("otp", {
-									data : btoa(data.id)
-								});
-							} else if ((!data.isEmailVerified)) {
-								$cookieStore.put(Constant.TOKEN, success.data.token);
-								$rootScope.loadMasters();
-								$state.go("web.lams.dashboard");
-//								$state.go("email", {
-//									data : btoa(data.id)
-//								});
+								$state.go("otp", {data : btoa(data.id)});
+							} else if ((!data.isEmailVerified) && (!$rootScope.isEmpty(data.isSent) && (data.isSent || data.isSent == "true"))) {
+									Notification.success(success.data.message);
 							}else{
 								$cookieStore.put(Constant.TOKEN, success.data.token);
 								$rootScope.loadMasters();
-								console.warn("Email Verification is Remain to integrate");
 								$state.go("web.lams.dashboard");
 							}
 						}else{

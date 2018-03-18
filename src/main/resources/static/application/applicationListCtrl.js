@@ -1,4 +1,4 @@
-app.controller("applicationListCtrl", [ "$scope", "masterService", "$rootScope", "Notification", "applicationService", "Constant","$filter",
+angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterService", "$rootScope", "Notification", "applicationService", "Constant","$filter",
 	function($scope, masterService, $rootScope, Notification, applicationService, Constant,$filter) {
 
 		$scope.showExistingApplication = false;
