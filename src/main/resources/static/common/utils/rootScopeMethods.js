@@ -17,6 +17,7 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 			userService.logout().then(
 				function(success) {
 					$cookieStore.remove(Constant.TOKEN);
+					$cookieStore.remove(Constant.USER_TYPE);
 					$state.go("login");
 				}, function(error) {
 					$cookieStore.remove(Constant.TOKEN);
@@ -103,11 +104,41 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 					$rootScope.validateErrorResponse(error);
 				});
 		}
+		
+		$rootScope.banks = [];
+		$rootScope.getBanks = function(mode) {
+			masterService.banks(mode).then(
+				function(success) {
+					if (success.data.status == 200) {
+						$rootScope.banks = success.data.data;
+					} else {
+						Notification.warning(success.data.message);
+					}
+				}, function(error) {
+					$rootScope.validateErrorResponse(error);
+				});
+		}
+		
+		$rootScope.applicationTypes = [];
+		$rootScope.getApplicationTypes = function(mode) {
+			masterService.applicationType(mode).then(
+				function(success) {
+					if (success.data.status == 200) {
+						$rootScope.applicationTypes = success.data.data;
+					} else {
+						Notification.warning(success.data.message);
+					}
+				}, function(error) {
+					$rootScope.validateErrorResponse(error);
+				});
+		}
 
 		$rootScope.loadMasters = function() {
 			$rootScope.getCountries(Constant.Mode.ACTIVE.id);
 			$rootScope.getLoggedInUserDetail();
 			$rootScope.getSalutations(Constant.Mode.ACTIVE.id);
+			$rootScope.getBanks(Constant.Mode.ACTIVE.id);
+			$rootScope.getApplicationTypes(Constant.Mode.ACTIVE.id);
 		}
 
 		//Getting All Masters
