@@ -2,9 +2,9 @@
 <div class="logo">
 	<h2 class="text-center">LAMS</h2>
 </div>
-<div class="sidebar-wrapper">
+<div class="sidebar-wrapper" data-ng-if="user.userType == Constant.UserType.BORROWER.id">
 	<ul class="nav">
-		<li data-ui-sref-active="active"><a href="javascript:void(0)" data-ui-sref="web.lams.dashboard"> <i class="material-icons">dashboard</i>
+		<li data-ui-sref-active="active"><a href="javascript:void(0)" data-ui-sref="web.lams.brDashboard"> <i class="material-icons">dashboard</i>
 				<p>Dashboard</p>
 		</a></li>
 		<li data-ui-sref-active="active"><a href="javascript:void(0)" data-ui-sref="web.lams.applicationList"> <i class="material-icons">Applications</i>
@@ -34,5 +34,16 @@
 				class="material-icons">unarchive</i>
 				<p>Upgrade to PRO</p>
 		</a></li> -->
+	</ul>
+</div>
+
+<div class="sidebar-wrapper" data-ng-if="user.userType == Constant.UserType.LENDER.id">
+	<ul class="nav">
+		<li data-ui-sref-active="active"><a href="javascript:void(0)" data-ui-sref="web.lams.ldDashboard"> <i class="material-icons">dashboard</i>
+				<p>Dashboard</p>
+		</a></li>
+		<li data-ui-sref-active="active"><a href="javascript:void(0)" data-ui-sref="web.lams.products"> <i class="material-icons">Products</i>
+				<p>Products</p>
+		</a></li>
 	</ul>
 </div>
