@@ -1,31 +1,17 @@
-angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService", "$rootScope", "Notification", "applicationService", "Constant","$filter",
-	function($scope, masterService, $rootScope, Notification, applicationService, Constant,$filter) {
+angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService", "$rootScope", "Notification", "applicationService", "Constant", "$filter", "$stateParams", "documentService",
+	function($scope, masterService, $rootScope, Notification, applicationService, Constant, $filter, $stateParams, documentService) {
 
-		$scope.showExistingApplication = false;
-		$scope.showCurrentApplication = false;
-		$scope.showClosedApplication = false;
-		
-		$scope.existingObj = {};
-		$scope.currentObj = {};
-		$scope.closedObj = {};
+		$scope.applicationTypeCode = $stateParams.appCode;
+		$scope.applicationTypeId = $rootScope.getAppTypeIdByCode($scope.applicationTypeCode);
+		$scope.applicationId = $stateParams.appId;
+		$scope.editApplicationForm = true;
 
-		$scope.existingAppCount = 0;
-		$scope.curentAppCount = 0;
-		$scope.closedAppCount = 0;
-		
-		$scope.applicationList = [];
-		$scope.applicationTypeList = [];
-		$scope.loanTypeList = [];
-		
-		$scope.getApplications = function() {
+		$scope.getApplicationDetails = function() {
 
-			applicationService.getAll().then(
+			applicationService.getLoanDetails($scope.applicationId, $scope.applicationTypeId).then(
 				function(success) {
 					if (success.data.status == 200) {
-						$scope.applicationList = success.data.data;
-						$scope.existingAppCount = $filter('filter')($scope.applicationList,{loanTypeId : Constant.LoanType.EXISTING_LOAN}).length;
-						$scope.curentAppCount = $filter('filter')($scope.applicationList,{loanTypeId : Constant.LoanType.CURRENT_LOAN}).length;
-						$scope.closedAppCount = $filter('filter')($scope.applicationList,{loanTypeId : Constant.LoanType.CLOSED_LOAN}).length;
+						$scope.applicationDetails = success.data.data;
 					} else {
 						Notification.warning(success.data.message);
 					}
@@ -33,55 +19,17 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 					$rootScope.validateErrorResponse(error);
 				});
 		}
-		$scope.getApplications();
+		$scope.getApplicationDetails();
 
-		$scope.hideDiv = function(type) {
-			$scope.appObj = {};
-			if (type == Constant.LoanType.EXISTING_LOAN) {
-				$scope.existingObj = {};
-				$scope.showExistingApplication = !$scope.showExistingApplication;
-			} else if (type == Constant.LoanType.CURRENT_LOAN) {
-				$scope.currentObj = {};
-				$scope.showCurrentApplication = !$scope.showCurrentApplication;
-			} else if (type == Constant.LoanType.CLOSED_LOAN) {
-				$scope.closedObj = {};
-				$scope.showClosedApplication = !$scope.showClosedApplication;
-			}
-		}
-
-		$scope.existingLoanSave = function() {
-			if ($scope.existingForm.$invalid) {
-				Notification.warning("Please fill all mandatory fields !!");
-				return;
-			}
-			$scope.saveApplication($scope.existingObj,Constant.LoanType.EXISTING_LOAN);	
-		}
-		$scope.currentLoanSave = function() {
-			if ($scope.currentForm.$invalid) {
-				Notification.warning("Please fill all mandatory fields !!");
-				return;
-			}
-			$scope.saveApplication($scope.currentObj,Constant.LoanType.CURRENT_LOAN);
-		}
-		$scope.closedLoanSave = function() {
-			if ($scope.closedForm.$invalid) {
-				Notification.warning("Please fill all mandatory fields !!");
-				return;
-			}
-			$scope.saveApplication($scope.closedObj,Constant.LoanType.CLOSED_LOAN);
-		}
-
-		$scope.saveApplication = function(appObj,type) {
+		$scope.saveLoanDetails = function() {
 			var data = {};
-			data.applicationTypeId = appObj.applicationTypeId;
-			appObj.loanTypeId = type;
-			data.data = JSON.stringify(appObj);
+			data.applicationTypeId = $scope.applicationTypeId;
+			data.data = JSON.stringify($scope.applicationDetails);
 			applicationService.save(data).then(
 				function(success) {
 					if (success.data.status == 200) {
-						Notification.info("Successfully created Application !!");
-						$scope.getApplications();
-						$scope.hideDiv(type);
+						Notification.info("Successfully updated application !!");
+						$scope.editApplicationForm = !$scope.editApplicationForm;
 					} else {
 						Notification.warning(success.data.message);
 					}
@@ -90,32 +38,16 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 				});
 		}
 
-		$scope.getApplicationType = function() {
-			if ($scope.applicationTypeList.length > 0) {
-				return;
-			}
-			masterService.applicationType(0).then(
-				function(success) {
-					if (success.data.status == 200) {
-						$scope.applicationTypeList = success.data.data;
-						
-					} else {
-						Notification.warning(success.data.message);
-					}
-				}, function(error) {
-					$rootScope.validateErrorResponse(error);
-				});
+		$scope.uploadAppFile = function(element) {
+			$rootScope.uploadFile(element.files, $scope.applicationId, element.id,$scope);
 		}
-		$scope.getApplicationType();
 
-		$scope.getLoanType = function() {
-			if ($scope.loanTypeList.length > 0) {
-				return;
-			}
-			masterService.loanType(0).then(
+		$scope.documentList = [];
+		$scope.getDocumentList = function(listOfDocumentMstId) {
+			documentService.getDocumentList($scope.applicationId,listOfDocumentMstId).then(
 				function(success) {
 					if (success.data.status == 200) {
-						$scope.loanTypeList = success.data.data;
+						$scope.documentList = success.data.data;
 					} else {
 						Notification.warning(success.data.message);
 					}
@@ -123,6 +55,26 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 					$rootScope.validateErrorResponse(error);
 				});
 		}
-		$scope.getLoanType();
+		
+		$scope.getDocumentList([Constant.documentType.PAN_CARD,Constant.documentType.AADHAR_CARD,Constant.documentType.LAST_3_MONTH_SALARY_SLIP,
+			Constant.documentType.LAST_6_MONTHS_BANK_ACCOUNT_STATEMENT,Constant.documentType.FORM_16_OR_APPOIMENT_LETTER,
+			Constant.documentType.INVESTMENT_PROOFS,Constant.documentType.EXISTING_LOAN_DOCUMENT,Constant.documentType.OTHER_DOCUMENT]);
+
+		
+		$scope.inActiveDocument = function(documentMappingId,documentMapId,documentResponseList,index) {
+			documentService.inActiveDocument(documentMappingId).then(
+				function(success) {
+					if (success.data.status == 200) {
+						Notification.info("Successfully inactive documents !!");
+						documentResponseList.splice(index,1);
+					} else {
+						Notification.warning(success.data.message);
+					}
+				}, function(error) {
+					$rootScope.validateErrorResponse(error);
+				});
+		}
+
+
 
 	} ]);

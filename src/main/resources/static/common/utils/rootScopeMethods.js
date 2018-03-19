@@ -1,5 +1,5 @@
-app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interval", "$q", "userService", "$cookieStore", "Constant", "Notification", "masterService",
-	function($rootScope, $state, $stateParams, $http, $timeout, $interval, $q, userService, $cookieStore, Constant, Notification, masterService) {
+app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interval", "$q", "userService", "$cookieStore", "Constant", "Notification", "masterService","URLS","$filter",
+	function($rootScope, $state, $stateParams, $http, $timeout, $interval, $q, userService, $cookieStore, Constant, Notification, masterService,URLS,$filter) {
 		$rootScope.state = $state;
 		$rootScope.stateParams = $stateParams;
 		$rootScope.Constant = Constant;
@@ -12,20 +12,20 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 		$rootScope.beforeLoginStates = [ "login", "signup" ];
 
 		$rootScope.doLogout = function() {
-//			console.log("Current State====>",$state.$current.name);
-//			if ($rootScope.beforeLoginStates.indexOf($))
-				userService.logout().then(
-					function(success) {
-						$cookieStore.remove(Constant.TOKEN);
-						$state.go("login");
-					}, function(error) {
-						$cookieStore.remove(Constant.TOKEN);
-						$state.go("login");
-					});
+			//			console.log("Current State====>",$state.$current.name);
+			//			if ($rootScope.beforeLoginStates.indexOf($))
+			userService.logout().then(
+				function(success) {
+					$cookieStore.remove(Constant.TOKEN);
+					$state.go("login");
+				}, function(error) {
+					$cookieStore.remove(Constant.TOKEN);
+					$state.go("login");
+				});
 		}
 
 		if ($rootScope.isEmpty($cookieStore.get(Constant.TOKEN))) {
-//			$rootScope.doLogout();
+			//			$rootScope.doLogout();
 		}
 
 		$rootScope.validateErrorResponse = function(error) {
@@ -125,47 +125,92 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 			id : 3,
 			value : 'Third Gender'
 		} ];
-		
-		$rootScope.getAppTypeIdByCode = function(appTypeCode){
-			switch(appTypeCode){
-				case Constant.ApplicationTypeCode.HOME_LOAN :
-					return Constant.ApplicationType.HOME_LOAN;
-				case Constant.ApplicationTypeCode.LOAN_AGAINST_PROPERTY :
-					return Constant.ApplicationType.LOAN_AGAINST_PROPERTY;
-				case Constant.ApplicationTypeCode.SECURED_BUSINESS_LOAN :
-					return Constant.ApplicationType.SECURED_BUSINESS_LOAN;
-				case Constant.ApplicationTypeCode.WORKING_CAPITAL_LOAN :
-					return Constant.ApplicationType.WORKING_CAPITAL_LOAN;
-				case Constant.ApplicationTypeCode.EDUCATION_LOAN :
-					return Constant.ApplicationType.EDUCATION_LOAN;
-				case Constant.ApplicationTypeCode.CAR_LOAN :
-					return Constant.ApplicationType.CAR_LOAN;
-				case Constant.ApplicationTypeCode.OVERDRAFT_FACILITIES_LOAN :
-					return Constant.ApplicationType.OVERDRAFT_FACILITIES_LOAN;
-				case Constant.ApplicationTypeCode.DROPLINE_OVERDRAFT_FACILITIES_LOAN :
-					return Constant.ApplicationType.DROPLINE_OVERDRAFT_FACILITIES_LOAN;
-				case Constant.ApplicationTypeCode.BANK_GUARANTEE_LOAN :
-					return Constant.ApplicationType.BANK_GUARANTEE_LOAN;
-				case Constant.ApplicationTypeCode.CC_FACILITIES_LOAN :
-					return Constant.ApplicationType.CC_FACILITIES_LOAN;
-				case Constant.ApplicationTypeCode.TERM_LOAN :
-					return Constant.ApplicationType.TERM_LOAN;
-				case Constant.ApplicationTypeCode.LOAN_AGAINST_FDS :
-					return Constant.ApplicationType.LOAN_AGAINST_FDS;
-				case Constant.ApplicationTypeCode.LOAN_AGAINST_SECURITIS :
-					return Constant.ApplicationType.LOAN_AGAINST_SECURITIS;
-				case Constant.ApplicationTypeCode.PROJECT_FINANCE_LOAN :
-					return Constant.ApplicationType.PROJECT_FINANCE_LOAN;
-				case Constant.ApplicationTypeCode.PRIVATE_EQUITY_FINANCE_LOAN :
-					return Constant.ApplicationType.PRIVATE_EQUITY_FINANCE_LOAN;
-				case Constant.ApplicationTypeCode.GOLD_LOAN :
-					return Constant.ApplicationType.GOLD_LOAN;
-				case Constant.ApplicationTypeCode.OTHER_LOAN :
-					return Constant.ApplicationType.OTHER_LOAN;
-				case Constant.ApplicationTypeCode.PERSONAL_LOAN :
-					return Constant.ApplicationType.PERSONAL_LOAN;
+
+		$rootScope.getAppTypeIdByCode = function(appTypeCode) {
+			switch (appTypeCode) {
+			case Constant.ApplicationTypeCode.HOME_LOAN:
+				return Constant.ApplicationType.HOME_LOAN;
+			case Constant.ApplicationTypeCode.LOAN_AGAINST_PROPERTY:
+				return Constant.ApplicationType.LOAN_AGAINST_PROPERTY;
+			case Constant.ApplicationTypeCode.SECURED_BUSINESS_LOAN:
+				return Constant.ApplicationType.SECURED_BUSINESS_LOAN;
+			case Constant.ApplicationTypeCode.WORKING_CAPITAL_LOAN:
+				return Constant.ApplicationType.WORKING_CAPITAL_LOAN;
+			case Constant.ApplicationTypeCode.EDUCATION_LOAN:
+				return Constant.ApplicationType.EDUCATION_LOAN;
+			case Constant.ApplicationTypeCode.CAR_LOAN:
+				return Constant.ApplicationType.CAR_LOAN;
+			case Constant.ApplicationTypeCode.OVERDRAFT_FACILITIES_LOAN:
+				return Constant.ApplicationType.OVERDRAFT_FACILITIES_LOAN;
+			case Constant.ApplicationTypeCode.DROPLINE_OVERDRAFT_FACILITIES_LOAN:
+				return Constant.ApplicationType.DROPLINE_OVERDRAFT_FACILITIES_LOAN;
+			case Constant.ApplicationTypeCode.BANK_GUARANTEE_LOAN:
+				return Constant.ApplicationType.BANK_GUARANTEE_LOAN;
+			case Constant.ApplicationTypeCode.CC_FACILITIES_LOAN:
+				return Constant.ApplicationType.CC_FACILITIES_LOAN;
+			case Constant.ApplicationTypeCode.TERM_LOAN:
+				return Constant.ApplicationType.TERM_LOAN;
+			case Constant.ApplicationTypeCode.LOAN_AGAINST_FDS:
+				return Constant.ApplicationType.LOAN_AGAINST_FDS;
+			case Constant.ApplicationTypeCode.LOAN_AGAINST_SECURITIS:
+				return Constant.ApplicationType.LOAN_AGAINST_SECURITIS;
+			case Constant.ApplicationTypeCode.PROJECT_FINANCE_LOAN:
+				return Constant.ApplicationType.PROJECT_FINANCE_LOAN;
+			case Constant.ApplicationTypeCode.PRIVATE_EQUITY_FINANCE_LOAN:
+				return Constant.ApplicationType.PRIVATE_EQUITY_FINANCE_LOAN;
+			case Constant.ApplicationTypeCode.GOLD_LOAN:
+				return Constant.ApplicationType.GOLD_LOAN;
+			case Constant.ApplicationTypeCode.OTHER_LOAN:
+				return Constant.ApplicationType.OTHER_LOAN;
+			case Constant.ApplicationTypeCode.PERSONAL_LOAN:
+				return Constant.ApplicationType.PERSONAL_LOAN;
 			}
 			return null;
+		}
+
+		$rootScope.uploadFile = function(files, applicationId,documentId,scope) {
+			if ($rootScope.isEmpty(documentId)) {
+				Notification.warning("Document id is null or empty !!");
+				return;
+			}
+			var formData = new FormData();
+			formData.append("file", files[0]);
+			var data = {};
+			data.applicationId = applicationId;
+			data.documentId = documentId;
+			formData.append("uploadRequest", JSON.stringify(data));
+
+			$http({
+				method : "POST",
+				enctype : 'multipart/form-data',
+				url : URLS.user + "/upload",
+				headers : {
+					'Content-Type' : undefined,
+					'token' : $cookieStore.get(Constant.TOKEN)
+				},
+				data : formData,
+				processData : false,
+				cache : false
+			})
+				.then(
+					function success(response) {
+						if (response.data.status == 200) {
+							if(response.data.data.isFileUpload){
+								Notification.info("Successfully upload documents !!");
+								if (!$rootScope.isEmpty(scope.documentList)) {
+									var currentType = $filter('filter')(scope.documentList,{documentMstrId : documentId})[0];
+									currentType.documentResponseList.push(response.data.data);
+								}	
+							} else {
+								Notification.warning("File can't uploaded !!");
+							}
+							
+						} else if (response.data.status == 400) {
+							Notification.warning(response.data.message);
+						}
+					}, function errorCallback(error) {
+						$rootScope.validateErrorResponse(error);
+					});
 		}
 
 	} ]);
