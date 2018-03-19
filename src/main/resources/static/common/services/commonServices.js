@@ -90,3 +90,19 @@ app.service("masterService", [ 'httpService','URLS',"$http",
 		
 	} ]);
 
+
+app.service("documentService", [ 'httpService','URLS',"$http",
+	function(httpService, URLS, $http) {
+
+		this.getDocumentList = function(applicationId,data) {
+			return httpService.post(URLS.user + "/getDocuments/" + applicationId,data);
+		};
+		
+		this.inActiveDocument = function(documentMappingId) {
+			return httpService.get(URLS.user + "/inActiveDocument/" + documentMappingId);
+		};
+
+		
+		
+	} ]);
+

@@ -105,6 +105,33 @@
 								</div>
 							</div>
 							<div class="row">
+								<div class="panel panel-default">
+									<div>
+										<h5>
+											<b>&nbsp&nbsp&nbspFile Upload</b>
+										</h5>
+									</div>
+									<div class="panel-body">
+										<div class="row" data-ng-repeat="documents in documentList">
+											<div class="col-md-3">
+												<label class="btn btn-default"> <b>{{documents.documentMstrName}} </b> <input type="file"
+													title="Upload size limit 5 MB" upload-files id="{{documents.documentMstrId}}"
+													onchange="angular.element(this).scope().uploadAppFile(this);">
+												</label>
+											</div>
+											<div class="col-md-2" data-ng-repeat="doc in documents.documentResponseList">
+												<div class="input-group">
+													<input type="text" class="form-control" data-ng-model="doc.originalName" disabled> <span
+														class="input-group-btn">
+														<button class="btn btn-sm btn-default" type="button" ng-click="inActiveDocument(doc.documentMappingId,documents.documentMstrId,documents.documentResponseList,$index)">x</button>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
 								<div class="col-md-8"></div>
 								<div class="col-md-4 ">
 									<button type="button" class="btn btn-primary pull-right"
@@ -117,7 +144,7 @@
 									<button type="button" data-ng-show="!editApplicationForm"
 										class="btn btn-primary pull-right"
 										data-ng-click="saveLoanDetails()">Submit</button>
-									
+
 								</div>
 							</div>
 						</form>
