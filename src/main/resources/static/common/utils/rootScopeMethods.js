@@ -243,5 +243,4 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 						$rootScope.validateErrorResponse(error);
 					});
 		}
-
 	} ]);
