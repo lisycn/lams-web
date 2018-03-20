@@ -178,7 +178,7 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
     			templateUrl : 'application/application.html',
         		controller: 'applicationCtrl'
     		}
-    	},
+    	},	
     	data : {pageTitle : "Lams | Application"},
     	resolve: {
             lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {

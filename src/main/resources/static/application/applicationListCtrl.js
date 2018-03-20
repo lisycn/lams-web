@@ -51,6 +51,7 @@ angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterServ
 
 		$scope.existingLoanSave = function() {
 			if ($scope.existingForm.$invalid) {
+				$scope.existingForm.$submitted = true;
 				Notification.warning("Please fill all mandatory fields !!");
 				return;
 			}
@@ -58,6 +59,7 @@ angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterServ
 		}
 		$scope.currentLoanSave = function() {
 			if ($scope.currentForm.$invalid) {
+				$scope.currentForm.$submitted = true;
 				Notification.warning("Please fill all mandatory fields !!");
 				return;
 			}
@@ -65,6 +67,7 @@ angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterServ
 		}
 		$scope.closedLoanSave = function() {
 			if ($scope.closedForm.$invalid) {
+				$scope.closedForm.$submitted = true;
 				Notification.warning("Please fill all mandatory fields !!");
 				return;
 			}
