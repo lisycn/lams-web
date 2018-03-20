@@ -17,5 +17,8 @@ app.service("applicationService", [ 'httpService', 'URLS', "$rootScope","$http",
 		return httpService.post(URLS.user + "/application/save",data);
 	};
 	
+	this.getBorrowerForLender = function() {
+		return httpService.get(URLS.user + "/application/get_borrowers_for_lender");
+	};
 	
 }]);

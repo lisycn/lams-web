@@ -12,8 +12,11 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 		$rootScope.beforeLoginStates = [ "login", "signup" ];
 
 		$rootScope.doLogout = function() {
-			//			console.log("Current State====>",$state.$current.name);
-			//			if ($rootScope.beforeLoginStates.indexOf($))
+			if ($rootScope.isEmpty($cookieStore.get(Constant.TOKEN))) {
+				$state.go("login");
+				return;
+			}
+			
 			userService.logout().then(
 				function(success) {
 					$cookieStore.remove(Constant.TOKEN);
