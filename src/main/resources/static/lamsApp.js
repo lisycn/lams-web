@@ -107,23 +107,38 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
                 templateUrl: 'common/htmls/sidebar.html',
             }
         }
-	}).state("web.lams.dashboard", {
-        	url : '/dashboard',
+	}).state("web.lams.brDashboard", {
+        	url : '/borrower-dashboard',
         	views :  {
         		'content@web' :  {
-        			templateUrl : 'dashboard/dashboard.html',
-            		controller: 'dashboardCtrl'
+        			templateUrl : 'dashboard/br-dashboard.html',
+            		controller: 'brDashboardCtrl'
         		}
         	},
         	data : {pageTitle : "Lams | Dashboard"},
         	resolve: {
                 lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load({files: [
-                            'dashboard/dashboardCtrl.js']});
+                            'dashboard/brDashboardCtrl.js']});
                 }]
     		}
+	}).state("web.lams.ldDashboard", {
+    	url : '/lender-dashboard',
+    	views :  {
+    		'content@web' :  {
+    			templateUrl : 'dashboard/ld-dashboard.html',
+        		controller: 'ldDashboardCtrl'
+    		}
+    	},
+    	data : {pageTitle : "Lams | Dashboard"},
+    	resolve: {
+            lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load({files: [
+                        'dashboard/ldDashboardCtrl.js']});
+            }]
+		}
 	}).state("web.lams.brProfile", {
-    	url : '/profile',
+    	url : '/borrwer-profile',
     	views :  {
     		'content@web' :  {
     			templateUrl : 'profile/brProfile.html',
@@ -135,6 +150,21 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
             lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
                 return $ocLazyLoad.load({files: [
                         'profile/brProfileCtrl.js']});
+            }]
+		}
+	}).state("web.lams.ldProfile", {
+    	url : '/lender-profile',
+    	views :  {
+    		'content@web' :  {
+    			templateUrl : 'profile/ldProfile.html',
+        		controller: 'ldProfileCtrl'
+    		}
+    	},
+    	data : {pageTitle : "Lams | Lender"},
+    	resolve: {
+            lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load({files: [
+                        'profile/ldProfileCtrl.js']});
             }]
 		}
 	}).state("web.lams.changepassword", {
@@ -169,6 +199,23 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
             lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
                 return $ocLazyLoad.load({files: [
                         'application/applicationListCtrl.js']});
+            }]
+		}
+	}).state("web.lams.products", {
+		url : '/products',
+		views : {
+			'content@web' : {
+				templateUrl : 'product/products.html',
+				controller : 'productsCtrl'
+			}
+		},
+		data : {
+			pageTitle : "Lams | Products"
+		},
+    	resolve: {
+            lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load({files: [
+                        'product/productsCtrl.js']});
             }]
 		}
 	}).state("web.lams.application", {

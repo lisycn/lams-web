@@ -21,14 +21,10 @@ angular.module("lams").controller("loginCtrl", [ "$scope", "$http", "$rootScope"
 							} else if ((!data.isEmailVerified) && (!$rootScope.isEmpty(data.isSent) && (data.isSent || data.isSent == "true"))) {
 									Notification.success(success.data.message);
 							}else{
-								$cookieStore.put(Constant.TOKEN, success.data.token);
-								$rootScope.loadMasters();
-								$state.go("web.lams.dashboard");
+								$scope.setCookies(success);
 							}
 						}else{
-							$cookieStore.put(Constant.TOKEN, success.data.token);
-							$rootScope.loadMasters();
-							$state.go("web.lams.dashboard");							
+							$scope.setCookies(success);								
 						}
 					} else {
 						Notification.warning(success.data.message);
@@ -38,6 +34,17 @@ angular.module("lams").controller("loginCtrl", [ "$scope", "$http", "$rootScope"
 					$rootScope.validateErrorResponse(error);
 				});
 		}
+		
+		$scope.setCookies = function(success){
+			$cookieStore.put(Constant.TOKEN, success.data.token);
+			$cookieStore.put(Constant.USER_TYPE, btoa(success.data.data.userType));
+			$rootScope.loadMasters();
+			if(success.data.data.userType == Constant.UserType.LENDER.id){
+				$state.go("web.lams.ldDashboard");									
+			}else  if(success.data.data.userType == Constant.UserType.BORROWER.id){
+				$state.go("web.lams.brDashboard");
+			}
+		} 
 		
 		$scope.sendLink = function(){
 			if ($scope.sendLinkForm.$invalid) {

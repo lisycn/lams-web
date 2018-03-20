@@ -70,6 +70,9 @@ app.service("masterService", [ 'httpService','URLS',"$http",
 		this.cities = function(stateId) {
 			return httpService.get(URLS.user + '/master/get_city_by_state_id/' + stateId);
 		};
+		this.banks = function(mode) {
+			return httpService.get(URLS.user + '/master/get_banks/' + mode);
+		};
 		
 		this.applicationType = function(mode) {
 			return httpService.get(URLS.user + '/master/get_application_type/' + mode);

@@ -41,6 +41,7 @@ app.constant('Constant', {
 		BAD_REQUEST : "Invalid Request !"
 	},
 	TOKEN : "TOKEN",
+	USER_TYPE : "UT",
 	AddressType : {
 		PERMANENT : 1,
 		COMMUNICATION : 2

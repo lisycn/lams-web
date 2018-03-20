@@ -1,0 +1,39 @@
+
+<div class="col-md-12 col-sm-12 col-lg-12">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header" data-background-color="purple">
+						<h4 class="title">
+							<b>Products </b>
+						</h4>
+						<p class="category">
+							<b>List of all Products</b>
+						</p>
+					</div>
+					<div class="card-content">
+						<div class="panel panel-default">
+							<!-- <div class="panel-heading">
+								<b>Existing Loan</b>
+							</div> -->
+							<div class="panel-body">
+								<div class="list-group" ng-repeat="product in products">
+									<a href="javascript:void(0)"
+										class="list-group-item list-group-item-action flex-column align-items-start">
+										<h4>
+											<b>{{product.name}} </b><small class="pull-right">{{product.createdDate |
+											date : 'dd-MM-yyyy'}}</small>
+										</h4> 
+									</a>
+								</div>
+								<div class="list-group" ng-if="isEmpty(products)">No
+									Products Added Yet!</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
