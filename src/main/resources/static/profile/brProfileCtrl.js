@@ -31,6 +31,12 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 	
 	$scope.initUserObj();
 	$scope.updateUserDetail = function(){
+		console.log("-----> ", $scope.userForm);
+		if (!$scope.userForm.$valid) {
+			$scope.userForm.$submitted = true;
+			Notification.warning("Please fill all mandatory fields");
+			return false;
+		}
 		$scope.isDisable = true;
 		userService.updateUserDetail($scope.userData).then(
 	            function(success) {

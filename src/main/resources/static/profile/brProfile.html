@@ -17,10 +17,13 @@
 						<div class="row">
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">Salutation</label> <select
+									<label class="control-label">Salutation 
+									<span class="text-danger">*</span></label> 
+									<select
 										class="form-control" data-ng-model="userData.salutation"
 										name="salutation"
-										data-ng-options="salu.id as salu.name for salu in salutations">
+										data-ng-options="salu.id as salu.name for salu in salutations"
+										required>
 										<option value="">Select Salutation</option>
 									</select>
 								</div>
@@ -28,9 +31,12 @@
 
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">First Name</label> <input
+									<label class="control-label">First Name
+									<span class="text-danger">*</span>
+									</label> 
+									<input
 										type="text" class="form-control" name="firstName"
-										data-ng-model="userData.firstName">
+										data-ng-model="userData.firstName" required>
 								</div>
 							</div>
 
@@ -44,9 +50,11 @@
 
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">Last Name</label> <input
+									<label class="control-label">Last Name
+									<span class="text-danger">*</span></label>
+									 <input
 										type="text" class="form-control" name="lastName"
-										data-ng-model="userData.lastName">
+										data-ng-model="userData.lastName" required>
 								</div>
 							</div>
 						</div>
@@ -64,24 +72,30 @@
 
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">Date Of Birth</label> <input
+									<label class="control-label">Date Of Birth
+									<span class="text-danger">*</span></label>
+									 <input
 										type="date" name="birthDate" class="form-control"
-										data-ng-model="userData.birthDate">
+										data-ng-model="userData.birthDate" required>
 								</div>
 							</div>
 
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">Pan Card</label> <input
+									<label class="control-label">Pan Card
+								<span class="text-danger">*</span></label>
+ 								<input
 										type="text" class="form-control" name="panCard"
-										data-ng-model="userData.panCard">
+										data-ng-model="userData.panCard" required>
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">Aadhar Card Number</label> <input
+									<label class="control-label">Aadhar Card Number
+									<span class="text-danger">*</span></label>
+									 <input
 										type="text" class="form-control" name="aadharCardNo"
-										data-ng-model="userData.aadharCardNo">
+										data-ng-model="userData.aadharCardNo" required>
 								</div>
 							</div>
 
@@ -99,9 +113,11 @@
 
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">Contact Number</label> <input
+									<label class="control-label">Contact Number
+									<span class="text-danger">*</span></label> 
+									<input
 										type="text" class="form-control" name="contactNumber"
-										data-ng-model="userData.contactNumber">
+										data-ng-model="userData.contactNumber" required>
 								</div>
 							</div>
 						</div>
@@ -112,17 +128,22 @@
 								<label style="color: #555;"><b>Permanent Address</b></label>
 								<div class="form-group">
 									<label class="control-label">Premises No &amp; Street
-										Name.</label> <input type="text" class="form-control"
-										data-ng-model="userData.permanentAdd.streetName">
+										Name.
+										<span class="text-danger">*</span></label>
+										<input type="text" class="form-control"
+										data-ng-model="userData.permanentAdd.streetName" required>
 								</div>
 							</div>
 
 							<div class="col-md-3">
 								<label style="color: #555;">&nbsp;&nbsp;</label>
 								<div class="form-group">
-									<label class="control-label">LandMark</label> <input
+									<label class="control-label">Land Mark
+									<span class="text-danger">*</span></label>
+									 <input
 										type="text" class="form-control"
-										data-ng-model="userData.permanentAdd.landMark">
+										data-ng-model="userData.permanentAdd.landMark"
+										required>
 								</div>
 							</div>
 							<div class="col-md-3">
@@ -137,7 +158,7 @@
 							<div class="col-md-3">
 								<label style="color: #555;">&nbsp;&nbsp;</label>
 								<div class="form-group">
-									<label class="control-label">LandMark</label> <input
+									<label class="control-label">Land Mark</label> <input
 										type="text" class="form-control"
 										data-ng-model="userData.communicationAdd.landMark">
 								</div>
@@ -146,11 +167,14 @@
 						<div class="row">
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">Country </label> <select
+									<label class="control-label">Country 
+									<span class="text-danger">*</span></label>
+									 <select
 										class="form-control"
 										data-ng-model="userData.permanentAdd.country.id"
 										data-ng-options="coun.id as coun.name for coun in countries"
-										data-ng-change="getStates(userData.permanentAdd.country.id,Constant.AddressType.PERMANENT)">
+										data-ng-change="getStates(userData.permanentAdd.country.id,Constant.AddressType.PERMANENT)"
+										required>
 										<option value="">Select Country</option>
 									</select>
 								</div>
@@ -158,11 +182,14 @@
 
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">State </label> <select
+									<label class="control-label">State 
+									<span class="text-danger">*</span></label>
+									 <select
 										class="form-control"
 										data-ng-model="userData.permanentAdd.state.id"
 										data-ng-options="state.id as state.name for state in permStates"
-										data-ng-change="getCities(userData.permanentAdd.state.id,Constant.AddressType.PERMANENT)">
+										data-ng-change="getCities(userData.permanentAdd.state.id,Constant.AddressType.PERMANENT)"
+										required>
 										<option value="">Select State</option>
 									</select>
 								</div>
@@ -195,10 +222,14 @@
 						<div class="row">
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">City </label> <select
+									<label class="control-label">City 
+									<span class="text-danger">*</span>
+									</label> 
+									<select
 										class="form-control"
 										data-ng-model="userData.permanentAdd.city.id"
-										data-ng-options="city.id as city.name for city in permCities">
+										data-ng-options="city.id as city.name for city in permCities"
+										required>
 										<option value="">Select City</option>
 									</select>
 								</div>
@@ -206,9 +237,12 @@
 
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">Pincode </label> <input
+									<label class="control-label">Pincode 
+									<span class="text-danger">*</span></label>
+									 <input
 										type="text" class="form-control"
-										data-ng-model="userData.permanentAdd.pincode">
+										data-ng-model="userData.permanentAdd.pincode"
+										required>
 								</div>
 							</div>
 							<div class="col-md-3">
@@ -243,9 +277,12 @@
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
-									<label class="control-label">Employment</label> <select
+									<label class="control-label">Employment
+									 <span class="text-danger">*</span></label>
+									 <select
 										class="form-control" ng-model="userData.employmentType"
-										ng-options="employment.id as employment.name for employment in employmentType">
+										ng-options="employment.id as employment.name for employment in employmentType"
+										required>
 										<option value="">Select Employment</option>
 									</select>
 								</div>
@@ -254,9 +291,11 @@
 						<div class="row">
 							<div class="col-md-3" ng-show="userData.employmentType == 1">
 								<div class="form-group">
-									<label class="control-label">Employer Name</label> <input
+									<label class="control-label">Employer Name
+									 <span class="text-danger">*</span></label>
+									 <input
 										type="text" class="form-control"
-										data-ng-model="userData.employerName">
+										data-ng-model="userData.employerName" required>
 								</div>
 							</div>
 							<div class="col-md-3" ng-show="userData.employmentType == 1">
@@ -267,11 +306,14 @@
 								</div>
 							</div>
 
-							<div class="col-md-3" ng-show="userData.employmentType == 1">
+							<div class="col-md-3" ng-if="userData.employmentType == 1">
 								<div class="form-group">
-									<label class="control-label">Gross Monthly Income</label> <input
+									<label class="control-label">Gross Monthly Income
+									 <span class="text-danger">*</span></label>
+									 <input
 										type="text" class="form-control"
-										data-ng-model="userData.grossMonthlyIncome">
+										data-ng-model="userData.grossMonthlyIncome"
+										required>
 								</div>
 							</div>
 
@@ -284,28 +326,37 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-3" ng-show="userData.employmentType == 2">
+							<div class="col-md-3" ng-if="userData.employmentType == 2">
 								<div class="form-group">
-									<label class="control-label">Type</label> <select
+									<label class="control-label">Type
+									<span class="text-danger">*</span></label>
+									 <select
 										class="form-control" ng-model="userData.selfEmployedType"
-										ng-options="selfEmployment.id as selfEmployment.name for selfEmployment in selfEmploymentType">
+										ng-options="selfEmployment.id as selfEmployment.name for selfEmployment in selfEmploymentType"
+										required>
 										<option value="">Select Type</option>
 									</select>
 								</div>
 							</div>
-							<div class="col-md-3" ng-show="userData.employmentType == 2">
+							<div class="col-md-3" ng-if="userData.employmentType == 2">
 								<div class="form-group">
-									<label class="control-label">Entity Name</label> <input
+									<label class="control-label">Entity Name
+									<span class="text-danger">*</span></label>
+									 <input
 										type="text" class="form-control"
-										data-ng-model="userData.entityName">
+										data-ng-model="userData.entityName"
+										required>
 								</div>
 							</div>
 
-							<div class="col-md-3" ng-show="userData.employmentType == 2">
+							<div class="col-md-3" ng-if="userData.employmentType == 2">
 								<div class="form-group">
-									<label class="control-label">Entity Type</label> <select
+									<label class="control-label">Entity Type
+									<span class="text-danger">*</span></label>
+									 <select
 										class="form-control" ng-model="userData.entityType"
-										ng-options="entity.id as entity.name for entity in entityType">
+										ng-options="entity.id as entity.name for entity in entityType"
+										required>
 										<option value="">Select Entity Type</option>
 									</select>
 								</div>
