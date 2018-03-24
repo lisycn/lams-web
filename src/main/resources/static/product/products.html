@@ -21,10 +21,54 @@
 								<div class="list-group" ng-repeat="product in products">
 									<a href="javascript:void(0)"
 										class="list-group-item list-group-item-action flex-column align-items-start">
-										<h4>
+										<h4 ng-click="getBorrowerForLenderByApplicationId(product)">
 											<b>{{product.name}} </b><small class="pull-right">{{product.createdDate |
 											date : 'dd-MM-yyyy'}}</small>
 										</h4> 
+										
+										
+										
+										<div class="panel-body table-responsive" ng-if="product.isActiveTab">
+								<table class="table">
+									<thead class="text-primary">
+										<tr>
+											<th colspan="10"><input type="text" name="searchData"
+												class="form-control" data-ng-model="searchBorrower"
+												placeholder="Type anything to search Borrower"></th>
+										</tr>
+										<tr>
+											<th>Sr No.</th>
+											<th>Name</th>
+											<th>Email</th>
+											<th>Mobile</th>
+											<th>Employment Type</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr
+											data-ng-repeat="borrower in product.borrowers | filter : searchBorrower" class="bg-active">
+											<td>{{$index + 1}}</td>
+											<td>{{ (!isEmpty(borrower.firstName) &&
+												!isEmpty(borrower.lastName) ? borrower.firstName + ' ' +
+												borrower.lastName : borrower.firstName || Constant.NA )}}</td>
+											<td>{{borrower.email}}</td>
+											<td>{{borrower.mobile}}</td>
+											<td>{{borrower.employmentType}}</td>
+											<td><button class="btn btn-info btn-sm" ui-sref="web.lams.brLoanProfile({brId:borrower.id, appId:product.id})">View</button></td>
+										</tr>
+										<tr data-ng-if="isEmpty(product.borrowers)">
+											<td colspan="10" class="alert alert-default text-center">No
+												No Borrower are on the Platform!</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+										
+										
+										
+										
+										
 									</a>
 								</div>
 								<div class="list-group" ng-if="isEmpty(products)">No

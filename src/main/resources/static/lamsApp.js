@@ -152,6 +152,21 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
                         'profile/brProfileCtrl.js']});
             }]
 		}
+	}).state("web.lams.brLoanProfile", {
+    	url : '/borrwer-loan-profile/:brId/:appId',
+    	views :  {
+    		'content@web' :  {
+    			templateUrl : 'profile/brLoanProfile.html',
+        		controller: 'brLoanProfileCtrl'
+    		}
+    	},
+    	data : {pageTitle : "Lams | Application"},
+    	resolve: {
+            lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load({files: [
+                        'profile/brLoanProfileCtrl.js']});
+            }]
+		}
 	}).state("web.lams.ldProfile", {
     	url : '/lender-profile',
     	views :  {
@@ -236,6 +251,7 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 	});
 	$urlRouterProvider.otherwise("login");
 } ]);
+
 	//app.config(['$stateProvider', '$httpProvider', '$locationProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$ocLazyLoadProvider',
 	//	function ($stateProvider, $httpProvider, $locationProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $ocLazyLoadProvider) {
 	//

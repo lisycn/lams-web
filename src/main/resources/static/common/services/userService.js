@@ -33,6 +33,10 @@ app.service("userService", [ 'httpService', 'URLS', "$rootScope","$http",
 				return httpService.get(URLS.user + '/get_user_details');
 			};
 			
+			this.getUserDetailsById = function(userId) {
+				return httpService.get(URLS.user + '/get_user_details_by_id/' + userId);
+			};
+			
 			this.updateUserDetail = function(userObj) {
 				return httpService.post(URLS.user + '/update_user_details',userObj);
 			};
