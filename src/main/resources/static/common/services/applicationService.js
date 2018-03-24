@@ -21,4 +21,12 @@ app.service("applicationService", [ 'httpService', 'URLS', "$rootScope","$http",
 		return httpService.get(URLS.user + "/application/get_borrowers_for_lender");
 	};
 	
+	this.getBorrowerForLenderByApplicationId = function(appId) {
+		return httpService.get(URLS.user + "/application/get_borrowers_for_lender_app_id/" + appId);
+	};
+	
+//	this.getApplicationDetailsByIdAndUserId = function(appId, userId) {
+//		return httpService.get(URLS.user + "/application/get_application_details_for_lender/" + appId + "/"+ userId);
+//	};
+	
 }]);
