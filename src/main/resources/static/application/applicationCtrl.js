@@ -12,6 +12,18 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 				function(success) {
 					if (success.data.status == 200) {
 						$scope.applicationDetails = success.data.data;
+						if($scope.applicationDetails.employmentType == Constant.EmploymentType.SALARIED){
+							$scope.getDocumentList([Constant.documentType.PHOTO_GRAPH,Constant.documentType.PAN_CARD,Constant.documentType.AADHAR_CARD,Constant.documentType.LAST_3_MONTH_SALARY_SLIP,
+								Constant.documentType.LAST_6_MONTHS_BANK_ACCOUNT_STATEMENT,Constant.documentType.FORM_16_OR_APPOIMENT_LETTER,
+								Constant.documentType.INVESTMENT_PROOFS,Constant.documentType.EXISTING_LOAN_DOCUMENT,Constant.documentType.OTHER_DOCUMENT]);
+						} else if($scope.applicationDetails.employmentType == Constant.EmploymentType.SELF_EMPLOYED){
+							$scope.getDocumentList(Constant.documentType.PHOTO_GRAPH,Constant.documentType.PAN_CARD,Constant.documentType.AADHAR_CARD,
+									Constant.documentType.CORPORATE_ITR_SET_YEAR1,Constant.documentType.CORPORATE_ITR_SET_YEAR2,
+									Constant.documentType.CORPORATE_ITR_SET_YEAR3,
+									Constant.documentType.CORPORATE_BANK_ACCOUNT_STATEMENT,Constant.documentType.INDIVIDUAL_ITR_SET_YEAR1,
+									Constant.documentType.INDIVIDUAL_ITR_SET_YEAR2,Constant.documentType.INDIVIDUAL_ITR_SET_YEAR3,
+									Constant.documentType.INDIVIDUAL_BANK_ACCOUNT_STATEMENT);
+						}
 					} else {
 						Notification.warning(success.data.message);
 					}
@@ -56,9 +68,6 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 				});
 		}
 		
-		$scope.getDocumentList([Constant.documentType.PAN_CARD,Constant.documentType.AADHAR_CARD,Constant.documentType.LAST_3_MONTH_SALARY_SLIP,
-			Constant.documentType.LAST_6_MONTHS_BANK_ACCOUNT_STATEMENT,Constant.documentType.FORM_16_OR_APPOIMENT_LETTER,
-			Constant.documentType.INVESTMENT_PROOFS,Constant.documentType.EXISTING_LOAN_DOCUMENT,Constant.documentType.OTHER_DOCUMENT]);
 
 		
 		$scope.inActiveDocument = function(documentMappingId,documentMapId,documentResponseList,index) {
