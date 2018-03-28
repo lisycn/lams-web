@@ -100,9 +100,9 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
             'header@web': {
                 templateUrl: 'common/htmls/header.html',
             },
-            'footer@web': {
-                templateUrl: 'common/htmls/footer.html',
-            },
+//            'footer@web': {
+//                templateUrl: 'common/htmls/footer.html',
+//            },
             'sidebar@web': {
                 templateUrl: 'common/htmls/sidebar.html',
             }
@@ -251,6 +251,12 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 	});
 	$urlRouterProvider.otherwise("login");
 } ]);
+
+app.run(['$rootScope', function($rootScope) {
+//	$scope.open = function() {
+//	    $scope.popup1.opened = true;
+//	  };
+}]);
 
 	//app.config(['$stateProvider', '$httpProvider', '$locationProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$ocLazyLoadProvider',
 	//	function ($stateProvider, $httpProvider, $locationProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $ocLazyLoadProvider) {

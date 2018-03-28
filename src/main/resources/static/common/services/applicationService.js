@@ -29,4 +29,8 @@ app.service("applicationService", [ 'httpService', 'URLS', "$rootScope","$http",
 //		return httpService.get(URLS.user + "/application/get_application_details_for_lender/" + appId + "/"+ userId);
 //	};
 	
+	this.saveApprovalRequest = function(data) {
+		return httpService.post(URLS.user + "/application/save_approval_request",data);
+	};
+	
 }]);
