@@ -111,5 +111,11 @@ app.constant('Constant', {
 	},EmploymentType : {
 		SALARIED : 1,
 		SELF_EMPLOYED : 2
+	},
+	Status :  {
+		OPEN : "OPEN",
+		RESPONDED : "RESPONDED",
+		ACCEPTED : "ACCEPTED",
+		REJECTED : "REJECTED"
 	}
 });
