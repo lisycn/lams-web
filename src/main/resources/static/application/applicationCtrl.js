@@ -59,6 +59,9 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 
 		$scope.documentList = [];
 		$scope.getDocumentList = function(listOfDocumentMstId) {
+			if($scope.applicationDetails.loanTypeId == Constant.LoanType.EXISTING_LOAN){
+				return;
+			}
 			documentService.getDocumentList($scope.applicationId,listOfDocumentMstId).then(
 				function(success) {
 					if (success.data.status == 200) {

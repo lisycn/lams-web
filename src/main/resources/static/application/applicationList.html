@@ -22,6 +22,7 @@
 									ng-repeat="application in applicationList | filter : {loanTypeId : Constant.LoanType.EXISTING_LOAN}">
 									<!-- data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})" -->
 									<a href="javascript:void(0)" 
+									 data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})"
 										class="list-group-item list-group-item-action flex-column align-items-start">
 										<h4 class="list-group-item-heading">
 											<b>{{application.applicationTypeName}}
