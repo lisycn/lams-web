@@ -6,6 +6,8 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 		$scope.applicationId = $stateParams.appId;
 		$scope.editApplicationForm = true;
 		$scope.connections = [];
+		$scope.statuses = [Constant.Status.RESPONDED,Constant.Status.ACCEPTED,Constant.Status.REJECTED];
+		$scope.status = Constant.Status.RESPONDED;
 
 		$scope.getApplicationDetails = function() {
 
@@ -100,5 +102,25 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 		};
 
 		$scope.getConnections($scope.applicationId,Constant.Status.RESPONDED);
+		
+		$scope.updateStatus = function (con,status){
+			applicationService.updateStatus(con.application.id,status).then(
+		            function(success) {
+		            	if(success.data.status == 200){
+		            		if(success.data.data && success.data.data == true){
+		            			if(Constant.Status.ACCEPTED == status){
+		            				Notification.success("Successfully Accepted!");
+		            			}else if(Constant.Status.REJECTED == status){
+		            				Notification.success("Successfully Rejected!");		            				
+		            			}
+		            			$scope.getConnections($scope.applicationId,Constant.Status.RESPONDED);
+		            		}
+		            	}else{
+		                	Notification.error(success.data.message);
+		                }
+		            }, function(error) {
+		            	$rootScope.validateErrorResponse(error);
+		     });
+		};
 
 	} ]);

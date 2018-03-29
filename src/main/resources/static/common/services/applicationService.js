@@ -24,11 +24,18 @@ app.service("applicationService", [ 'httpService', 'URLS', "$rootScope","$http",
 	this.getBorrowerForLenderByApplicationId = function(appId) {
 		return httpService.get(URLS.user + "/application/get_borrowers_for_lender_app_id/" + appId);
 	};
-	
 	this.getConnections = function(appId,status) {
 		return httpService.get(URLS.user + "/application/get_connections/" + appId + "/" + status);
 	};
 	
+	this.saveApprovalRequest = function(data) {
+		return httpService.post(URLS.user + "/application/save_approval_request",data);
+	};
+	
+	this.updateStatus = function(appId,status) {
+		return httpService.get(URLS.user + "/application/update_status/" + appId + "/" + status);
+	};
+
 //	this.getApplicationDetailsByIdAndUserId = function(appId, userId) {
 //		return httpService.get(URLS.user + "/application/get_application_details_for_lender/" + appId + "/"+ userId);
 //	};
