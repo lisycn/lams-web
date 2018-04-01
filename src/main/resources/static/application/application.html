@@ -6,8 +6,8 @@
 				<div class="card">
 					<div class="card-header" data-background-color="purple">
 						<h4 class="title">
-							<b>{{applicationDetails.applicationTypeName}}
-								({{applicationDetails.leadReferenceNo}})</b></a>
+							<b>{{applicationDetails.applicationTypeName}} <span
+								ng-if="applicationDetails.loanTypeId == Constant.LoanType.CURRENT_LOAN">({{applicationDetails.leadReferenceNo}})</span></b></a>
 						</h4>
 						<p class="pull-right">
 							<b>Created Date: {{applicationDetails.createdDate | date :
@@ -20,11 +20,13 @@
 					</div>
 					<div class="card-content">
 
-						<div class="panel panel-default" ng-if="applicationDetails.loanTypeId != Constant.LoanType.EXISTING_LOAN">
+						<div class="panel panel-default"
+							ng-if="applicationDetails.loanTypeId != Constant.LoanType.EXISTING_LOAN">
 							<div class="panel-heading">
 								<b>Lender Responses</b> <select class="form-control"
 									data-ng-model="status"
-									data-ng-options="status as status for status in statuses" data-ng-change="getConnections(applicationId,status)">
+									data-ng-options="status as status for status in statuses"
+									data-ng-change="getConnections(applicationId,status)">
 								</select>
 							</div>
 							<div class="panel-body">
@@ -51,12 +53,14 @@
 											<td>{{con.tenure || Constant.NA}}</td>
 											<td>{{con.processingFees || Constant.NA}}</td>
 											<td>{{con.termAndCondition || Constant.NA}}</td>
-											<td ><button
-													data-ng-show="con.application.status == Constant.Status.RESPONDED" class="btn btn-primary btn-sm"
+											<td><button
+													data-ng-show="con.application.status == Constant.Status.RESPONDED"
+													class="btn btn-primary btn-sm"
 													ng-click="updateStatus(con,Constant.Status.ACCEPTED)">Accept</button>
 												&nbsp;
 												<button class="btn btn-danger btn-sm"
-													data-ng-show="con.application.status == Constant.Status.RESPONDED" ng-click="updateStatus(con,Constant.Status.REJECTED)">Reject</button>
+													data-ng-show="con.application.status == Constant.Status.RESPONDED"
+													ng-click="updateStatus(con,Constant.Status.REJECTED)">Reject</button>
 												<button class="btn btn-default btn-sm"
 													ng-click="con.isView = !con.isView">{{con.isView ?
 													'Hide' : 'View'}} Lender Info</button></td>
@@ -120,6 +124,32 @@
 											data-ng-required="true">
 									</div>
 								</div>
+								<div class="col-md-3" ng-if="applicationDetails.loanTypeId == Constant.LoanType.EXISTING_LOAN">
+									<div class="form-group">
+										<label class="control-label">EMI <span
+											class="text-danger">*</span></label> <input type="number"
+											data-ng-disabled="editApplicationForm" class="form-control"
+											data-ng-model="applicationDetails.emi" name="emi"
+											data-ng-required="true">
+									</div>
+								</div>
+
+								<div class="col-md-3"  ng-if="applicationDetails.loanTypeId == Constant.LoanType.EXISTING_LOAN">
+									<div class="form-group">
+										<label class="control-label">Planning to close before
+											Disbursement <span class="text-danger">*</span>
+										</label> &nbsp&nbsp<input type="radio" ng-value="true"
+											data-ng-disabled="editApplicationForm"
+											data-ng-model="applicationDetails.closeBeforeDisbsmnt"
+											name="emi">Yes&nbsp&nbsp <input type="radio"
+											data-ng-disabled="editApplicationForm" ng-value="false"
+											data-ng-model="applicationDetails.closeBeforeDisbsmnt"
+											name="emi"> No
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
 								<div class="col-md-3"
 									ng-if="applicationDetails.applicationTypeId == Constant.ApplicationType.PERSONAL_LOAN">
 									<div class="form-group">
@@ -172,19 +202,18 @@
 									</div>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-md-3"
-									ng-if="applicationDetails.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
-									<div class="form-group">
-										<label class="control-label">Reason For Lap</label> <input
-											type="text" class="form-control"
-											data-ng-disabled="editApplicationForm"
-											data-ng-model="applicationDetails.reasonForLap"
-											name="reasonForLap">
-									</div>
+							<div class="col-md-3"
+								ng-if="applicationDetails.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
+								<div class="form-group">
+									<label class="control-label">Reason For Lap</label> <input
+										type="text" class="form-control"
+										data-ng-disabled="editApplicationForm"
+										data-ng-model="applicationDetails.reasonForLap"
+										name="reasonForLap">
 								</div>
 							</div>
-							<div class="row" ng-if="applicationDetails.loanTypeId != Constant.LoanType.EXISTING_LOAN">
+							<div class="row"
+								ng-if="applicationDetails.loanTypeId != Constant.LoanType.EXISTING_LOAN">
 								<div class="panel panel-default">
 									<div>
 										<h5>
@@ -197,6 +226,7 @@
 												<label class="btn btn-default"> <b>{{documents.documentMstrName}}
 												</b> <input type="file" title="Upload size limit 5 MB"
 													upload-files id="{{documents.documentMstrId}}"
+													data-ng-disabled="editApplicationForm"
 													onchange="angular.element(this).scope().uploadAppFile(this);">
 												</label>
 											</div>
@@ -207,6 +237,7 @@
 														data-ng-model="doc.originalName" disabled> <span
 														class="input-group-btn">
 														<button class="btn btn-sm btn-default" type="button"
+															data-ng-disabled="editApplicationForm"
 															ng-click="inActiveDocument(doc.documentMappingId,documents.documentMstrId,documents.documentResponseList,$index)">x</button>
 													</span>
 												</div>
@@ -214,6 +245,7 @@
 										</div>
 									</div>
 								</div>
+
 							</div>
 							<div class="row">
 								<div class="col-md-8"></div>
