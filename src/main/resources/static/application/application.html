@@ -36,7 +36,7 @@
 											<th style="width: 5%">No.</th>
 											<th>Bank</th>
 											<th>Loan Possible Amount</th>
-											<th>Roi</th>
+											<th>ROI</th>
 											<th>Tenure</th>
 											<th>Processing Fees</th>
 											<th>Terms and Conditions</th>
@@ -54,16 +54,22 @@
 											<td>{{con.processingFees || Constant.NA}}</td>
 											<td>{{con.termAndCondition || Constant.NA}}</td>
 											<td><button
-													data-ng-show="con.application.status == Constant.Status.RESPONDED"
-													class="btn btn-primary btn-sm"
-													ng-click="updateStatus(con,Constant.Status.ACCEPTED)">Accept</button>
+													data-ng-show="con.status == Constant.Status.RESPONDED"
+													class="btn btn-success btn-sm"
+													data-ng-click="setLenderInfo(con,Constant.Status.ACCEPTED)"
+													data-toggle="modal" data-target="#responseModel">Accept</button>
 												&nbsp;
 												<button class="btn btn-danger btn-sm"
-													data-ng-show="con.application.status == Constant.Status.RESPONDED"
-													ng-click="updateStatus(con,Constant.Status.REJECTED)">Reject</button>
+													data-ng-show="con.status == Constant.Status.RESPONDED"
+													data-ng-click="updateStatus(con,Constant.Status.REJECTED)">Reject</button>
+												&nbsp;
 												<button class="btn btn-default btn-sm"
-													ng-click="con.isView = !con.isView">{{con.isView ?
-													'Hide' : 'View'}} Lender Info</button></td>
+													data-ng-click="con.isView = !con.isView">{{con.isView
+													? 'Hide' : 'View'}} Lender Info</button> &nbsp;
+												<button class="btn btn-info btn-sm"
+													data-ng-click="setLenderInfo(con,con.status)"
+													data-toggle="modal" data-target="#responseModel">View
+													Payment Info</button></td>
 										</tr>
 
 										<tr data-ng-repeat-end>
@@ -124,7 +130,8 @@
 											data-ng-required="true">
 									</div>
 								</div>
-								<div class="col-md-3" ng-if="applicationDetails.loanTypeId == Constant.LoanType.EXISTING_LOAN">
+								<div class="col-md-3"
+									ng-if="applicationDetails.loanTypeId == Constant.LoanType.EXISTING_LOAN">
 									<div class="form-group">
 										<label class="control-label">EMI <span
 											class="text-danger">*</span></label> <input type="number"
@@ -134,7 +141,8 @@
 									</div>
 								</div>
 
-								<div class="col-md-3"  ng-if="applicationDetails.loanTypeId == Constant.LoanType.EXISTING_LOAN">
+								<div class="col-md-3"
+									ng-if="applicationDetails.loanTypeId == Constant.LoanType.EXISTING_LOAN">
 									<div class="form-group">
 										<label class="control-label">Planning to close before
 											Disbursement <span class="text-danger">*</span>
@@ -266,6 +274,69 @@
 						</form>
 
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<!-- Respond Modal -->
+<div class="modal fade" id="responseModel" role="dialog">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">
+					Kindly deposit <b>Rs. 5000</b> to below Account No
+				</h4>
+			</div>
+			<div class="modal-body">
+				{{curSelectedLender.application}}
+				<form name="responseForm" novalidate>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label><b>Account No :</b> 8458954899</label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label><b>IFSC :</b> ICICI4582</label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label><b>State :</b> Gujarat. </label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label><b>City :</b> Ahmedabad. </label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label><b>Branch :</b> Naranpura,300512. </label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label><b>Amount :</b> Rs.5000 </label>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer"
+				data-ng-if="curSelectedLender.con.status == Constant.Status.RESPONDED">
+				<div class="col-md-12">
+					<button type="button" class="btn btn-primary"
+						data-ng-click="updateStatus(curSelectedLender.con,curSelectedLender.status)"
+						data-dismiss="modal">Submit</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>

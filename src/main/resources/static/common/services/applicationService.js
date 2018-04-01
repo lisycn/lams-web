@@ -32,8 +32,8 @@ app.service("applicationService", [ 'httpService', 'URLS', "$rootScope","$http",
 		return httpService.post(URLS.user + "/application/save_approval_request",data);
 	};
 	
-	this.updateStatus = function(appId,status) {
-		return httpService.get(URLS.user + "/application/update_status/" + appId + "/" + status);
+	this.updateStatus = function(data,status) {
+		return httpService.post(URLS.user + "/application/update_status/"+ status,data);
 	};
 
 //	this.getApplicationDetailsByIdAndUserId = function(appId, userId) {
