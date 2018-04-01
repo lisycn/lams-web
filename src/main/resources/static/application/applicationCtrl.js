@@ -104,7 +104,7 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 		$scope.getConnections($scope.applicationId,Constant.Status.RESPONDED);
 		
 		$scope.updateStatus = function (con,status){
-			applicationService.updateStatus(con.application.id,status).then(
+			applicationService.updateStatus(con,status).then(
 		            function(success) {
 		            	if(success.data.status == 200){
 		            		if(success.data.data && success.data.data == true){
@@ -122,5 +122,11 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 		            	$rootScope.validateErrorResponse(error);
 		     });
 		};
+		
+		$scope.curSelectedLender = {};
+		$scope.setLenderInfo = function(con,status){
+			$scope.curSelectedLender.con = con;
+			$scope.curSelectedLender.status = status;
+		}
 
 	} ]);
