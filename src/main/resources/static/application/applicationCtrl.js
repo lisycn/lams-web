@@ -39,6 +39,13 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 		$scope.saveLoanDetails = function() {
 			var data = {};
 			data.applicationTypeId = $scope.applicationTypeId;
+			var uploadAll = true;
+			for (var i = 0; i < $scope.documentList.length; i++) {
+				if($scope.documentList[i].documentResponseList.length == 0){
+					uploadAll = false;
+				}
+			}	
+			$scope.applicationDetails.isUploadComplete = uploadAll; 
 			data.data = JSON.stringify($scope.applicationDetails);
 			applicationService.save(data).then(
 				function(success) {
@@ -63,7 +70,7 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 				return;
 			}
 			documentService.getDocumentList($scope.applicationId,listOfDocumentMstId).then(
-				function(success) {
+				function(success) {  
 					if (success.data.status == 200) {
 						$scope.documentList = success.data.data;
 					} else {
