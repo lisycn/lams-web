@@ -209,15 +209,16 @@
 											data-ng-model="applicationDetails.carCost" name="carCost">
 									</div>
 								</div>
-							</div>
-							<div class="col-md-3"
-								ng-if="applicationDetails.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
-								<div class="form-group">
-									<label class="control-label">Reason For Lap</label> <input
-										type="text" class="form-control"
-										data-ng-disabled="editApplicationForm"
-										data-ng-model="applicationDetails.reasonForLap"
-										name="reasonForLap">
+
+								<div class="col-md-3"
+									ng-if="applicationDetails.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
+									<div class="form-group">
+										<label class="control-label">Reason For Lap</label> <input
+											type="text" class="form-control"
+											data-ng-disabled="editApplicationForm"
+											data-ng-model="applicationDetails.reasonForLap"
+											name="reasonForLap">
+									</div>
 								</div>
 							</div>
 							<div class="row"
