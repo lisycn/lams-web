@@ -17,13 +17,21 @@ angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterServ
 		$scope.applicationTypeList = [];
 		$scope.loanTypeList = [];
 		
+		$scope.totalExistingLoanAmount = 0;
 		$scope.getApplications = function() {
-
+			$scope.totalExistingLoanAmount = 0;
 			applicationService.getAll().then(
 				function(success) {
 					if (success.data.status == 200) {
+						$scope.existingLoanList = [];
 						$scope.applicationList = success.data.data;
-						$scope.existingAppCount = $filter('filter')($scope.applicationList,{loanTypeId : Constant.LoanType.EXISTING_LOAN}).length;
+						$scope.existingLoanList = $filter('filter')($scope.applicationList,{loanTypeId : Constant.LoanType.EXISTING_LOAN});
+						for(var i = 0; i < $scope.existingLoanList.length; i++){
+							if(!$rootScope.isEmpty($scope.existingLoanList[i].loanAmount)){
+								$scope.totalExistingLoanAmount = $scope.totalExistingLoanAmount + parseFloat($scope.existingLoanList[i].loanAmount);
+							}
+						}
+						$scope.existingAppCount = $scope.existingLoanList.length;
 						$scope.curentAppCount = $filter('filter')($scope.applicationList,{loanTypeId : Constant.LoanType.CURRENT_LOAN}).length;
 						$scope.closedAppCount = $filter('filter')($scope.applicationList,{loanTypeId : Constant.LoanType.CLOSED_LOAN}).length;
 					} else {

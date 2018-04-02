@@ -6,8 +6,8 @@
 				<div class="card">
 					<div class="card-header" data-background-color="purple">
 						<h4 class="title">
-							<b>{{applicationDetails.applicationTypeName}}
-								({{applicationDetails.leadReferenceNo}})</b></a>
+							<b>{{applicationDetails.applicationTypeName}} <span
+								ng-if="applicationDetails.loanTypeId == Constant.LoanType.CURRENT_LOAN">({{applicationDetails.leadReferenceNo}})</span></b></a>
 						</h4>
 						<p class="pull-right">
 							<b>Created Date: {{applicationDetails.createdDate | date :
@@ -19,6 +19,96 @@
 
 					</div>
 					<div class="card-content">
+
+						<div class="panel panel-default"
+							ng-if="applicationDetails.loanTypeId != Constant.LoanType.EXISTING_LOAN">
+							<div class="panel-heading">
+								<b>Lender Responses</b> <select class="form-control"
+									data-ng-model="status"
+									data-ng-options="status as status for status in statuses"
+									data-ng-change="getConnections(applicationId,status)">
+								</select>
+							</div>
+							<div class="panel-body">
+								<table class="table table-striped table-bordered">
+									<thead class="text-primary">
+										<tr>
+											<th style="width: 5%">No.</th>
+											<th>Bank</th>
+											<th>Loan Possible Amount</th>
+											<th>ROI</th>
+											<th>Tenure</th>
+											<th>Processing Fees</th>
+											<th>Terms and Conditions</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr data-ng-repeat-start="con in connections">
+											<td>{{$index + 1}}</td>
+											<td>{{con.applicationMappingBO.user.bank.name ||
+												Constant.NA }}</td>
+											<td>{{con.loanPossibleAmount || Constant.NA}}</td>
+											<td>{{con.roi | number : 2 || Constant.NA}}</td>
+											<td>{{con.tenure || Constant.NA}}</td>
+											<td>{{con.processingFees || Constant.NA}}</td>
+											<td>{{con.termAndCondition || Constant.NA}}</td>
+											<td><button
+													data-ng-show="con.status == Constant.Status.RESPONDED"
+													class="btn btn-success btn-sm"
+													data-ng-click="setLenderInfo(con,Constant.Status.ACCEPTED)"
+													data-toggle="modal" data-target="#responseModel">Accept</button>
+												&nbsp;
+												<button class="btn btn-danger btn-sm"
+													data-ng-show="con.status == Constant.Status.RESPONDED"
+													data-ng-click="updateStatus(con,Constant.Status.REJECTED)">Reject</button>
+												&nbsp;
+												<button class="btn btn-default btn-sm"
+													data-ng-click="con.isView = !con.isView">{{con.isView
+													? 'Hide' : 'View'}} Lender Info</button> &nbsp;
+												<button class="btn btn-info btn-sm"
+													data-ng-click="setLenderInfo(con,con.status)"
+													data-toggle="modal" data-target="#responseModel">View
+													Payment Info</button></td>
+										</tr>
+
+										<tr data-ng-repeat-end>
+											<td colspan="8" data-ng-show="con.isView">
+												<table class="table table-striped table-bordered">
+													<thead class="text-primary">
+														<tr>
+															<th>Name</th>
+															<th>Email</th>
+															<th>Mobile</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>{{(!isEmpty(con.applicationMappingBO.user.firstName)
+																&& !isEmpty(con.applicationMappingBO.user.lastName) ?
+																user.firstName + ' ' +
+																con.applicationMappingBO.user.lastName :
+																con.applicationMappingBO.user.firstName || Constant.NA
+																)}}</td>
+															<td>{{con.applicationMappingBO.user.email ||
+																Constant.NA }}</td>
+															<td>{{con.applicationMappingBO.user.mobile ||
+																Constant.NA}}</td>
+														</tr>
+													</tbody>
+												</table>
+
+											</td>
+										</tr>
+										<tr data-ng-if="isEmpty(connections)">
+											<td colspan="8" class="alert alert-default text-center">No
+												Pending Response Yet!</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
 
 						<form name="currentForm" novalidate>
 							<div class="row">
@@ -40,6 +130,34 @@
 											data-ng-required="true">
 									</div>
 								</div>
+								<div class="col-md-3"
+									ng-if="applicationDetails.loanTypeId == Constant.LoanType.EXISTING_LOAN">
+									<div class="form-group">
+										<label class="control-label">EMI <span
+											class="text-danger">*</span></label> <input type="number"
+											data-ng-disabled="editApplicationForm" class="form-control"
+											data-ng-model="applicationDetails.emi" name="emi"
+											data-ng-required="true">
+									</div>
+								</div>
+
+								<div class="col-md-3"
+									ng-if="applicationDetails.loanTypeId == Constant.LoanType.EXISTING_LOAN">
+									<div class="form-group">
+										<label class="control-label">Planning to close before
+											Disbursement <span class="text-danger">*</span>
+										</label> &nbsp&nbsp<input type="radio" ng-value="true"
+											data-ng-disabled="editApplicationForm"
+											data-ng-model="applicationDetails.closeBeforeDisbsmnt"
+											name="emi">Yes&nbsp&nbsp <input type="radio"
+											data-ng-disabled="editApplicationForm" ng-value="false"
+											data-ng-model="applicationDetails.closeBeforeDisbsmnt"
+											name="emi"> No
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
 								<div class="col-md-3"
 									ng-if="applicationDetails.applicationTypeId == Constant.ApplicationType.PERSONAL_LOAN">
 									<div class="form-group">
@@ -91,8 +209,7 @@
 											data-ng-model="applicationDetails.carCost" name="carCost">
 									</div>
 								</div>
-							</div>
-							<div class="row">
+
 								<div class="col-md-3"
 									ng-if="applicationDetails.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
 									<div class="form-group">
@@ -104,7 +221,8 @@
 									</div>
 								</div>
 							</div>
-							<div class="row">
+							<div class="row"
+								ng-if="applicationDetails.loanTypeId != Constant.LoanType.EXISTING_LOAN">
 								<div class="panel panel-default">
 									<div>
 										<h5>
@@ -114,22 +232,29 @@
 									<div class="panel-body">
 										<div class="row" data-ng-repeat="documents in documentList">
 											<div class="col-md-3">
-												<label class="btn btn-default"> <b>{{documents.documentMstrName}} </b> <input type="file"
-													title="Upload size limit 5 MB" upload-files id="{{documents.documentMstrId}}"
+												<label class="btn btn-default"> <b>{{documents.documentMstrName}}
+												</b> <input type="file" title="Upload size limit 5 MB"
+													upload-files id="{{documents.documentMstrId}}"
+													data-ng-disabled="editApplicationForm"
 													onchange="angular.element(this).scope().uploadAppFile(this);">
 												</label>
 											</div>
-											<div class="col-md-2" data-ng-repeat="doc in documents.documentResponseList">
+											<div class="col-md-2"
+												data-ng-repeat="doc in documents.documentResponseList">
 												<div class="input-group">
-													<input type="text" class="form-control" data-ng-model="doc.originalName" disabled> <span
+													<input type="text" class="form-control"
+														data-ng-model="doc.originalName" disabled> <span
 														class="input-group-btn">
-														<button class="btn btn-sm btn-default" type="button" ng-click="inActiveDocument(doc.documentMappingId,documents.documentMstrId,documents.documentResponseList,$index)">x</button>
+														<button class="btn btn-sm btn-default" type="button"
+															data-ng-disabled="editApplicationForm"
+															ng-click="inActiveDocument(doc.documentMappingId,documents.documentMstrId,documents.documentResponseList,$index)">x</button>
 													</span>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+
 							</div>
 							<div class="row">
 								<div class="col-md-8"></div>
@@ -150,6 +275,69 @@
 						</form>
 
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<!-- Respond Modal -->
+<div class="modal fade" id="responseModel" role="dialog">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">
+					Kindly deposit <b>Rs. 5000</b> to below Account No
+				</h4>
+			</div>
+			<div class="modal-body">
+				{{curSelectedLender.application}}
+				<form name="responseForm" novalidate>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label><b>Account No :</b> 8458954899</label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label><b>IFSC :</b> ICICI4582</label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label><b>State :</b> Gujarat. </label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label><b>City :</b> Ahmedabad. </label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label><b>Branch :</b> Naranpura,300512. </label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label><b>Amount :</b> Rs.5000 </label>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer"
+				data-ng-if="curSelectedLender.con.status == Constant.Status.RESPONDED">
+				<div class="col-md-12">
+					<button type="button" class="btn btn-primary"
+						data-ng-click="updateStatus(curSelectedLender.con,curSelectedLender.status)"
+						data-dismiss="modal">Submit</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>

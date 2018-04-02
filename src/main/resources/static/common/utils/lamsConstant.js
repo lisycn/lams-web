@@ -8,6 +8,10 @@ app.constant('Constant', {
 			id : 2,
 			value : 'Borrower'
 		},
+		CHANNEL_PARTNER : {
+			id : 3,
+			value : 'Channel Partner'
+		},
 		ALL : {
 			id : -1,
 			value : 'All'
@@ -98,6 +102,24 @@ app.constant('Constant', {
 		FORM_16_OR_APPOIMENT_LETTER : 5,
 		INVESTMENT_PROOFS : 6,
 		EXISTING_LOAN_DOCUMENT : 7,
-		OTHER_DOCUMENT : 8
+		OTHER_DOCUMENT : 8,
+		PHOTO_GRAPH : 9,
+		CORPORATE_ITR_SET_YEAR1 : 10,
+		CORPORATE_ITR_SET_YEAR2 : 11,
+		CORPORATE_ITR_SET_YEAR3 : 12,
+		CORPORATE_BANK_ACCOUNT_STATEMENT : 13,
+		INDIVIDUAL_ITR_SET_YEAR1 : 14,
+		INDIVIDUAL_ITR_SET_YEAR2 : 15,
+		INDIVIDUAL_ITR_SET_YEAR3 : 16,
+		INDIVIDUAL_BANK_ACCOUNT_STATEMENT : 17
+	},EmploymentType : {
+		SALARIED : 1,
+		SELF_EMPLOYED : 2
+	},
+	Status :  {
+		OPEN : "OPEN",
+		RESPONDED : "RESPONDED",
+		ACCEPTED : "ACCEPTED",
+		REJECTED : "REJECTED"
 	}
 });
