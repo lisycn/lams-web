@@ -40,7 +40,7 @@ angular.module("lams").controller("loginCtrl", [ "$scope", "$http", "$rootScope"
 			$cookieStore.put(Constant.USER_TYPE, btoa(success.data.data.userType));
 			$rootScope.loadMasters();
 			if(success.data.data.userType == Constant.UserType.LENDER.id){
-				$state.go("web.lams.ldDashboard");									
+				$state.go("web.lams.products");									
 			}else  if(success.data.data.userType == Constant.UserType.BORROWER.id){
 				$state.go("web.lams.brDashboard");
 			}
