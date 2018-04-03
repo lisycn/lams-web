@@ -9,6 +9,10 @@ app.service("applicationService", [ 'httpService', 'URLS', "$rootScope","$http",
 		return httpService.get(URLS.user + "/application/get/"+id);
 	};
 	
+	this.getRespondedApplications = function(brId, appId) {
+		return httpService.get(URLS.user + "/application/get_responded_application/" +brId + "/" + appId);
+	};
+	
 	this.getLoanDetails = function(id,appTypeId) {
 		return httpService.get(URLS.user + "/application/getLoanDetails/" + id + "/" + appTypeId);
 	};
@@ -33,11 +37,15 @@ app.service("applicationService", [ 'httpService', 'URLS', "$rootScope","$http",
 	};
 	
 	this.updateStatus = function(data,status) {
-		return httpService.post(URLS.user + "/application/update_status/"+ status,data);
+		return httpService.get(URLS.user + "/application/update_status/" + status, data);
 	};
 
 //	this.getApplicationDetailsByIdAndUserId = function(appId, userId) {
 //		return httpService.get(URLS.user + "/application/get_application_details_for_lender/" + appId + "/"+ userId);
 //	};
+	
+	this.saveApprovalRequest = function(data) {
+		return httpService.post(URLS.user + "/application/save_approval_request",data);
+	};
 	
 }]);

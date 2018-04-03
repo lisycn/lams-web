@@ -1,6 +1,12 @@
 angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope","Constant","userService","Notification","masterService","$filter",
 		function($scope, $http, $rootScope,Constant,userService,Notification,masterService,$filter) {
-
+	
+	
+	$scope.popup ={"opened" : false};
+	$scope.open = function() {
+	    $scope.popup.opened = true;
+	  };
+	
 	$scope.isDisable = false;
 	$scope.initUserObj = function(){
 		$scope.userData = { address : {

@@ -33,13 +33,15 @@
 								</thead>
 								<tbody>
 									<tr data-ng-repeat="app in userData.applications">
-										<td>{{$index + 1}}</td>
+										<td ng-init="getRespondedApplications(app)">{{$index + 1}}</td>
 										<td>{{app.leadReferenceNo || Constant.NA }}</td>
 										<td>{{app.applicationTypeName || Constant.NA}}</td>
 										<td>{{app.loanAmount | number : 2 || Constant.NA}}</td>
 										<td>{{app.tenure || Constant.NA}}</td>
-										<td><button class="btn btn-primary btn-sm"
-												data-toggle="modal" data-target="#responseModel" ng-click="setApplicationData(app)">Respond</button></td>
+										<td>
+										<button ng-if="app.respondedApplications.length == 0" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#responseModel" ng-click="setApplicationData(app)">Respond</button>
+										<button ng-if="app.respondedApplications.length > 0" class="btn btn-success btn-sm" data-toggle="modal" data-target="#responseModel" ng-click="viewRespondedData(app.respondedApplications)">Responded</button>
+										</td>
 									</tr>
 									<tr data-ng-if="isEmpty(userData.applications)">
 										<td colspan="6" class="alert alert-default text-center">No
@@ -226,9 +228,10 @@
 					<div class="row">
 						<div class="col-md-3">
 							<div class="form-group">
-								<label class="control-label">Possible Loan Amount <span
+								<label class="control-label">Possible Loan Amount - {{respond.canEdit}}<span
 									class="text-danger">*</span></label> <input type="number"
 									class="form-control" data-ng-model="respond.loanPossibleAmount"
+									ng-disabled="!respond.canEdit"
 									name="respond.possibleLoanAmount" ng-required="true">
 							</div>
 						</div>
@@ -237,6 +240,7 @@
 								<label class="control-label">Tenure<span
 									class="text-danger">*</span></label> <input type="number"
 									class="form-control" data-ng-model="respond.tenure" name="tenure"
+									ng-disabled="!respond.canEdit"
 									ng-required="true">
 							</div>
 						</div>
@@ -245,6 +249,7 @@
 								<label class="control-label">Interest Rate<span
 									class="text-danger">*</span></label> <input type="number"
 									class="form-control" data-ng-model="respond.roi"
+									ng-disabled="!respond.canEdit"
 									name="interestRate" ng-required="true">
 							</div>
 						</div>
@@ -253,6 +258,7 @@
 								<label class="control-label">Processing Fees<span
 									class="text-danger">*</span></label> <input type="number"
 									class="form-control" data-ng-model="respond.processingFees"
+									ng-disabled="!respond.canEdit"
 									name="processingFees" ng-required="true">
 							</div>
 						</div>
@@ -261,6 +267,7 @@
 								<label class="control-label">Terms & Conditions<span
 									class="text-danger">*</span></label>
 								<textarea class="form-control" data-ng-model="respond.termAndCondition"
+								ng-disabled="!respond.canEdit"
 									name="terms" ng-required="true"></textarea>
 							</div>
 						</div>
@@ -269,8 +276,7 @@
 			</div>
 			<div class="modal-footer">
 				<div class="col-md-12">
-					<button type="button" class="btn btn-primary"
-						ng-click="submitApproval()" data-dismiss="modal">Submit</button>
+					<button type="button" ng-if="respond.canEdit" class="btn btn-primary" ng-click="submitApproval()" data-dismiss="modal">Submit</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>

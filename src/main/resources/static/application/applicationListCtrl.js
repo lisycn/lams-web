@@ -86,6 +86,7 @@ angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterServ
 			var data = {};
 			data.applicationTypeId = appObj.applicationTypeId;
 			appObj.loanTypeId = type;
+//			data.status = "OPEN";
 			data.data = JSON.stringify(appObj);
 			applicationService.save(data).then(
 				function(success) {
