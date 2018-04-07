@@ -21,54 +21,89 @@
 								<div class="list-group" ng-repeat="product in products">
 									<a href="javascript:void(0)"
 										class="list-group-item list-group-item-action flex-column align-items-start">
-										<h4 ng-click="getBorrowerForLenderByApplicationId(product)">
-											<b>{{product.name}} </b><small class="pull-right">{{product.createdDate |
+										<h4>
+											<b>{{product.applicationTypeMstrBO.name}} </b><small class="pull-right">{{product.createdDate |
 											date : 'dd-MM-yyyy'}}</small>
 										</h4> 
 										
 										
 										
-										<div class="panel-body table-responsive" ng-if="product.isActiveTab">
-								<table class="table">
+										<div class="panel-body table-responsive">
+								<table class="table table-bordered">
 									<thead class="text-primary">
 										<tr>
-											<th colspan="10"><input type="text" name="searchData"
-												class="form-control" data-ng-model="searchBorrower"
-												placeholder="Type anything to search Borrower"></th>
+										<th colspan="2">
+												<select class="form-control"
+													data-ng-model="status"
+													data-ng-options="status as status for status in statuses"
+													data-ng-change="getBorrowerForLenderByApplicationId(products[0],status)">
+												</select>
+												</th>
+												
+											<th colspan="8"><input type="text" name="searchData"
+												class="form-control" data-ng-model=searchApps
+												placeholder="Type anything to search Applications"></th>
 										</tr>
 										<tr>
 											<th>Sr No.</th>
 											<th>Name</th>
 											<th>Email</th>
 											<th>Mobile</th>
-											<th>Employment Type</th>
+											<th>Employment</th>
+											<th>Reference No</th>
+											<th>Amount</th>
+											<th>Tenure</th>
 											<th>Action</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody data-ng-if="status == Constant.Status.OPEN">
 										<tr
-											data-ng-repeat="borrower in product.borrowers | filter : searchBorrower" class="bg-active">
+											data-ng-repeat="application in product.applications | filter : searchApps" class="bg-active">
 											<td>{{$index + 1}}</td>
-											<td>{{ (!isEmpty(borrower.firstName) &&
-												!isEmpty(borrower.lastName) ? borrower.firstName + ' ' +
-												borrower.lastName : borrower.firstName || Constant.NA )}}</td>
-											<td>{{borrower.email}}</td>
-											<td>{{borrower.mobile}}</td>
-											<td>{{borrower.employmentType}}</td>
-											<td><button class="btn btn-info btn-sm" ui-sref="web.lams.brLoanProfile({brId:borrower.id, appId:product.id})">View</button></td>
+											<td>{{ (!isEmpty(application.firstName) &&
+												!isEmpty(application.lastName) ? application.firstName + ' ' +
+												application.lastName : application.firstName || Constant.NA )}}</td>
+											<td>{{application.email}}</td>
+											<td>{{application.mobile}}</td>
+											<td>{{getEmployementType(application.employmentType)}}</td>
+											<td>{{application.leadReferenceNo}}</td>
+											<td>{{application.loanAmount}}</td>
+											<td>{{application.tenure}}</td>
+											<td><button class="btn btn-info btn-sm" data-ui-sref="web.lams.brLoanProfile({brId:application.userId, appId:product.id})">View</button>
+											<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#responseModel" data-ng-click="setApplicationData(application)">Respond</button>
+											</td>
 										</tr>
-										<tr data-ng-if="isEmpty(product.borrowers)">
-											<td colspan="10" class="alert alert-default text-center">No
-												No Borrower are on the Platform!</td>
+										<tr data-ng-if="isEmpty(product.applications)">
+											<td colspan="9" class="alert alert-default text-center text-danger">
+												<span class=" text-danger">No  <b>{{status}}</b> Application Available! </span></td>
+										</tr>
+									</tbody>
+									
+									
+									<tbody data-ng-if="status != Constant.Status.OPEN">
+										<tr
+											data-ng-repeat="app in product.applications | filter : searchApps" class="bg-active">
+											<td>{{$index + 1}}</td>
+											<td>{{ (!isEmpty(app.application.firstName) &&
+												!isEmpty(app.application.lastName) ? app.application.firstName + ' ' +
+												app.application.lastName : app.application.firstName || Constant.NA )}}</td>
+											<td>{{app.application.email}}</td>
+											<td>{{app.application.mobile}}</td>
+											<td>{{getEmployementType(app.application.employmentType)}}</td>
+											<td>{{app.application.leadReferenceNo}}</td>
+											<td>{{app.application.loanAmount}}</td>
+											<td>{{app.application.tenure}}</td>
+											<td><button class="btn btn-info btn-sm" data-ui-sref="web.lams.brLoanProfile({brId:app.application.userId, appId:product.id})">View</button>
+											<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#responseModel" data-ng-click="setApplicationData(app)">Responded</button>
+											</td>
+										</tr>
+										<tr data-ng-if="isEmpty(product.applications)">
+											<td colspan="9" class="alert alert-default text-center text-danger">
+												<span class=" text-danger">No  <b>{{status}}</b> Application Available! </span></td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
-										
-										
-										
-										
-										
 									</a>
 								</div>
 								<div class="list-group" ng-if="isEmpty(products)">No
@@ -76,6 +111,76 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Respond Modal -->
+<div class="modal fade" id="responseModel" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Approve Loan Request</h4>
+			</div>
+			<div class="modal-body">
+				<form name="responseForm" novalidate>
+					<div class="row">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label class="control-label">Possible Loan Amount<span
+									class="text-danger">*</span></label> <input type="number"
+									class="form-control" data-ng-model="appData.loanPossibleAmount"
+									data-ng-disabled="!appData.canEdit"
+									name="appData.possibleLoanAmount" data-ng-required="true">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label class="control-label">Tenure<span
+									class="text-danger">*</span></label> <input type="number"
+									class="form-control" data-ng-model="appData.tenure" name="tenure"
+									data-ng-disabled="!appData.canEdit"
+									data-ng-required="true">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label class="control-label">Interest Rate<span
+									class="text-danger">*</span></label> <input type="number"
+									class="form-control" data-ng-model="appData.roi"
+									data-ng-disabled="!appData.canEdit"
+									name="interestRate" data-ng-required="true">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label class="control-label">Processing Fees<span
+									class="text-danger">*</span></label> <input type="number"
+									class="form-control" data-ng-model="appData.processingFees"
+									data-ng-disabled="!appData.canEdit"
+									name="processingFees" data-ng-required="true">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Terms & Conditions<span
+									class="text-danger">*</span></label>
+								<textarea class="form-control" data-ng-model="appData.termAndCondition"
+								data-ng-disabled="!appData.canEdit"
+									name="terms" data-ng-required="true"></textarea>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<div class="col-md-12">
+					<button type="button" class="btn btn-primary" data-ng-if="appData.canEdit" data-ng-click="submitApproval()" data-dismiss="modal">Submit</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>

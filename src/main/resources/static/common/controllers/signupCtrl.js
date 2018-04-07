@@ -1,7 +1,7 @@
 angular.module("lams").controller("signupCtrl",["$scope", "$http","$rootScope","Constant","userService","Notification","$state",
 		function($scope, $http,$rootScope,Constant, userService, Notification, $state) {
 	$scope.user = {userType : Constant.UserType.BORROWER.id};
-	$scope.userTypes = [Constant.UserType.BORROWER,Constant.UserType.CHANNEL_PARTNER];
+	$scope.userTypes = [Constant.UserType.BORROWER/*,Constant.UserType.CHANNEL_PARTNER*/];
 	$scope.isDisabled = false;
 	$scope.doRegister = function(){
 		if($scope.userForm.$invalid){

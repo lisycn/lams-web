@@ -135,6 +135,20 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 					$rootScope.validateErrorResponse(error);
 				});
 		}
+		
+		$rootScope.businessTypes = [];
+		$rootScope.getBusinessTypes = function(mode) {
+			masterService.businessType(mode).then(
+				function(success) {
+					if (success.data.status == 200) {
+						$rootScope.businessTypes = success.data.data;
+					} else {
+						Notification.warning(success.data.message);
+					}
+				}, function(error) {
+					$rootScope.validateErrorResponse(error);
+				});
+		}
 
 		$rootScope.loadMasters = function() {
 			$rootScope.getCountries(Constant.Mode.ACTIVE.id);
@@ -142,6 +156,7 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 			$rootScope.getSalutations(Constant.Mode.ACTIVE.id);
 			$rootScope.getBanks(Constant.Mode.ACTIVE.id);
 			$rootScope.getApplicationTypes(Constant.Mode.ACTIVE.id);
+			$rootScope.getBusinessTypes(Constant.Mode.ACTIVE.id);
 		}
 
 		//Getting All Masters
