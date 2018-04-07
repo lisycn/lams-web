@@ -86,7 +86,9 @@ app.service("masterService", [ 'httpService','URLS',"$http",
 			return httpService.get(URLS.user + '/master/get_yes_no_list');
 		};
 		
-		
+		this.businessType = function(mode) {
+			return httpService.get(URLS.user + '/master/get_business_types/' + mode);
+		};
 		
 	} ]);
 

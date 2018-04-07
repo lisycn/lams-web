@@ -25,8 +25,8 @@ app.service("applicationService", [ 'httpService', 'URLS', "$rootScope","$http",
 		return httpService.get(URLS.user + "/application/get_borrowers_for_lender");
 	};
 	
-	this.getBorrowerForLenderByApplicationId = function(appId) {
-		return httpService.get(URLS.user + "/application/get_borrowers_for_lender_app_id/" + appId);
+	this.getBorrowerForLenderByApplicationId = function(appId,status) {
+		return httpService.get(URLS.user + "/application/get_borrowers_for_lender_app_id/" + appId + "/" + status);
 	};
 	this.getConnections = function(appId,status) {
 		return httpService.get(URLS.user + "/application/get_connections/" + appId + "/" + status);
