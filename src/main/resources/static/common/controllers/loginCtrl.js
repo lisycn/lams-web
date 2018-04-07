@@ -41,8 +41,12 @@ angular.module("lams").controller("loginCtrl", [ "$scope", "$http", "$rootScope"
 			$rootScope.loadMasters();
 			if(success.data.data.userType == Constant.UserType.LENDER.id){
 				$state.go("web.lams.products");									
-			}else  if(success.data.data.userType == Constant.UserType.BORROWER.id){
-				$state.go("web.lams.brDashboard");
+			} else if(success.data.data.userType == Constant.UserType.BORROWER.id){
+				if(success.data.data.isProfileFilled){
+					$state.go("web.lams.brDashboard");	
+				} else {
+					$state.go("web.lams.brProfile");
+				}
 			}
 		} 
 		

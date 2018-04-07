@@ -66,7 +66,8 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 
 		$scope.documentList = [];
 		$scope.getDocumentList = function(listOfDocumentMstId) {
-			if($scope.applicationDetails.loanTypeId == Constant.LoanType.EXISTING_LOAN){
+			if($scope.applicationDetails.loanTypeId == Constant.LoanType.EXISTING_LOAN || 
+					$scope.applicationDetails.loanTypeId == Constant.LoanType.CLOSED_LOAN){
 				return;
 			}
 			documentService.getDocumentList($scope.applicationId,listOfDocumentMstId).then(

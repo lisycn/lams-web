@@ -1,5 +1,5 @@
-angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterService", "$rootScope", "Notification", "applicationService", "Constant","$filter",
-	function($scope, masterService, $rootScope, Notification, applicationService, Constant,$filter) {
+angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterService", "$rootScope", "Notification", "applicationService", "Constant","$filter","$state",
+	function($scope, masterService, $rootScope, Notification, applicationService, Constant,$filter,$state) {
 
 		$scope.showExistingApplication = false;
 		$scope.showCurrentApplication = false;
@@ -44,6 +44,16 @@ angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterServ
 		$scope.getApplications();
 
 		$scope.hideDiv = function(type) {
+			
+			if(!$rootScope.isEmpty($rootScope.user)){
+				if($rootScope.isEmpty($rootScope.user.isProfileFilled) || !$rootScope.user.isProfileFilled){
+					$state.go("web.lams.brProfile");
+					Notification.warning("Please Fill First Your Profile");
+					return;
+				}
+			}
+			
+			
 			$scope.appObj = {};
 			if (type == Constant.LoanType.EXISTING_LOAN) {
 				$scope.existingObj = {};
