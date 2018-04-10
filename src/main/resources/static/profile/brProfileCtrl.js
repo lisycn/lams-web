@@ -180,34 +180,34 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 	
 	$scope.sameAddress = function(isSameUs){
 		if(isSameUs){
-			if(!$rootScope.isEmpty($scope.userData.permanentAdd)){
-    			if(!$rootScope.isEmpty($scope.userData.permanentAdd.country)){
-    				if($rootScope.isEmpty($scope.userData.communicationAdd)){
-    					$scope.userData.communicationAdd = {};
+			if(!$rootScope.isEmpty($scope.userData.communicationAdd)){
+    			if(!$rootScope.isEmpty($scope.userData.communicationAdd.country)){
+    				if($rootScope.isEmpty($scope.userData.permanentAdd)){
+    					$scope.userData.permanentAdd = {};
     				}
-    				if($rootScope.isEmpty($scope.userData.communicationAdd.country)){
-						$scope.userData.communicationAdd.country = {};	
+    				if($rootScope.isEmpty($scope.userData.permanentAdd.country)){
+						$scope.userData.permanentAdd.country = {};	
 					}
-    				$scope.userData.communicationAdd.country.id = $scope.userData.permanentAdd.country.id;
-    				$scope.getStates($scope.userData.permanentAdd.country.id,Constant.AddressType.COMMUNICATION);
+    				$scope.userData.permanentAdd.country.id = $scope.userData.communicationAdd.country.id;
+    				$scope.getStates($scope.userData.communicationAdd.country.id,Constant.AddressType.PERMANENT);
     			}
-    			if(!$rootScope.isEmpty($scope.userData.permanentAdd.state)){
-    				if($rootScope.isEmpty($scope.userData.communicationAdd.state)){
-    					$scope.userData.communicationAdd.state = {};	
+    			if(!$rootScope.isEmpty($scope.userData.communicationAdd.state)){
+    				if($rootScope.isEmpty($scope.userData.permanentAdd.state)){
+    					$scope.userData.permanentAdd.state = {};	
 					}
-    				$scope.userData.communicationAdd.state.id = $scope.userData.permanentAdd.state.id;
-    				$scope.getCities($scope.userData.permanentAdd.state.id,Constant.AddressType.COMMUNICATION);	
+    				$scope.userData.permanentAdd.state.id = $scope.userData.communicationAdd.state.id;
+    				$scope.getCities($scope.userData.communicationAdd.state.id,Constant.AddressType.PERMANENT);	
     			}
-    			if($rootScope.isEmpty($scope.userData.communicationAdd.city)){
-    				$scope.userData.communicationAdd.city = {};	
+    			if($rootScope.isEmpty($scope.userData.permanentAdd.city)){
+    				$scope.userData.permanentAdd.city = {};	
 				}
-    			$scope.userData.communicationAdd.city.id = $scope.userData.permanentAdd.city.id;
-    			$scope.userData.communicationAdd.pincode = $scope.userData.permanentAdd.pincode;
-    			$scope.userData.communicationAdd.landMark = $scope.userData.permanentAdd.landMark;
-    			$scope.userData.communicationAdd.streetName = $scope.userData.permanentAdd.streetName;
+    			$scope.userData.permanentAdd.city.id = $scope.userData.communicationAdd.city.id;
+    			$scope.userData.permanentAdd.pincode = $scope.userData.communicationAdd.pincode;
+    			$scope.userData.permanentAdd.landMark = $scope.userData.communicationAdd.landMark;
+    			$scope.userData.permanentAdd.streetName = $scope.userData.communicationAdd.streetName;
     		}
 		} else {
-			$scope.userData.communicationAdd = {};	
+			$scope.userData.permanentAdd = {};	
 		}
 	}
 }]);

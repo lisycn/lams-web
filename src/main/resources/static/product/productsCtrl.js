@@ -31,8 +31,11 @@ angular.module("lams").controller("productsCtrl", [ "$scope", "masterService", "
 			applicationService.getBorrowerForLenderByApplicationId(product.applicationTypeMstrBO.id,status).then(
 				function(success) {
 					if (success.data.status == 200) {
-						product.applications = $filter("filter")(success.data.data,{isUploadComplete : true});
-						
+						if(status === Constant.Status.OPEN){
+							product.applications = $filter("filter")(success.data.data,{isUploadComplete : true});
+						}else{
+							product.applications = success.data.data;
+						}
 					} else {
 						Notification.warning(success.data.message);
 					}

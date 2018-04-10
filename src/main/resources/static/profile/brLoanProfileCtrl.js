@@ -3,17 +3,20 @@ angular.module("lams").controller("brLoanProfileCtrl",["$scope", "$http","$rootS
 
 	
 	$scope.brId = $stateParams.brId;
-//	console.log("BR : "+brId)
+
 	
 	var appId = $stateParams.appId;
-	console.log("BR : "+appId)
+	var appTypeId = $stateParams.appTypeId;
+	console.log("-------- : "+appTypeId)
 	
 	function getUserDetailsById (brId) {
 		userService.getUserDetailsById(brId).then(
 	            function(success) {
 	            	if(success.data.status == 200){
 	            		$scope.userData = success.data.data;
-	            		$scope.userData.applications =  $filter('filter')($scope.userData.applications, {applicationTypeId: appId});
+	            		console.log("appId : "+appId);
+	            		console.log("$scope.userData.applications : ", $scope.userData.applications);
+	            		$scope.userData.applications =  $filter('filter')($scope.userData.applications, {id: appId});
 	                }else{
 	                	Notification.error(success.data.message);
 	                }
@@ -25,7 +28,7 @@ angular.module("lams").controller("brLoanProfileCtrl",["$scope", "$http","$rootS
 	
 	$scope.setApplicationData = function (app){
 		console.log(app);
-		$scope.respond = {application : {}};
+		$scope.respond = {application : {}, applicationMappingBO : {id:appTypeId}};
 		$scope.respond.application = app;
 		$scope.respond.canEdit = true;
 	};

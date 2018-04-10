@@ -153,7 +153,7 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
             }]
 		}
 	}).state("web.lams.brLoanProfile", {
-    	url : '/borrwer-loan-profile/:brId/:appId',
+    	url : '/borrwer-loan-profile/:brId/:appId/:appTypeId',
     	views :  {
     		'content@web' :  {
     			templateUrl : 'profile/brLoanProfile.html',
