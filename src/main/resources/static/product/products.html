@@ -23,7 +23,7 @@
 										class="list-group-item list-group-item-action flex-column align-items-start">
 										<h4>
 											<b>{{product.applicationTypeMstrBO.name}} </b><small class="pull-right">{{product.createdDate |
-											date : 'dd-MM-yyyy'}}</small>
+											date : 'dd/MM/yyyy'}}</small>
 										</h4> 
 										
 										
@@ -68,8 +68,8 @@
 											<td>{{getEmployementType(application.employmentType)}}</td>
 											<td>{{application.leadReferenceNo}}</td>
 											<td>{{application.loanAmount}}</td>
-											<td>{{application.tenure}}</td>
-											<td><button class="btn btn-info btn-sm" data-ui-sref="web.lams.brLoanProfile({brId:application.userId, appId:product.id})">View</button>
+											<td>{{application.tenure}} Month</td>
+											<td><button class="btn btn-info btn-sm" data-ui-sref="web.lams.brLoanProfile({brId:application.userId, appId:application.id, appTypeId: product.id})">View</button>
 											<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#responseModel" data-ng-click="setApplicationData(application)">Respond</button>
 											</td>
 										</tr>
@@ -92,8 +92,8 @@
 											<td>{{getEmployementType(app.application.employmentType)}}</td>
 											<td>{{app.application.leadReferenceNo}}</td>
 											<td>{{app.application.loanAmount}}</td>
-											<td>{{app.application.tenure}}</td>
-											<td><button class="btn btn-info btn-sm" data-ui-sref="web.lams.brLoanProfile({brId:app.application.userId, appId:product.id})">View</button>
+											<td>{{app.application.tenure}} Month</td>
+											<td><button class="btn btn-info btn-sm" data-ui-sref="web.lams.brLoanProfile({brId:app.application.userId, appId:app.application.id, appTypeId:product.id})">View</button>
 											<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#responseModel" data-ng-click="setApplicationData(app)">Responded</button>
 											</td>
 										</tr>
@@ -140,7 +140,7 @@
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
-								<label class="control-label">Tenure<span
+								<label class="control-label">Tenure in Month<span
 									class="text-danger">*</span></label> <input type="number"
 									class="form-control" data-ng-model="appData.tenure" name="tenure"
 									data-ng-disabled="!appData.canEdit"

@@ -37,7 +37,7 @@ app.service("applicationService", [ 'httpService', 'URLS', "$rootScope","$http",
 	};
 	
 	this.updateStatus = function(data,status) {
-		return httpService.get(URLS.user + "/application/update_status/" + status, data);
+		return httpService.post(URLS.user + "/application/update_status/" + status, data);
 	};
 
 //	this.getApplicationDetailsByIdAndUserId = function(appId, userId) {

@@ -50,7 +50,7 @@
 												Constant.NA }}</td>
 											<td>{{con.loanPossibleAmount || Constant.NA}}</td>
 											<td>{{con.roi | number : 2 || Constant.NA}}</td>
-											<td>{{con.tenure || Constant.NA}}</td>
+											<td>{{con.tenure || Constant.NA}} Month</td>
 											<td>{{con.processingFees || Constant.NA}}</td>
 											<td>{{con.termAndCondition || Constant.NA}}</td>
 											<td><button
@@ -59,9 +59,9 @@
 													data-ng-click="setLenderInfo(con,Constant.Status.ACCEPTED)"
 													data-toggle="modal" data-target="#responseModel">Accept</button>
 												&nbsp;
-												<button class="btn btn-danger btn-sm"
-													data-ng-show="con.status == Constant.Status.RESPONDED"
-													data-ng-click="updateStatus(con,Constant.Status.REJECTED)">Reject</button>
+<!-- 												<button class="btn btn-danger btn-sm" -->
+<!-- 													data-ng-show="con.status == Constant.Status.RESPONDED" -->
+<!-- 													data-ng-click="updateStatus(con,Constant.Status.REJECTED)">Reject</button> -->
 												&nbsp;
 												<button class="btn btn-default btn-sm"
 													data-ng-click="con.isView = !con.isView">{{con.isView
@@ -123,7 +123,7 @@
 								</div>
 								<div class="col-md-3">
 									<div class="form-group">
-										<label class="control-label">Tenure</label> <input
+										<label class="control-label">Tenure in Month</label> <input
 											type="number" class="form-control"
 											data-ng-disabled="editApplicationForm"
 											data-ng-model="applicationDetails.tenure" name="tenure"

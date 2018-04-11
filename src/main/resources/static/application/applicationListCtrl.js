@@ -101,7 +101,7 @@ angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterServ
 			applicationService.save(data).then(
 				function(success) {
 					if (success.data.status == 200) {
-						Notification.info("Successfully created Application !!");
+						Notification.info("Application Created  Successfully!!");
 						$scope.getApplications();
 						$scope.hideDiv(type);
 					} else {

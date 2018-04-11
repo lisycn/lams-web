@@ -37,14 +37,14 @@
 										<td>{{app.leadReferenceNo || Constant.NA }}</td>
 										<td>{{app.applicationTypeName || Constant.NA}}</td>
 										<td>{{app.loanAmount | number : 2 || Constant.NA}}</td>
-										<td>{{app.tenure || Constant.NA}}</td>
+										<td>{{app.tenure || Constant.NA}} Month</td>
 										<td>
 										<button data-ng-if="app.respondedApplications.length == 0" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#responseModel" data-ng-click="setApplicationData(app)">Respond</button>
 										<button data-ng-if="app.respondedApplications.length > 0" class="btn btn-success btn-sm" data-toggle="modal" data-target="#responseModel" data-ng-click="viewRespondedData(app.respondedApplications)">Responded</button>
 										</td>
 									</tr>
 									<tr data-ng-if="isEmpty(userData.applications)">
-										<td colspan="6" class="alert alert-default text-center">No
+										<td colspan="6" class="alert alert-default text-center">
 											No Applications!</td>
 									</tr>
 								</tbody>
@@ -228,7 +228,7 @@
 					<div class="row">
 						<div class="col-md-3">
 							<div class="form-group">
-								<label class="control-label">Possible Loan Amount - {{respond.canEdit}}<span
+								<label class="control-label">Possible Loan Amount<span
 									class="text-danger">*</span></label> <input type="number"
 									class="form-control" data-ng-model="respond.loanPossibleAmount"
 									ng-disabled="!respond.canEdit"
@@ -237,7 +237,7 @@
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
-								<label class="control-label">Tenure<span
+								<label class="control-label">Tenure in Month<span
 									class="text-danger">*</span></label> <input type="number"
 									class="form-control" data-ng-model="respond.tenure" name="tenure"
 									ng-disabled="!respond.canEdit"
