@@ -182,6 +182,21 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
                         'profile/brProfileCtrl.js']});
             }]
 		}
+	}).state("web.lams.cpProfile", {
+    	url : '/channel-partner-profile',
+    	views :  {
+    		'content@web' :  {
+    			templateUrl : 'profile/cpProfile.html',
+        		controller: 'cpProfileCtrl'
+    		}
+    	},
+    	data : {pageTitle : "Lams | Profile"},
+    	resolve: {
+            lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load({files: [
+                        'profile/cpProfileCtrl.js']});
+            }]
+		}
 	}).state("web.lams.brLoanProfile", {
     	url : '/borrwer-loan-profile/:brId/:appId/:appTypeId',
     	views :  {
