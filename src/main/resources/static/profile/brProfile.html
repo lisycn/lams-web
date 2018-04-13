@@ -96,11 +96,9 @@
 										<span class="text-danger" style="font-size: 12px;" ng-show="userForm.aadharCardNo.$error.pattern">Invalid Aadhar Number</span>
 								</div>
 							</div>
-
-
 						</div>
+						
 						<div class="row">
-
 							<div class="col-md-3">
 								<div class="form-group">
 									<label class="control-label">Education Qualification</label> <input
@@ -121,9 +119,9 @@
 							</div>
 						</div>
 
-
+						<br/>
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-6">
 								<label style="color: #555;"><b>Communication Address</b></label>
 								<div class="form-group">
 									<label class="control-label">Premises No &amp; Street
@@ -131,7 +129,8 @@
 										data-ng-model="userData.communicationAdd.streetName">
 								</div>
 							</div>
-							<div class="col-md-3">
+							
+							<div class="col-md-6">
 								<label style="color: #555;">&nbsp;&nbsp;</label>
 								<div class="form-group">
 									<label class="control-label">Land Mark</label> <input
@@ -139,26 +138,8 @@
 										data-ng-model="userData.communicationAdd.landMark">
 								</div>
 							</div>
-							
-								<div class="col-md-3">
-								<label style="color: #555;"><b>Permanent Address</b></label>
-								<div class="form-group">
-									<label class="control-label">Premises No &amp; Street
-										Name. <span class="text-danger">*</span>
-									</label> <input type="text" class="form-control"
-										data-ng-model="userData.permanentAdd.streetName" required>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<label style="color: #555;">&nbsp;&nbsp;</label>
-								<div class="form-group">
-									<label class="control-label">Land Mark <span
-										class="text-danger">*</span></label> <input type="text"
-										class="form-control"
-										data-ng-model="userData.permanentAdd.landMark" required>
-								</div>
-							</div>
 						</div>
+						
 						<div class="row">
 							<div class="col-md-3">
 								<div class="form-group">
@@ -185,6 +166,54 @@
 							
 							<div class="col-md-3">
 								<div class="form-group">
+									<label class="control-label">City </label> <select
+										class="form-control"
+										data-ng-model="userData.communicationAdd.city.id"
+										data-ng-options="city.id as city.name for city in commCities">
+										<option value="">Select City</option>
+									</select>
+								</div>
+							</div>
+							
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">Pincode </label> <input
+										type="text" class="form-control"
+										data-ng-model="userData.communicationAdd.pincode">
+								</div>
+							</div>
+						</div>
+						
+						<br/>
+						<div class="row">
+							<div class="col-md-6">
+								<label style="color: #555;"><b>Permanent Address</b></label>
+								<span class="pull-right">
+								<input type="checkbox" ng-model="userData.isSameUsAddress"
+									ng-change="sameAddress(userData.isSameUsAddress)">
+								&nbsp;<label>Same as Communication Address</label>
+								</span>
+								<div class="form-group">
+									<label class="control-label">Premises No &amp; Street
+										Name. <span class="text-danger">*</span>
+									</label> <input type="text" class="form-control"
+										data-ng-model="userData.permanentAdd.streetName" required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<label style="color: #555;">&nbsp;&nbsp;</label>
+								<div class="form-group">
+									<label class="control-label">Land Mark <span
+										class="text-danger">*</span></label> <input type="text"
+										class="form-control"
+										data-ng-model="userData.permanentAdd.landMark" required>
+								</div>
+							</div>
+						 </div>
+							
+							<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
 									<label class="control-label">Country <span
 										class="text-danger">*</span></label> <select class="form-control"
 										data-ng-model="userData.permanentAdd.country.id"
@@ -206,26 +235,6 @@
 										required>
 										<option value="">Select State</option>
 									</select>
-								</div>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">City </label> <select
-										class="form-control"
-										data-ng-model="userData.communicationAdd.city.id"
-										data-ng-options="city.id as city.name for city in commCities">
-										<option value="">Select City</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Pincode </label> <input
-										type="text" class="form-control"
-										data-ng-model="userData.communicationAdd.pincode">
 								</div>
 							</div>
 							
@@ -250,16 +259,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-6"></div>
-							<div class="col-md-6">
-								<input type="checkbox" ng-model="userData.isSameUsAddress"
-									ng-change="sameAddress(userData.isSameUsAddress)">
-								&nbsp;<label>Same as Communication Address</label>
-							</div>
-
-						</div>
-
+						
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
@@ -348,7 +348,6 @@
 								</div>
 							</div>
 						</div>
-
 
 						<div class="row">
 							<div class="col-md-8"></div>
