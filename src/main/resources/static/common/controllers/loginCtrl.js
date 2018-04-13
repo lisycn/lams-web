@@ -51,7 +51,7 @@ angular.module("lams").controller("loginCtrl", [ "$scope", "$http", "$rootScope"
 				if(!success.data.data.isProfileFilled){
 					$state.go("web.lams.cpDashboard");	
 				} else {
-					$state.go("web.lams.brProfile");
+					$state.go("web.lams.cpProfile");
 				}
 			}
 		} 

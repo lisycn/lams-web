@@ -1,0 +1,165 @@
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header" data-background-color="purple">
+					<h4 class="title">
+						<b>Profile - {{userData.name}} {{userData.code ? '(' + userData.code + ')'  : ''}} </b>
+					</h4>
+					<p class="category">
+						<b>Update Additional Details in Profile</b>
+					</p>
+				</div>
+				<div class="card-content">
+					<form name="userForm" data-ng-submit="updateUserDetail()"
+						novalidate>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">Entity Name  <span
+										class="text-danger">*</span></label> <input type="text" class="form-control" name="entityName"
+										data-ng-model="userData.entityName" required>
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">Contact Person Name <span
+										class="text-danger">*</span>
+									</label> <input type="text" class="form-control" name="contactPersonName"
+										data-ng-model="userData.contactPersonName" required>
+								</div>
+							</div>
+							
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">GST Number <span
+										class="text-danger">*</span></label> <input type="text"
+										class="form-control" name="gstNumber"
+										data-ng-model="userData.gstNumber" required>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">Business Type  <span
+										class="text-danger">*</span></label>
+										<select data-ng-model="userData.businessType" class="form-control" required
+										data-ng-options="busType as busType.name for busType in businessTypes  track by busType.id">
+										<option value="">Select Business Types</option>
+										</select>
+								</div>
+							</div>
+							
+						</div>
+						<div class="row">
+							
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">Email  </label> <input
+										type="email" class="form-control" name="email"
+										data-ng-model="userData.email" data-ng-disabled="true" required>
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">Mobile : <span
+										class="text-danger">*</span></label> <input type="text"
+										class="form-control" name="mobile"
+										data-ng-model="userData.mobile" data-ng-disabled="true" required>
+								</div>
+							</div>
+							
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label">About Me  <span
+										class="text-danger">*</span></label>
+										<input type="text" class="form-control" data-ng-model="userData.aboutMe" required> 
+								</div>
+							</div>
+						</div>
+						
+						<br/>
+						<div class="row">
+							<div class="col-md-4">
+								<label style="color: #555;"><b>Business Address</b> <span
+										class="text-danger">*</span></label>
+								<div class="form-group">
+									<label class="control-label">Premises No &amp; Street
+										Name.</label> <input type="text" class="form-control"
+										data-ng-model="userData.communicationAdd.streetName">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<label style="color: #555;">&nbsp;&nbsp;</label>
+								<div class="form-group">
+									<label class="control-label">Land Mark</label> <input
+										type="text" class="form-control"
+										data-ng-model="userData.communicationAdd.landMark">
+								</div>
+							</div>
+							
+							<div class="col-md-4">
+							<label style="color: #555;">&nbsp;&nbsp;</label>
+								<div class="form-group">
+									<label class="control-label">Pincode  <span
+										class="text-danger">*</span></label> <input
+										type="text" class="form-control"
+										data-ng-model="userData.communicationAdd.pincode" required>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label class="control-label">Country  <span
+										class="text-danger">*</span></label> <select
+										class="form-control"
+										data-ng-model="userData.communicationAdd.country.id"
+										data-ng-options="coun.id as coun.name for coun in countries"
+										data-ng-change="getStates(userData.communicationAdd.country.id,Constant.AddressType.COMMUNICATION)" required>
+										<option value="">Select Country</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label class="control-label">State <span
+										class="text-danger">*</span> </label> <select
+										class="form-control"
+										data-ng-model="userData.communicationAdd.state.id"
+										data-ng-options="state.id as state.name for state in commStates"
+										data-ng-change="getCities(userData.communicationAdd.state.id,Constant.AddressType.COMMUNICATION)" required>
+										<option value="">Select State</option>
+									</select>
+								</div>
+							</div>
+							
+							<div class="col-md-4">
+								<div class="form-group">
+									<label class="control-label">City <span
+										class="text-danger">*</span> </label> <select
+										class="form-control"
+										data-ng-model="userData.communicationAdd.city.id"
+										data-ng-options="city.id as city.name for city in commCities" required>
+										<option value="">Select City</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-8"></div>
+							<div class="col-md-4 ">
+								<button type="submit" class="btn btn-primary pull-right"
+									data-ng-disabled="isDisable">Submit</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
