@@ -122,6 +122,36 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
                             'dashboard/brDashboardCtrl.js']});
                 }]
     		}
+	}).state("web.lams.cpDashboard", {
+    	url : '/channel-partner-dashboard',
+    	views :  {
+    		'content@web' :  {
+    			templateUrl : 'dashboard/cp-dashboard.html',
+        		controller: 'cpDashboardCtrl'
+    		}
+    	},
+    	data : {pageTitle : "Lams | Dashboard"},
+    	resolve: {
+            lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load({files: [
+                        'dashboard/cpDashboardCtrl.js']});
+            }]
+		}
+	}).state("web.lams.clients", {
+    	url : '/clients-dashboard',
+    	views :  {
+    		'content@web' :  {
+    			templateUrl : 'clients/clients.html',
+        		controller: 'clientsCtrl'
+    		}
+    	},
+    	data : {pageTitle : "Lams | Clients"},
+    	resolve: {
+            lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load({files: [
+                        'clients/clientsCtrl.js']});
+            }]
+		}
 	}).state("web.lams.ldDashboard", {
     	url : '/lender-dashboard',
     	views :  {
