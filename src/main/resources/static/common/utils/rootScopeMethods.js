@@ -216,6 +216,49 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 			}
 			return null;
 		}
+		
+		
+		$rootScope.getAppIdByAppCode = function(appId) {
+			switch (appId) {
+			case Constant.ApplicationType.HOME_LOAN:
+				return Constant.ApplicationTypeCode.HOME_LOAN;
+			case Constant.ApplicationType.LOAN_AGAINST_PROPERTY:
+				return Constant.ApplicationTypeCode.LOAN_AGAINST_PROPERTY;
+			case Constant.ApplicationType.SECURED_BUSINESS_LOAN:
+				return Constant.ApplicationTypeCode.SECURED_BUSINESS_LOAN;
+			case Constant.ApplicationType.WORKING_CAPITAL_LOAN:
+				return Constant.ApplicationTypeCode.WORKING_CAPITAL_LOAN;
+			case Constant.ApplicationType.EDUCATION_LOAN:
+				return Constant.ApplicationTypeCode.EDUCATION_LOAN;
+			case Constant.ApplicationType.CAR_LOAN:
+				return Constant.ApplicationTypeCode.CAR_LOAN;
+			case Constant.ApplicationType.OVERDRAFT_FACILITIES_LOAN:
+				return Constant.ApplicationTypeCode.OVERDRAFT_FACILITIES_LOAN;
+			case Constant.ApplicationType.DROPLINE_OVERDRAFT_FACILITIES_LOAN:
+				return Constant.ApplicationTypeCode.DROPLINE_OVERDRAFT_FACILITIES_LOAN;
+			case Constant.ApplicationType.BANK_GUARANTEE_LOAN:
+				return Constant.ApplicationTypeCode.BANK_GUARANTEE_LOAN;
+			case Constant.ApplicationType.CC_FACILITIES_LOAN:
+				return Constant.ApplicationTypeCode.CC_FACILITIES_LOAN;
+			case Constant.ApplicationType.TERM_LOAN:
+				return Constant.ApplicationTypeCode.TERM_LOAN;
+			case Constant.ApplicationType.LOAN_AGAINST_FDS:
+				return Constant.ApplicationTypeCode.LOAN_AGAINST_FDS;
+			case Constant.ApplicationType.LOAN_AGAINST_SECURITIS:
+				return Constant.ApplicationTypeCode.LOAN_AGAINST_SECURITIS;
+			case Constant.ApplicationType.PROJECT_FINANCE_LOAN:
+				return Constant.ApplicationTypeCode.PROJECT_FINANCE_LOAN;
+			case Constant.ApplicationType.PRIVATE_EQUITY_FINANCE_LOAN:
+				return Constant.ApplicationTypeCode.PRIVATE_EQUITY_FINANCE_LOAN;
+			case Constant.ApplicationType.GOLD_LOAN:
+				return Constant.ApplicationTypeCode.GOLD_LOAN;
+			case Constant.ApplicationType.OTHER_LOAN:
+				return Constant.ApplicationTypeCode.OTHER_LOAN;
+			case Constant.ApplicationType.PERSONAL_LOAN:
+				return Constant.ApplicationTypeCode.PERSONAL_LOAN;
+			}
+			return null;
+		}
 
 		$rootScope.uploadFile = function(files, applicationId,documentId,scope) {
 			if ($rootScope.isEmpty(documentId)) {
