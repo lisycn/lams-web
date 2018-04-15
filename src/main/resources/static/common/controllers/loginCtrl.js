@@ -48,7 +48,7 @@ angular.module("lams").controller("loginCtrl", [ "$scope", "$http", "$rootScope"
 					$state.go("web.lams.brProfile");
 				}
 			}else if(success.data.data.userType == Constant.UserType.CHANNEL_PARTNER.id){
-				if(!success.data.data.isProfileFilled){
+				if(success.data.data.isProfileFilled){
 					$state.go("web.lams.cpDashboard");	
 				} else {
 					$state.go("web.lams.cpProfile");
