@@ -100,6 +100,10 @@ app.service("documentService", [ 'httpService','URLS',"$http",
 			return httpService.post(URLS.user + "/getDocuments/" + applicationId,data);
 		};
 		
+		this.getUserDocument = function(documentId) {
+			return httpService.get(URLS.user + "/getUserDocuments/" + documentId);
+		};
+		
 		this.inActiveDocument = function(documentMappingId) {
 			return httpService.get(URLS.user + "/inActiveDocument/" + documentMappingId);
 		};
