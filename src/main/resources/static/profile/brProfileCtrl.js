@@ -2,6 +2,8 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 		function($scope, $http, $rootScope,Constant,userService,Notification,masterService,$filter) {
 	
 	
+	$scope.documentResponse = {};
+	
 	$scope.popup ={"opened" : false};
 	$scope.open = function() {
 	    $scope.popup.opened = true;
@@ -67,6 +69,7 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 	            function(success) {
 	            	if(success.data.status == 200){
 	            		$scope.userData = success.data.data;
+	            		$rootScope.getUserDocument(9,$scope);
 	            		$scope.separateName($scope.userData);
 	            		if(!$rootScope.isEmpty($scope.userData.birthDate)){
 	            			$scope.userData.birthDate = new Date($scope.userData.birthDate);
@@ -145,6 +148,10 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 	            }, function(error) {
 	            	$rootScope.validateErrorResponse(error);
 	     });		
+	}
+	
+	$scope.uploadAppFile = function(element) {
+		$rootScope.uploadFile(element.files, null, element.id, $scope,true);
 	}
 	
 	$scope.permCities = [];

@@ -14,112 +14,143 @@
 				<div class="card-content">
 					<form name="userForm" data-ng-submit="updateUserDetail()"
 						novalidate>
-						<div class="row">
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Salutation <span
-										class="text-danger">*</span></label> <select class="form-control"
-										data-ng-model="userData.salutation" name="salutation"
-										data-ng-options="salu.id as salu.name for salu in salutations"
-										required>
-										<option value="">Select Salutation</option>
-									</select>
-								</div>
-							</div>
-
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">First Name <span
-										class="text-danger">*</span>
-									</label> <input type="text" class="form-control" name="firstName"
-										data-ng-model="userData.firstName" required>
-								</div>
-							</div>
-
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Middle Name</label> <input
-										type="text" class="form-control" name="middleName"
-										data-ng-model="userData.middleName">
-								</div>
-							</div>
-
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Last Name <span
-										class="text-danger">*</span></label> <input type="text"
-										class="form-control" name="lastName"
-										data-ng-model="userData.lastName" required>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Gender</label><br> <br>
-									<div data-ng-repeat="gender in genders" style="float: left;">
-										<label><input type="radio" name="rdoGender"
-											data-ng-model="userData.gender" data-ng-value="{{gender.id}}">&nbsp;{{gender.value}}&nbsp;</label>
+						<div class="col-md-9">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="control-label">Salutation <span
+											class="text-danger">*</span></label> <select class="form-control"
+											data-ng-model="userData.salutation" name="salutation"
+											data-ng-options="salu.id as salu.name for salu in salutations"
+											required>
+											<option value="">Select Salutation</option>
+										</select>
 									</div>
 								</div>
+
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="control-label">First Name <span
+											class="text-danger">*</span>
+										</label> <input type="text" class="form-control" name="firstName"
+											data-ng-model="userData.firstName" required>
+									</div>
+								</div>
+
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="control-label">Middle Name</label> <input
+											type="text" class="form-control" name="middleName"
+											data-ng-model="userData.middleName">
+									</div>
+								</div>
+
+
+							</div>
+							<div class="row">
+
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="control-label">Last Name <span
+											class="text-danger">*</span></label> <input type="text"
+											class="form-control" name="lastName"
+											data-ng-model="userData.lastName" required>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="control-label">Gender</label><br> <br>
+										<div data-ng-repeat="gender in genders" style="float: left;">
+											<label><input type="radio" name="rdoGender"
+												data-ng-model="userData.gender"
+												data-ng-value="{{gender.id}}">&nbsp;{{gender.value}}&nbsp;</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="control-label">Date Of Birth <span
+											class="text-danger">*</span></label> <input ng-focus="open()"
+											type="text" name="birthDate" class="form-control"
+											uib-datepicker-popup="dd/MM/yyyy"
+											data-ng-model="userData.birthDate" is-open="popup.opened"
+											ng-required="true" close-text="Close" />
+									</div>
+								</div>
+
+
 							</div>
 
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Date Of Birth <span
-										class="text-danger">*</span></label> <input ng-focus="open()"
-										type="text" name="birthDate" class="form-control"
-										uib-datepicker-popup="dd/MM/yyyy"
-										data-ng-model="userData.birthDate" is-open="popup.opened"
-										ng-required="true" close-text="Close" />
+							<div class="row">
+
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="control-label">PAN Number<span
+											class="text-danger">*</span></label> <input type="text"
+											class="form-control" name="panCard"
+											ng-pattern="/^[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}$/"
+											data-ng-model="userData.panCard" required> <span
+											class="text-danger" style="font-size: 12px;"
+											ng-show="userForm.panCard.$error.pattern">Invalid PAN
+											Number</span>
+									</div>
 								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="control-label">Aadhar Card Number <span
+											class="text-danger">*</span></label> <input type="text"
+											class="form-control" name="aadharCardNo"
+											ng-pattern="/^[0-9]{12,12}$/"
+											data-ng-model="userData.aadharCardNo" required> <span
+											class="text-danger" style="font-size: 12px;"
+											ng-show="userForm.aadharCardNo.$error.pattern">Invalid
+											Aadhar Number</span>
+									</div>
+								</div>
+
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="control-label">Education Qualification</label> <input
+											type="text" class="form-control" name="eduQualification"
+											data-ng-model="userData.eduQualification">
+									</div>
+								</div>
+
+
 							</div>
 
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">PAN Number<span
-										class="text-danger">*</span></label> <input type="text"
-										class="form-control" name="panCard"
-										ng-pattern="/^[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}$/"
-										data-ng-model="userData.panCard" required>
-										<span class="text-danger" style="font-size: 12px;" ng-show="userForm.panCard.$error.pattern">Invalid PAN Number</span>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="control-label">Contact Number <span
+											class="text-danger">*</span></label> <input type="text"
+											class="form-control" name="contactNumber"
+											ng-pattern="/^[0-9]{10,10}$/"
+											data-ng-model="userData.contactNumber" required> <span
+											class="text-danger" style="font-size: 12px;"
+											ng-show="userForm.contactNumber.$error.pattern">10
+											Digits Allowed</span>
+									</div>
 								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Aadhar Card Number <span
-										class="text-danger">*</span></label> <input type="text"
-										class="form-control" name="aadharCardNo"
-										ng-pattern="/^[0-9]{12,12}$/"
-										data-ng-model="userData.aadharCardNo" required>
-										<span class="text-danger" style="font-size: 12px;" ng-show="userForm.aadharCardNo.$error.pattern">Invalid Aadhar Number</span>
-								</div>
+
 							</div>
 						</div>
-						
-						<div class="row">
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Education Qualification</label> <input
-										type="text" class="form-control" name="eduQualification"
-										data-ng-model="userData.eduQualification">
-								</div>
-							</div>
+						<div class="col-md-3">
+							<div class="text-center">
+								<img src="{{documentResponse.filePath}}" onerror="this.onerror=null; this.src='assets/img/default-pic.jpg';"
+									style="height: 200px; width: 200px" class="img-rounded"
+									alt="Cinque Terre">
+									<input type="file" style="padding-left: 83px !important;" 
+									title="Upload size limit 2 MB"
+									upload-files id="9"
+									onchange="angular.element(this).scope().uploadAppFile(this);">
+							</div> 
 
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Contact Number <span
-										class="text-danger">*</span></label> <input type="text"
-										class="form-control" name="contactNumber"
-										ng-pattern="/^[0-9]{10,10}$/"
-										data-ng-model="userData.contactNumber" required>
-										<span class="text-danger" style="font-size: 12px;" ng-show="userForm.contactNumber.$error.pattern">10 Digits Allowed</span>
-								</div>
-							</div>
+
 						</div>
 
-						<br/>
+						<br />
 						<div class="row">
 							<div class="col-md-6">
 								<label style="color: #555;"><b>Communication Address</b></label>
@@ -129,7 +160,7 @@
 										data-ng-model="userData.communicationAdd.streetName">
 								</div>
 							</div>
-							
+
 							<div class="col-md-6">
 								<label style="color: #555;">&nbsp;&nbsp;</label>
 								<div class="form-group">
@@ -139,7 +170,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="row">
 							<div class="col-md-3">
 								<div class="form-group">
@@ -163,7 +194,7 @@
 									</select>
 								</div>
 							</div>
-							
+
 							<div class="col-md-3">
 								<div class="form-group">
 									<label class="control-label">City </label> <select
@@ -174,7 +205,7 @@
 									</select>
 								</div>
 							</div>
-							
+
 							<div class="col-md-3">
 								<div class="form-group">
 									<label class="control-label">Pincode </label> <input
@@ -183,15 +214,15 @@
 								</div>
 							</div>
 						</div>
-						
-						<br/>
+
+						<br />
 						<div class="row">
 							<div class="col-md-6">
-								<label style="color: #555;"><b>Permanent Address</b></label>
-								<span class="pull-right">
-								<input type="checkbox" ng-model="userData.isSameUsAddress"
+								<label style="color: #555;"><b>Permanent Address</b></label> <span
+									class="pull-right"> <input type="checkbox"
+									ng-model="userData.isSameUsAddress"
 									ng-change="sameAddress(userData.isSameUsAddress)">
-								&nbsp;<label>Same as Communication Address</label>
+									&nbsp;<label>Same as Communication Address</label>
 								</span>
 								<div class="form-group">
 									<label class="control-label">Premises No &amp; Street
@@ -209,9 +240,9 @@
 										data-ng-model="userData.permanentAdd.landMark" required>
 								</div>
 							</div>
-						 </div>
-							
-							<div class="row">
+						</div>
+
+						<div class="row">
 							<div class="col-md-3">
 								<div class="form-group">
 									<label class="control-label">Country <span
@@ -237,7 +268,7 @@
 									</select>
 								</div>
 							</div>
-							
+
 							<div class="col-md-3">
 								<div class="form-group">
 									<label class="control-label">City <span
@@ -259,7 +290,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
@@ -292,9 +323,9 @@
 
 							<div class="col-md-3" ng-if="userData.employmentType == 1">
 								<div class="form-group">
-									<label class="control-label">Gross Monthly Income in Rs. <span
-										class="text-danger">*</span></label> <input type="text"
-										class="form-control"
+									<label class="control-label">Gross Monthly Income in
+										Rs. <span class="text-danger">*</span>
+									</label> <input type="text" class="form-control"
 										data-ng-model="userData.grossMonthlyIncome" required>
 								</div>
 							</div>

@@ -90,7 +90,7 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 		}
 
 		$scope.uploadAppFile = function(element) {
-			$rootScope.uploadFile(element.files, $scope.applicationId, element.id, $scope);
+			$rootScope.uploadFile(element.files, $scope.applicationId, element.id, $scope,false);
 		}
 
 		$scope.documentList = [];
