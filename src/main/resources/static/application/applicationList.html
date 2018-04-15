@@ -136,68 +136,68 @@
 															name="emi"> No
 													</div>
 												</div>
-												<div class="col-md-3"
-													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.PERSONAL_LOAN">
-													<div class="form-group">
-														<label class="control-label">Reason for Personal
-															Loan <span class="text-danger">*</span>
-														</label> <input type="text" class="form-control"
-															ng-required="true"
-															data-ng-model="existingObj.reasonForPl"
-															name="reasonForPl">
-													</div>
-												</div>
-												<div class="col-md-3"
-													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.HOME_LOAN">
-													<div class="form-group">
-														<label class="control-label">Property Cost <span
-															class="text-danger">*</span></label> <input type="number"
-															class="form-control" ng-required="true"
-															data-ng-model="existingObj.propertyCost"
-															name="propertyCost">
-													</div>
-												</div>
-												<div class="col-md-3"
-													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.HOME_LOAN
-												|| existingObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
-													<div class="form-group">
-														<label class="control-label">Property Address <span
-															class="text-danger">*</span></label> <input type="text"
-															class="form-control" ng-required="true"
-															data-ng-model="existingObj.propertyAddress"
-															name="propertyAddress">
-													</div>
-												</div>
-												<div class="col-md-3"
-													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
-													<div class="form-group">
-														<label class="control-label">Property Market Value
-															<span class="text-danger">*</span>
-														</label> <input type="number" class="form-control"
-															ng-required="true"
-															data-ng-model="existingObj.propertyMarketValue"
-															name="propertyMarketValue">
-													</div>
-												</div>
-												<div class="col-md-3"
-													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
-													<div class="form-group">
-														<label class="control-label">Reason For Lap <span
-															class="text-danger">*</span></label> <input type="text"
-															class="form-control" ng-required="true"
-															data-ng-model="existingObj.reasonForLap"
-															name="reasonForLap">
-													</div>
-												</div>
-												<div class="col-md-3"
-													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.CAR_LOAN">
-													<div class="form-group">
-														<label class="control-label">Car Cost <span
-															class="text-danger">*</span></label> <input type="text"
-															class="form-control" ng-required="true"
-															data-ng-model="existingObj.carCost" name="carCost">
-													</div>
-												</div>
+<!-- 												<div class="col-md-3" -->
+<!-- 													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.PERSONAL_LOAN"> -->
+<!-- 													<div class="form-group"> -->
+<!-- 														<label class="control-label">Reason for Personal -->
+<!-- 															Loan <span class="text-danger">*</span> -->
+<!-- 														</label> <input type="text" class="form-control" -->
+<!-- 															ng-required="true" -->
+<!-- 															data-ng-model="existingObj.reasonForPl" -->
+<!-- 															name="reasonForPl"> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 												<div class="col-md-3" -->
+<!-- 													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.HOME_LOAN"> -->
+<!-- 													<div class="form-group"> -->
+<!-- 														<label class="control-label">Property Cost <span -->
+<!-- 															class="text-danger">*</span></label> <input type="number" -->
+<!-- 															class="form-control" ng-required="true" -->
+<!-- 															data-ng-model="existingObj.propertyCost" -->
+<!-- 															name="propertyCost"> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 												<div class="col-md-3" -->
+<!-- 													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.HOME_LOAN -->
+<!-- 												|| existingObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY"> -->
+<!-- 													<div class="form-group"> -->
+<!-- 														<label class="control-label">Property Address <span -->
+<!-- 															class="text-danger">*</span></label> <input type="text" -->
+<!-- 															class="form-control" ng-required="true" -->
+<!-- 															data-ng-model="existingObj.propertyAddress" -->
+<!-- 															name="propertyAddress"> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 												<div class="col-md-3" -->
+<!-- 													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY"> -->
+<!-- 													<div class="form-group"> -->
+<!-- 														<label class="control-label">Property Market Value -->
+<!-- 															<span class="text-danger">*</span> -->
+<!-- 														</label> <input type="number" class="form-control" -->
+<!-- 															ng-required="true" -->
+<!-- 															data-ng-model="existingObj.propertyMarketValue" -->
+<!-- 															name="propertyMarketValue"> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 												<div class="col-md-3" -->
+<!-- 													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY"> -->
+<!-- 													<div class="form-group"> -->
+<!-- 														<label class="control-label">Reason For Lap <span -->
+<!-- 															class="text-danger">*</span></label> <input type="text" -->
+<!-- 															class="form-control" ng-required="true" -->
+<!-- 															data-ng-model="existingObj.reasonForLap" -->
+<!-- 															name="reasonForLap"> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 												<div class="col-md-3" -->
+<!-- 													ng-if="existingObj.applicationTypeId == Constant.ApplicationType.CAR_LOAN"> -->
+<!-- 													<div class="form-group"> -->
+<!-- 														<label class="control-label">Car Cost <span -->
+<!-- 															class="text-danger">*</span></label> <input type="text" -->
+<!-- 															class="form-control" ng-required="true" -->
+<!-- 															data-ng-model="existingObj.carCost" name="carCost"> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
 											</div>
 											<div class="row">
 												<div class="col-md-8"></div>
@@ -495,79 +495,79 @@
 													</div>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-md-3"
-													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.PERSONAL_LOAN">
-													<div class="form-group">
-														<label class="control-label">Reason for Personal
-															Loan <span class="text-danger">*</span>
-														</label> <input type="text" class="form-control"
-															ng-required="true" data-ng-model="closedObj.reasonForPl"
-															name="reasonForPl">
-													</div>
-												</div>
-												<div class="col-md-3"
-													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.HOME_LOAN">
-													<div class="form-group">
-														<label class="control-label">Property Cost <span
-															class="text-danger">*</span></label> <input type="number"
-															class="form-control" ng-required="true"
-															data-ng-model="closedObj.propertyCost"
-															name="propertyCost">
-													</div>
-												</div>
-												<div class="col-md-3"
-													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.HOME_LOAN
-												|| closedObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
-													<div class="form-group">
-														<label class="control-label">Property Address <span
-															class="text-danger">*</span></label> <input type="text"
-															class="form-control" ng-required="true"
-															data-ng-model="closedObj.propertyAddress"
-															name="propertyAddress">
-													</div>
-												</div>
-												<div class="col-md-3"
-													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
-													<div class="form-group">
-														<label class="control-label">Property Market Value
-															<span class="text-danger">*</span>
-														</label> <input type="number" class="form-control"
-															ng-required="true"
-															data-ng-model="closedObj.propertyMarketValue"
-															name="propertyMarketValue">
-													</div>
-												</div>
-												<div class="col-md-3"
-													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
-													<div class="form-group">
-														<label class="control-label">Reason For Lap <span
-															class="text-danger">*</span></label> <input type="text"
-															class="form-control" ng-required="true"
-															data-ng-model="closedObj.reasonForLap"
-															name="reasonForLap">
-													</div>
-												</div>
-												<div class="col-md-3"
-													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.CAR_LOAN">
-													<div class="form-group">
-														<label class="control-label">Car Cost <span
-															class="text-danger">*</span></label> <input type="text"
-															class="form-control" ng-required="true"
-															data-ng-model="closedObj.carCost" name="carCost">
-													</div>
-												</div>
-												<!-- <div class="col-md-3">
-													<div class="form-group">
-														<label class="control-label">Loan Type</label> <select
-															class="form-control" data-ng-model="appObj.loanTypeId"
-															name="salutation"
-															data-ng-options="loanType.id as loanType.name for loanType in loanTypeList">
-															<option value="">Select Loan Type</option>
-														</select>
-													</div>
-												</div> -->
-											</div>
+<!-- 											<div class="row"> -->
+<!-- 												<div class="col-md-3" -->
+<!-- 													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.PERSONAL_LOAN"> -->
+<!-- 													<div class="form-group"> -->
+<!-- 														<label class="control-label">Reason for Personal -->
+<!-- 															Loan <span class="text-danger">*</span> -->
+<!-- 														</label> <input type="text" class="form-control" -->
+<!-- 															ng-required="true" data-ng-model="closedObj.reasonForPl" -->
+<!-- 															name="reasonForPl"> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 												<div class="col-md-3" -->
+<!-- 													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.HOME_LOAN"> -->
+<!-- 													<div class="form-group"> -->
+<!-- 														<label class="control-label">Property Cost <span -->
+<!-- 															class="text-danger">*</span></label> <input type="number" -->
+<!-- 															class="form-control" ng-required="true" -->
+<!-- 															data-ng-model="closedObj.propertyCost" -->
+<!-- 															name="propertyCost"> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 												<div class="col-md-3" -->
+<!-- 													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.HOME_LOAN -->
+<!-- 												|| closedObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY"> -->
+<!-- 													<div class="form-group"> -->
+<!-- 														<label class="control-label">Property Address <span -->
+<!-- 															class="text-danger">*</span></label> <input type="text" -->
+<!-- 															class="form-control" ng-required="true" -->
+<!-- 															data-ng-model="closedObj.propertyAddress" -->
+<!-- 															name="propertyAddress"> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 												<div class="col-md-3" -->
+<!-- 													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY"> -->
+<!-- 													<div class="form-group"> -->
+<!-- 														<label class="control-label">Property Market Value -->
+<!-- 															<span class="text-danger">*</span> -->
+<!-- 														</label> <input type="number" class="form-control" -->
+<!-- 															ng-required="true" -->
+<!-- 															data-ng-model="closedObj.propertyMarketValue" -->
+<!-- 															name="propertyMarketValue"> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 												<div class="col-md-3" -->
+<!-- 													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY"> -->
+<!-- 													<div class="form-group"> -->
+<!-- 														<label class="control-label">Reason For Lap <span -->
+<!-- 															class="text-danger">*</span></label> <input type="text" -->
+<!-- 															class="form-control" ng-required="true" -->
+<!-- 															data-ng-model="closedObj.reasonForLap" -->
+<!-- 															name="reasonForLap"> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 												<div class="col-md-3" -->
+<!-- 													ng-if="closedObj.applicationTypeId == Constant.ApplicationType.CAR_LOAN"> -->
+<!-- 													<div class="form-group"> -->
+<!-- 														<label class="control-label">Car Cost <span -->
+<!-- 															class="text-danger">*</span></label> <input type="text" -->
+<!-- 															class="form-control" ng-required="true" -->
+<!-- 															data-ng-model="closedObj.carCost" name="carCost"> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 												<div class="col-md-3">
+<!-- 													<div class="form-group"> -->
+<!-- 														<label class="control-label">Loan Type</label> <select -->
+<!-- 															class="form-control" data-ng-model="appObj.loanTypeId" -->
+<!-- 															name="salutation" -->
+<!-- 															data-ng-options="loanType.id as loanType.name for loanType in loanTypeList"> -->
+<!-- 															<option value="">Select Loan Type</option> -->
+<!-- 														</select> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
 											<div class="row">
 												<div class="col-md-8"></div>
 												<div class="col-md-4 ">
