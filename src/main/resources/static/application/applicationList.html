@@ -317,6 +317,15 @@
 															name="tenure" ng-required="true">
 													</div>
 												</div>
+												
+												<div class="col-md-3" data-ng-if="currentObj.isFromCP">
+													<div class="form-group">
+														<label class="control-label">Tenure in month<span
+															class="text-danger">*</span></label> <input type="number"
+															class="form-control" data-ng-model="currentObj.leadReferenceNo"
+															name="loanCode" disabled="disabled">
+													</div>
+												</div>
 											</div>
 											<div class="row">
 												<div class="col-md-3"
