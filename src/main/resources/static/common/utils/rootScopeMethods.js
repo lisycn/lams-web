@@ -1,5 +1,5 @@
-app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interval", "$q", "userService", "$cookieStore", "Constant", "Notification", "masterService","URLS","$filter",
-	function($rootScope, $state, $stateParams, $http, $timeout, $interval, $q, userService, $cookieStore, Constant, Notification, masterService,URLS,$filter) {
+app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interval", "$q", "userService", "$cookieStore", "Constant", "Notification", "masterService", "URLS", "$filter","documentService",
+	function($rootScope, $state, $stateParams, $http, $timeout, $interval, $q, userService, $cookieStore, Constant, Notification, masterService, URLS, $filter,documentService) {
 		$rootScope.state = $state;
 		$rootScope.stateParams = $stateParams;
 		$rootScope.Constant = Constant;
@@ -16,7 +16,7 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 				$state.go("login");
 				return;
 			}
-			
+
 			userService.logout().then(
 				function(success) {
 					$cookieStore.remove(Constant.TOKEN);
@@ -107,7 +107,7 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 					$rootScope.validateErrorResponse(error);
 				});
 		}
-		
+
 		$rootScope.banks = [];
 		$rootScope.getBanks = function(mode) {
 			masterService.banks(mode).then(
@@ -121,7 +121,7 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 					$rootScope.validateErrorResponse(error);
 				});
 		}
-		
+
 		$rootScope.applicationTypes = [];
 		$rootScope.getApplicationTypes = function(mode) {
 			masterService.applicationType(mode).then(
@@ -135,7 +135,7 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 					$rootScope.validateErrorResponse(error);
 				});
 		}
-		
+
 		$rootScope.businessTypes = [];
 		$rootScope.getBusinessTypes = function(mode) {
 			masterService.businessType(mode).then(
@@ -216,8 +216,8 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 			}
 			return null;
 		}
-		
-		
+
+
 		$rootScope.getAppIdByAppCode = function(appId) {
 			switch (appId) {
 			case Constant.ApplicationType.HOME_LOAN:
@@ -260,7 +260,22 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 			return null;
 		}
 
-		$rootScope.uploadFile = function(files, applicationId,documentId,scope) {
+		$rootScope.getUserDocument = function(documentId,scope) {
+			documentService.getUserDocument(documentId).then(
+				function(success) {
+					if (success.data.status == 200) {
+						scope.documentResponse = success.data.data;
+						console.log(success.data.data);
+					} else {
+						Notification.warning(success.data.message);
+					}
+				}, function(error) {
+					$rootScope.validateErrorResponse(error);
+				});
+		}
+
+
+		$rootScope.uploadFile = function(files, applicationId, documentId, scope, isUserDoc) {
 			if ($rootScope.isEmpty(documentId)) {
 				Notification.warning("Document id is null or empty !!");
 				return;
@@ -270,6 +285,9 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 			var data = {};
 			data.applicationId = applicationId;
 			data.documentId = documentId;
+			if(isUserDoc != undefined && isUserDoc != null){
+				data.isUserDocument = isUserDoc;	
+			}
 			formData.append("uploadRequest", JSON.stringify(data));
 
 			$http({
@@ -287,16 +305,23 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 				.then(
 					function success(response) {
 						if (response.data.status == 200) {
-							if(response.data.data.isFileUpload){
-								Notification.info("Successfully upload documents !!");
-								if (!$rootScope.isEmpty(scope.documentList)) {
-									var currentType = $filter('filter')(scope.documentList,{documentMstrId : documentId})[0];
-									currentType.documentResponseList.push(response.data.data);
-								}	
+							if (response.data.data.isFileUpload) {
+								Notification.info("Successfully Uploaded !!");
+								if(isUserDoc){
+									$rootScope.getUserDocument(documentId,scope);
+								} else {
+									if (!$rootScope.isEmpty(scope.documentList)) {
+										var currentType = $filter('filter')(scope.documentList, {
+											documentMstrId : documentId
+										})[0];
+										currentType.documentResponseList.push(response.data.data);
+									}	
+								}
+								
 							} else {
 								Notification.warning("File can't uploaded !!");
 							}
-							
+
 						} else if (response.data.status == 400) {
 							Notification.warning(response.data.message);
 						}
