@@ -52,4 +52,12 @@ app.service("userService", [ 'httpService', 'URLS', "$rootScope", "$http",
 		this.resetPassword = function(data, link) {
 			return httpService.post(URLS.user + "/reset_password/" + link, data);
 		};
+		this.saveOrUpdateBorrowerByCP = function(userObj) {
+			return httpService.post(URLS.user + '/save_cp_borrower',userObj);
+		};
+		
+		this.getCpUsers = function(userType) {
+			return httpService.get(URLS.user + '/get_cp_users/' + userType);
+		};
+		
 	} ]);
