@@ -2,7 +2,7 @@ angular.module("lams").controller("clientsCtrl",["$scope", "$http","$rootScope",
 		function($scope, $http,$rootScope,Constant,Notification,userService) {
 
 	$scope.initUserObj = function(){
-		$scope.userData = {userType : Constant.UserType.BORROWER.id, applications : [{}]};		
+		$scope.userData = {userType : Constant.UserType.BORROWER.id, applications : [{isFromCP : true}]};		
 	}
 	
 	$scope.initUserObj();
