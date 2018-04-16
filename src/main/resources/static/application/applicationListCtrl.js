@@ -5,6 +5,8 @@ angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterServ
 		$scope.showCurrentApplication = false;
 		$scope.showClosedApplication = false;
 		
+		$scope.acceptedStatus = Constant.Status.ACCEPTED;
+		
 		$scope.existingObj = {};
 		$scope.currentObj = {};
 		$scope.closedObj = {};

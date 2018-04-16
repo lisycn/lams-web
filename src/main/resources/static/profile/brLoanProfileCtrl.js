@@ -38,10 +38,8 @@ angular.module("lams").controller("brLoanProfileCtrl", [ "$scope", "$http", "$ro
 					$rootScope.validateErrorResponse(error);
 				});
 		}
-		getUserDetailsById($scope.brId);
 
-		
-		$scope.documentList = [];
+    $scope.documentList = [];
 		$scope.getDocumentList = function(listOfDocumentMstId) {
 			
 			documentService.getDocumentList(appId, listOfDocumentMstId).then(
@@ -67,25 +65,25 @@ angular.module("lams").controller("brLoanProfileCtrl", [ "$scope", "$http", "$ro
 			$scope.respond.canEdit = true;
 		};
 
-		$scope.submitApproval = function() {
-			if (!$scope.responseForm.$valid) {
-				Notification.warning("Please fill all mandatory fields");
-				return false;
-			}
-			applicationService.saveApprovalRequest($scope.respond).then(
-				function(success) {
-					if (success.data.status == 200) {
-						Notification.success(success.data.message);
-						//	            		$scope.userData = success.data.data;
-						getUserDetailsById($scope.brId);
-					} else {
-						Notification.error(success.data.message);
-					}
-				}, function(error) {
-					$rootScope.validateErrorResponse(error);
-				});
-		};
-
+		$scope.submitApproval = function (){
+		if (!$scope.responseForm.$valid) {
+			Notification.warning("Please fill all mandatory fields");
+			return false;
+		}
+		applicationService.saveApprovalRequest($scope.respond).then(
+	            function(success) {
+	            	if(success.data.status == 200){
+	            		Notification.success("Request has been sent");
+//	            		$scope.userData = success.data.data;
+	            		getUserDetailsById($scope.brId);
+	                }else{
+	                	Notification.error(success.data.message);
+	                }
+	            }, function(error) {
+	            	$rootScope.validateErrorResponse(error);
+	     });
+	};
+    
 		$scope.getRespondedApplications = function(application) {
 
 			applicationService.getRespondedApplications($scope.brId, application.id).then(
