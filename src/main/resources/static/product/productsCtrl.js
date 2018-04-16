@@ -1,11 +1,12 @@
 angular.module("lams").controller("productsCtrl", [ "$scope", "masterService", "$rootScope", "Notification", "applicationService", "Constant", "$filter",
 	function($scope, masterService, $rootScope, Notification, applicationService, Constant, $filter) {
 		$scope.products = [];
+		
 		$scope.employmentTypes = [
 			{id : 1, name : "Salaried"},
 			{id : 2, name : "Self Employed"}
 		];
-		$scope.statuses = [Constant.Status.RESPONDED,Constant.Status.ACCEPTED,Constant.Status.REJECTED,Constant.Status.OPEN];
+		$scope.statuses = [Constant.Status.RESPONDED,Constant.Status.ACCEPTED,Constant.Status.REJECTED,Constant.Status.OPEN,Constant.Status.NOTINTERESTED];
 		$scope.status = Constant.Status.OPEN;
 		$scope.getProducts = function() {
 			applicationService.getAll().then(

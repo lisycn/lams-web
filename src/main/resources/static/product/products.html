@@ -93,9 +93,11 @@
 											<td>{{getEmployementType(app.application.employmentType)}}</td>
 											<td>{{app.application.leadReferenceNo}}</td>
 											<td>{{app.application.loanAmount}}</td>
-											<td>{{app.application.tenure}} Month</td>
-											<td><button class="btn btn-info btn-sm" data-ui-sref="web.lams.brLoanProfile({brId:app.application.userId, appId:app.application.id, appTypeId:product.id})">View</button>
-											<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#responseModel" data-ng-click="setApplicationData(app)">Responded</button>
+											<td>{{app.application.tenure}} Month = {{status}}</td>
+											<td>
+											<button class="btn btn-info btn-sm" data-ui-sref="web.lams.brLoanProfile({brId:app.application.userId, appId:app.application.id, appTypeId:product.id})">View</button>
+											<button class="btn btn-success btn-sm" ng-show="status == Constant.Status.RESPONDED" data-toggle="modal" data-target="#responseModel" data-ng-click="setApplicationData(app)">Responded</button>
+											<button class="btn btn-default btn-sm" ng-show="status == Constant.Status.NOTINTERESTED">Not Interested</button>
 											</td>
 										</tr>
 										<tr data-ng-if="isEmpty(product.applications)">
