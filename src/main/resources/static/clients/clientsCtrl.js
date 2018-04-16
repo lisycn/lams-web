@@ -4,7 +4,7 @@ angular.module("lams").controller("clientsCtrl",["$scope", "$http","$rootScope",
 	$scope.initUserObj = function(){
 		$scope.userData = {userType : Constant.UserType.BORROWER.id, applications : [{isFromCP : true}]};		
 	}
-	
+	$scope.isDisable = false;
 	$scope.initUserObj();
 	$scope.borrowers = [];
 	$scope.addMore = function(){
@@ -29,7 +29,7 @@ angular.module("lams").controller("clientsCtrl",["$scope", "$http","$rootScope",
 			return;
 		}
 		console.log("$scope.userData===========>",$scope.userData);
-		
+		$scope.isDisable = true;
 		userService.saveOrUpdateBorrowerByCP($scope.userData).then(
 	            function(success) {
 	            	$scope.isDisable = false;

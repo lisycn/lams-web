@@ -68,7 +68,7 @@
 									<div class="form-group">
 										<label class="control-label">Loan Type <span
 											class="text-danger">*</span></label> <select class="form-control"
-											data-ng-model="apps.applicationTypeId"
+											data-ng-model="apps.applicationTypeId"  data-ng-disabled="apps.isLoanDetailsLock"
 											data-ng-options="appType.id as appType.name for appType in applicationTypes"
 											required>
 											<option value="">Select Application</option>
@@ -80,15 +80,23 @@
 										<label class="control-label">Loan Amount <span
 											class="text-danger">*</span></label> <input type="number"
 											name="amount" class="form-control"
-											data-ng-model="apps.loanAmount" required>
+											data-ng-model="apps.loanAmount" data-ng-disabled="apps.isLoanDetailsLock" required>
 									</div>
 								</div>
 
-								<div class="col-md-2" data-ng-if="!$first && isEmpty(apps.id)">
+								<div class="col-md-2" data-ng-if="userData.applications.length > 1 && !apps.isLoanDetailsLock">
 									<div class="form-group">
 										<div class="pull-right">
 											<button type="button" class="btn btn-sm btn-danger"
 												data-ng-click="remove($index)">Remove</button>
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-md-2" data-ng-if="apps.isLoanDetailsLock">
+									<div class="form-group">
+										<div class="pull-right">
+											<button type="button" class="btn btn-sm btn-success" disabled="disabled">Locked</button>
 										</div>
 									</div>
 								</div>
