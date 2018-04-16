@@ -212,6 +212,8 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
     			$scope.userData.permanentAdd.pincode = $scope.userData.communicationAdd.pincode;
     			$scope.userData.permanentAdd.landMark = $scope.userData.communicationAdd.landMark;
     			$scope.userData.permanentAdd.streetName = $scope.userData.communicationAdd.streetName;
+    			$scope.userData.permanentAdd.premisesNumber = $scope.userData.communicationAdd.premisesNumber;
+    			$scope.userData.permanentAdd.buildingName = $scope.userData.communicationAdd.buildingName;
     		}
 		} else {
 			$scope.userData.permanentAdd = {};	
