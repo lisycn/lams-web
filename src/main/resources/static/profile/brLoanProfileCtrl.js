@@ -38,6 +38,7 @@ angular.module("lams").controller("brLoanProfileCtrl", [ "$scope", "$http", "$ro
 					$rootScope.validateErrorResponse(error);
 				});
 		}
+		getUserDetailsById($scope.brId);
 
     $scope.documentList = [];
 		$scope.getDocumentList = function(listOfDocumentMstId) {
@@ -52,7 +53,7 @@ angular.module("lams").controller("brLoanProfileCtrl", [ "$scope", "$http", "$ro
 				}, function(error) {
 					$rootScope.validateErrorResponse(error);
 				});
-		}
+		};
 		
 		$scope.setApplicationData = function(app) {
 			$scope.respond = {
@@ -83,12 +84,37 @@ angular.module("lams").controller("brLoanProfileCtrl", [ "$scope", "$http", "$ro
 	            	$rootScope.validateErrorResponse(error);
 	     });
 	};
-    
+	
+	$scope.setNotInterestedStatus = function (app){
+		
+		$scope.respond = {
+				application : {},
+				applicationMappingBO : {
+					id : appTypeId
+				}
+			};
+			$scope.respond.application = app;
+		
+		applicationService.setNotInterestedStatus($scope.respond).then(
+	            function(success) {
+	            	if(success.data.status == 200){
+	            		Notification.success("Request has been sent");
+//	            		$scope.userData = success.data.data;
+	            		getUserDetailsById($scope.brId);
+	                }else{
+	                	Notification.error(success.data.message);
+	                }
+	            }, function(error) {
+	            	$rootScope.validateErrorResponse(error);
+	     });
+	};
+	
 		$scope.getRespondedApplications = function(application) {
 
 			applicationService.getRespondedApplications($scope.brId, application.id).then(
 				function(success) {
 					if (success.data.status == 200) {
+						console.log(success.data.data);
 						application.respondedApplications = success.data.data;
 					} else {
 						Notification.error(success.data.message);

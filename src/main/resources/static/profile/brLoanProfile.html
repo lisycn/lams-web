@@ -44,10 +44,17 @@
 												class="btn btn-primary btn-sm" data-toggle="modal"
 												data-target="#responseModel"
 												data-ng-click="setApplicationData(app)">Respond</button>
-											<button data-ng-if="app.respondedApplications.length > 0"
+											<button data-ng-if="app.respondedApplications[0].status == Constant.Status.NOTINTERESTED"
+												class="btn btn-default btn-sm"
+												data-ng-click="setNotInterestedStatus(app)">Not Interested</button>	
+											<button data-ng-if="app.respondedApplications.length > 0 && app.respondedApplications[0].status == Constant.Status.RESPONDED"
 												class="btn btn-success btn-sm" data-toggle="modal"
 												data-target="#responseModel"
 												data-ng-click="viewRespondedData(app.respondedApplications)">Responded</button>
+											<button data-ng-if="app.respondedApplications.length > 0 && app.respondedApplications[0].status == Constant.Status.ACCEPTED"
+												class="btn btn-success btn-sm" data-toggle="modal"
+												data-target="#responseModel"
+												data-ng-click="viewRespondedData(app.respondedApplications)">Accepted</button>
 										</td>
 									</tr>
 									<tr data-ng-if="isEmpty(userData.applications)">

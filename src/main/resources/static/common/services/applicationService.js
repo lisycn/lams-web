@@ -36,6 +36,10 @@ app.service("applicationService", [ 'httpService', 'URLS', "$rootScope","$http",
 		return httpService.post(URLS.user + "/application/save_approval_request",data);
 	};
 	
+	this.setNotInterestedStatus = function(data) {
+		return httpService.post(URLS.user + "/application/save_not_interested_status",data);
+	};
+	
 	this.updateStatus = function(data,status) {
 		return httpService.post(URLS.user + "/application/update_status/" + status, data);
 	};
