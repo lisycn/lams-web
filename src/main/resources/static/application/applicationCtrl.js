@@ -53,9 +53,15 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 			data.applicationTypeId = $scope.applicationTypeId;
 			var uploadAll = true;
 			for (var i = 0; i < $scope.documentList.length; i++) {
-				if ($scope.documentList[i].documentResponseList.length == 0) {
-					uploadAll = false;
+				if($scope.documentList[i].documentMstrId == Constant.documentType.PAN_CARD
+						|| $scope.documentList[i].documentMstrId == Constant.documentType.AADHAR_CARD
+						|| $scope.documentList[i].documentMstrId == Constant.documentType.LAST_3_MONTH_SALARY_SLIP
+						|| $scope.documentList[i].documentMstrId == Constant.documentType.LAST_6_MONTHS_BANK_ACCOUNT_STATEMENT){
+					if ($scope.documentList[i].documentResponseList.length == 0) {
+						uploadAll = false;
+					}
 				}
+				
 			}
 			$scope.applicationDetails.isUploadComplete = uploadAll;
 			
