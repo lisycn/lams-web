@@ -105,6 +105,7 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 //            },
             'sidebar@web': {
                 templateUrl: 'common/htmls/sidebar.html',
+                controller : 'sideBarCtrl'
             }
         }
 	}).state("web.lams.brDashboard", {
