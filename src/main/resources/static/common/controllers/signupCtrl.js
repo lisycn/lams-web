@@ -14,10 +14,9 @@ angular.module("lams").controller("signupCtrl",["$scope", "$http","$rootScope","
 			Notification.warning("Password and Confirm Password did not match");
 			return false;
 		}
-		$scope.isDisabled = true;		
 		userService.register($scope.user).then(
 	            function(success) {
-	            	$scope.isDisabled = false;
+	            	$scope.isDisabled = true;
 	            	if(success.data.status == 200){
 	            		Notification.success(success.data.message);
 	            		var data = success.data.data;
