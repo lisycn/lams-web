@@ -29,7 +29,7 @@
 												<th>Outstanding Amount</th>
 												<th>Tenure</th>
 												<th>Created Date</th>
-												<th>Action</th>
+<!-- 												<th>Action</th> -->
 											</tr>
 										</thead>
 										<tbody>
@@ -39,11 +39,11 @@
 												<td>{{application.applicationTypeName || Constant.NA }}</td>
 												<td>{{application.loanAmount | number}}</td>
 												<td>{{application.tenure || '0'}} Month</td>
-												<td>{{application.createdDate | date : 'dd-MM-yyyy
-													HH:mm:ss'}}</td>
-												<td><button class="btn btn-primary btn-sm"
-														data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})"
-														data-toggle="modal" data-target="#responseModel">View</button>
+												<td>{{application.createdDate | date : 'dd/MM/yyyy'}}</td>
+<!-- 												<td><button class="btn btn-primary btn-sm" -->
+<!-- 														data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})" -->
+<!-- 														data-toggle="modal" data-target="#responseModel">View</button> -->
+<!-- 												</td> -->
 											</tr>
 
 											<tr data-ng-if="existingAppCount < 1">
@@ -237,14 +237,13 @@
 										</thead>
 										<tbody>
 											<tr
-												ng-repeat="application in applicationList | filter : {loanTypeId : Constant.LoanType.CURRENT_LOAN}">
+												ng-repeat="application in applicationList | orderBy : '-id' | filter : {loanTypeId : Constant.LoanType.CURRENT_LOAN}" class="{{application.status == acceptedStatus ? 'success' : ''}}">
 												<td>{{$index + 1}}</td>
 												<td>{{application.applicationTypeName || Constant.NA }}</td>
 												<td>{{application.leadReferenceNo || 'NA'}}</td>
 												<td>{{application.loanAmount | number}}</td>
 												<td>{{application.tenure || '0'}} Month</td>
-												<td>{{application.createdDate | date : 'dd-MM-yyyy
-													HH:mm:ss'}}</td>
+												<td>{{application.createdDate | date : 'dd/MM/yyyy'}}</td>
 												<td><button class="btn btn-primary btn-sm"
 														data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})"
 														data-toggle="modal" data-target="#responseModel">View</button>
@@ -422,7 +421,7 @@
 												<th>Amount</th>
 												<th>Tenure</th>
 												<th>Created Date</th>
-												<th>Action</th>
+<!-- 												<th>Action</th> -->
 											</tr>
 										</thead>
 										<tbody>
@@ -432,11 +431,10 @@
 												<td>{{application.applicationTypeName || Constant.NA }}</td>
 												<td>{{application.loanAmount | number}}</td>
 												<td>{{application.tenure || '0'}} Month</td>
-												<td>{{application.createdDate | date : 'dd-MM-yyyy
-													HH:mm:ss'}}</td>
-												<td><button class="btn btn-primary btn-sm"
-														data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})"
-														data-toggle="modal" data-target="#responseModel">View</button>
+												<td>{{application.createdDate | date : 'dd/MM/yyyy'}}</td>
+<!-- 												<td><button class="btn btn-primary btn-sm" -->
+<!-- 														data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})" -->
+<!-- 														data-toggle="modal" data-target="#responseModel">View</button> -->
 											</tr>
 
 											<tr data-ng-if="closedAppCount < 1">

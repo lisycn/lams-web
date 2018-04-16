@@ -152,14 +152,9 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 			applicationService.updateStatus(con, status).then(
 				function(success) {
 					if (success.data.status == 200) {
-						if (success.data.data && success.data.data == true) {
-							if (Constant.Status.ACCEPTED == status) {
-								$scope.getConnections($scope.applicationId, Constant.Status.ACCEPTED);
-								Notification.success("Successfully Accepted!");
-							} else if (Constant.Status.REJECTED == status) {
-								Notification.success("Successfully Rejected!");
-							}
-							$scope.getConnections($scope.applicationId, Constant.Status.RESPONDED);
+						if (success.data) {
+							Notification.success("Successfully Lender Selected!");
+							$scope.getConnections($scope.applicationId, Constant.Status.ACCEPTED);
 						}
 					} else {
 						Notification.error(success.data.message);

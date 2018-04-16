@@ -41,7 +41,7 @@ angular.module("lams").controller("brLoanProfileCtrl",["$scope", "$http","$rootS
 		applicationService.saveApprovalRequest($scope.respond).then(
 	            function(success) {
 	            	if(success.data.status == 200){
-	            		Notification.success(success.data.message);
+	            		Notification.success("Request has been sent");
 //	            		$scope.userData = success.data.data;
 	            		getUserDetailsById($scope.brId);
 	                }else{

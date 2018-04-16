@@ -32,7 +32,7 @@ angular.module("lams").controller("productsCtrl", [ "$scope", "masterService", "
 				function(success) {
 					if (success.data.status == 200) {
 						if(status === Constant.Status.OPEN){
-							product.applications = $filter("filter")(success.data.data,{isUploadComplete : true});
+							product.applications = $filter("filter")(success.data.data,{isLoanDetailsLock : true});
 						}else{
 							product.applications = success.data.data;
 						}
@@ -70,7 +70,7 @@ angular.module("lams").controller("productsCtrl", [ "$scope", "masterService", "
 			applicationService.saveApprovalRequest($scope.appData).then(
 		            function(success) {
 		            	if(success.data.status == 200){
-		            		Notification.success(success.data.message);
+		            		Notification.success("Request has been sent");
 		            		$scope.status = Constant.Status.RESPONDED;
 		            		$scope.getBorrowerForLenderByApplicationId($scope.products[0],$scope.status);
 		                }else{
