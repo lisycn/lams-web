@@ -21,6 +21,10 @@ app.service("applicationService", [ 'httpService', 'URLS', "$rootScope","$http",
 		return httpService.post(URLS.user + "/application/save",data);
 	};
 	
+	this.inactive = function(applicationId) {
+		return httpService.get(URLS.user + "/application/delete/" + applicationId);
+	};
+	
 	this.getBorrowerForLender = function() {
 		return httpService.get(URLS.user + "/application/get_borrowers_for_lender");
 	};

@@ -15,6 +15,7 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 				function(success) {
 					if (success.data.status == 200) {
 						$scope.applicationDetails = success.data.data;
+						console.log("$scope.applicationDetails.employmentType==",$scope.applicationDetails.employmentType);
 						if ($scope.applicationDetails.employmentType == Constant.EmploymentType.SALARIED) {
 							$scope.getDocumentList([ Constant.documentType.PHOTO_GRAPH, Constant.documentType.PAN_CARD, Constant.documentType.AADHAR_CARD, Constant.documentType.LAST_3_MONTH_SALARY_SLIP,
 								Constant.documentType.LAST_6_MONTHS_BANK_ACCOUNT_STATEMENT, Constant.documentType.FORM_16_OR_APPOIMENT_LETTER,
