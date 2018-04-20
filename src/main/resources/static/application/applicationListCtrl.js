@@ -20,6 +20,7 @@ angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterServ
 		$scope.loanTypeList = [];
 		
 		$scope.totalExistingLoanAmount = 0;
+		$scope.totalExistingLoanEMI = 0;
 		$scope.getApplications = function() {
 			$scope.totalExistingLoanAmount = 0;
 			applicationService.getAll().then(
@@ -31,6 +32,7 @@ angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterServ
 						for(var i = 0; i < $scope.existingLoanList.length; i++){
 							if(!$rootScope.isEmpty($scope.existingLoanList[i].loanAmount)){
 								$scope.totalExistingLoanAmount = $scope.totalExistingLoanAmount + parseFloat($scope.existingLoanList[i].loanAmount);
+								$scope.totalExistingLoanEMI = $scope.totalExistingLoanEMI + parseFloat($scope.existingLoanList[i].emi);
 							}
 						}
 						$scope.existingAppCount = $scope.existingLoanList.length;
@@ -93,7 +95,7 @@ angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterServ
 			}
 			$scope.saveApplication($scope.closedObj,Constant.LoanType.CLOSED_LOAN);
 		}
-
+		
 		$scope.saveApplication = function(appObj,type) {
 			var data = {};
 			data.applicationTypeId = appObj.applicationTypeId;
@@ -114,12 +116,32 @@ angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterServ
 					$rootScope.validateErrorResponse(error);
 				});
 		}
+		
+		$scope.deleteApplication = function(applicationId) {
+			if($rootScope.isEmpty(applicationId)){
+				Notification.warning("Something is Wrong! Please try to Refresh Page or Relogin!");
+				return false;
+			}
+			
+			applicationService.inactive(applicationId).then(
+				function(success) {
+					if (success.data.status == 200) {
+						Notification.info("Application Deleted Successfully!");
+						$scope.getApplications();
+					} else {
+						Notification.warning(success.data.message);
+					}
+				}, function(error) {
+					$rootScope.validateErrorResponse(error);
+				});
+		}
+		
 
 		$scope.getApplicationType = function() {
 			if ($scope.applicationTypeList.length > 0) {
 				return;
 			}
-			masterService.applicationType(0).then(
+			masterService.applicationType(-1).then(
 				function(success) {
 					if (success.data.status == 200) {
 						$scope.applicationTypeList = success.data.data;

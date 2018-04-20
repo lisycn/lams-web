@@ -15,8 +15,7 @@
 					<div class="card-content">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<b>Existing Loan (Total Amount : {{totalExistingLoanAmount |
-									number}})</b>
+								<b>Existing Loan - These are the Loans you are current having or you are currently paying EMIs.</b>
 							</div>
 							<div class="panel-body">
 
@@ -26,24 +25,35 @@
 											<tr>
 												<th style="width: 5%">No.</th>
 												<th>Application Type</th>
-												<th>Outstanding Amount</th>
-												<th>Tenure</th>
+												<th>Outstanding Amount (Rs.)</th>
+												<th>EMI (Rs.)</th>
+												<th>Tenure (Month)</th>
 												<th>Created Date</th>
-<!-- 												<th>Action</th> -->
+												<th>Action</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr
-												ng-repeat="application in applicationList | filter : {loanTypeId : Constant.LoanType.EXISTING_LOAN}">
+												data-ng-repeat="application in applicationList | filter : {loanTypeId : Constant.LoanType.EXISTING_LOAN}">
 												<td>{{$index + 1}}</td>
 												<td>{{application.applicationTypeName || Constant.NA }}</td>
-												<td>{{application.loanAmount | number}}</td>
-												<td>{{application.tenure || '0'}} Month</td>
-												<td>{{application.createdDate | date : 'dd/MM/yyyy'}}</td>
-<!-- 												<td><button class="btn btn-primary btn-sm" -->
-<!-- 														data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})" -->
-<!-- 														data-toggle="modal" data-target="#responseModel">View</button> -->
-<!-- 												</td> -->
+												<td>{{application.loanAmount || 0 | currency : getCurrencySymbol()}}</td>
+												<td>{{application.emi || '0' | currency : getCurrencySymbol()}}</td>
+												<td>{{application.tenure || '0'}}</td>
+												<td>{{application.createdDate | date : dateFormate}}</td>
+												<td><button class="btn btn-primary btn-sm"
+														data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})">View</button>
+														
+														<button class="btn btn-infos btn-sm" data-ng-click="deleteApplication(application.id)">Delete</button>
+												</td>
+											</tr>
+											<tr data-ng-if="applicationList.length > 0">
+												<th colspan="2">Total</th>
+												<th>{{totalExistingLoanAmount || 0 | currency : getCurrencySymbol()}}</th>
+												<th>{{totalExistingLoanEMI || 0 | currency : getCurrencySymbol()}}</th>
+												<td>-</td>
+												<td>-</td>
+												<td> - </td>
 											</tr>
 
 											<tr data-ng-if="existingAppCount < 1">
@@ -219,7 +229,7 @@
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<b>New Loan</b>
+								<b>New Loan - This the loan that you want to apply through us.</b>
 							</div>
 							<div class="panel-body">
 								<div>
@@ -229,8 +239,8 @@
 												<th style="width: 5%">No.</th>
 												<th>Application Type</th>
 												<th>Lead Reference No</th>
-												<th>Amount</th>
-												<th>Tenure</th>
+												<th>Amount (Rs.)</th>
+												<th>Tenure (Month)</th>
 												<th>Created Date</th>
 												<th>Action</th>
 											</tr>
@@ -241,9 +251,9 @@
 												<td>{{$index + 1}}</td>
 												<td>{{application.applicationTypeName || Constant.NA }}</td>
 												<td>{{application.leadReferenceNo || 'NA'}}</td>
-												<td>{{application.loanAmount | number}}</td>
-												<td>{{application.tenure || '0'}} Month</td>
-												<td>{{application.createdDate | date : 'dd/MM/yyyy'}}</td>
+												<td>{{application.loanAmount  | currency : getCurrencySymbol()}}</td>
+												<td>{{application.tenure || '0'}}</td>
+												<td>{{application.createdDate | date : dateFormate}}</td>
 												<td><button class="btn btn-primary btn-sm"
 														data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})"
 														data-toggle="modal" data-target="#responseModel">View</button>
@@ -294,7 +304,7 @@
 															class="text-danger">*</span></label> <select class="form-control"
 															data-ng-model="currentObj.applicationTypeId"
 															name="salutation" ng-required="true"
-															data-ng-options="applicationTyp.id as applicationTyp.name for applicationTyp in applicationTypeList">
+															data-ng-options="applicationTyp.id as applicationTyp.name for applicationTyp in applicationTypes">
 															<option value="">Select Application Type</option>
 														</select>
 													</div>
@@ -409,7 +419,7 @@
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<b>Closed Loan</b>
+								<b>Closed Loan - These are the loans taken earlier by you that are closed.</b>
 							</div>
 							<div class="panel-body">
 								<div>
@@ -418,10 +428,10 @@
 											<tr>
 												<th style="width: 5%">No.</th>
 												<th>Application Type</th>
-												<th>Amount</th>
-												<th>Tenure</th>
+												<th>Amount (Rs.)</th>
+												<th>Tenure (Month.)</th>
 												<th>Created Date</th>
-<!-- 												<th>Action</th> -->
+												<th>Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -429,12 +439,12 @@
 												ng-repeat="application in applicationList | filter : {loanTypeId : Constant.LoanType.CLOSED_LOAN}">
 												<td>{{$index + 1}}</td>
 												<td>{{application.applicationTypeName || Constant.NA }}</td>
-												<td>{{application.loanAmount | number}}</td>
-												<td>{{application.tenure || '0'}} Month</td>
-												<td>{{application.createdDate | date : 'dd/MM/yyyy'}}</td>
-<!-- 												<td><button class="btn btn-primary btn-sm" -->
-<!-- 														data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})" -->
-<!-- 														data-toggle="modal" data-target="#responseModel">View</button> -->
+												<td>{{application.loanAmount  | currency : getCurrencySymbol()}}</td>
+												<td>{{application.tenure || '0'}}</td>
+												<td>{{application.createdDate | date : dateFormate}}</td>
+												<td><button class="btn btn-primary btn-sm"
+														data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})">View</button>
+														<button class="btn btn-infos btn-sm" data-ng-click="deleteApplication(application.id)">Delete</button>
 											</tr>
 
 											<tr data-ng-if="closedAppCount < 1">

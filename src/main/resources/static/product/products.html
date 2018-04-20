@@ -24,7 +24,7 @@
 										<h4>
 											<b>{{product.applicationTypeMstrBO.name}} </b>
 <!-- 											<small class="pull-right">{{product.createdDate | -->
-<!-- 											date : 'dd/MM/yyyy'}}</small> -->
+<!-- 											date : dateFormate}}</small> -->
 										</h4> 
 										
 										
@@ -40,10 +40,10 @@
 													data-ng-change="getBorrowerForLenderByApplicationId(products[0],status)">
 												</select>
 												</th>
-												
+												<th>{{status}}</th>
 											<th colspan="8"><input type="text" name="searchData"
 												class="form-control" data-ng-model=searchApps
-												placeholder="Type anything to search Applications"></th>
+												placeholder="Type anything to search Applications" ></th>
 										</tr>
 										<tr>
 											<th>Sr No.</th>
@@ -96,8 +96,8 @@
 											<td>{{app.application.tenure}} Month = {{status}}</td>
 											<td>
 											<button class="btn btn-info btn-sm" data-ui-sref="web.lams.brLoanProfile({brId:app.application.userId, appId:app.application.id, appTypeId:product.id})">View</button>
-											<button class="btn btn-success btn-sm" ng-show="status == Constant.Status.RESPONDED" data-toggle="modal" data-target="#responseModel" data-ng-click="setApplicationData(app)">Responded</button>
-											<button class="btn btn-default btn-sm" ng-show="status == Constant.Status.NOTINTERESTED">Not Interested</button>
+											<button class="btn btn-success btn-sm" data-ng-show="status == Constant.Status.RESPONDED" data-toggle="modal" data-target="#responseModel" data-ng-click="setApplicationData(app)">Responded</button>
+											<button class="btn btn-default btn-sm" data-ng-show="status == Constant.Status.NOTINTERESTED">Not Interested</button>
 											</td>
 										</tr>
 										<tr data-ng-if="isEmpty(product.applications)">
