@@ -47,6 +47,7 @@ angular.module("lams").controller("productsCtrl", [ "$scope", "masterService", "
 		
 		$scope.appData = {};
 		$scope.setApplicationData = function(app){
+			console.log("app====>",app);
 			console.log("$scope.status==>",$scope.status);
 			if($scope.status = Constant.Status.OPEN){
 				$scope.appData = {applicationMappingBO : {id : $scope.products[0].id},application:{id : app.id},canEdit : true};

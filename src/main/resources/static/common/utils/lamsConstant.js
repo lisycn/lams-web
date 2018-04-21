@@ -73,7 +73,7 @@ app.constant('Constant', {
 		PRIVATE_EQUITY_FINANCE_LOAN : 19,
 		GOLD_LOAN : 20,
 		OTHER_LOAN : 21,
-		PERSONAL_LOAN : 26
+		PERSONAL_LOAN : 27
 	}, 
 	ApplicationTypeCode : {
 		HOME_LOAN : "HL",
@@ -122,5 +122,9 @@ app.constant('Constant', {
 		ACCEPTED : "ACCEPTED",
 		REJECTED : "REJECTED",
 		NOTINTERESTED : "NOTINTERESTED"
+	},
+	CURRENCY : {
+		IND : 'IND',
+		DLR : 'DLR'
 	}
 });
