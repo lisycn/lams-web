@@ -1,6 +1,6 @@
 
 <div class="logo">
-	<h2 class="text-center">LAMS</h2>
+	<h2 class="text-center">L<span class="other-partn-name">AMS</span></h2>
 </div>
 <div class="sidebar-wrapper" data-ng-if="user.userType == Constant.UserType.BORROWER.id">
 	<ul class="nav">
@@ -40,7 +40,7 @@
 <div class="sidebar-wrapper" data-ng-if="user.userType == Constant.UserType.LENDER.id">
 	<ul class="nav">
 		<li data-ui-sref-active="active"><a href="javascript:void(0)" data-ui-sref="web.lams.products"> <i class="material-icons">dashboard</i>
-				<p>Dashboard</p>
+				<p class="item-name">Dashboard</p>
 		</a></li>
 <!-- 		<li data-ui-sref-active="active"><a href="javascript:void(0)" data-ui-sref="web.lams.products"> <i class="material-icons">Products</i> -->
 <!-- 				<p>Products</p> -->
@@ -52,7 +52,7 @@
 <div class="sidebar-wrapper" data-ng-if="user.userType == Constant.UserType.CHANNEL_PARTNER.id">
 	<ul class="nav">
 		<li data-ui-sref-active="active"><a href="javascript:void(0)" data-ui-sref="web.lams.cpDashboard"> <i class="material-icons">dashboard</i>
-				<p>Dashboard</p>
+				<p class="item-name">Dashboard</p>
 		</a></li>
 		<li data-ui-sref-active="active"><a href="javascript:void(0)" data-ng-click="go()"> <i class="material-icons">Clients</i>
 				<p>Clients</p>

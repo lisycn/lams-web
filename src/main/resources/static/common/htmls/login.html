@@ -1,17 +1,12 @@
-<div class="wrapper">
-	<div class="main-panel">
+<div class="">
+	<div class="">
 		<div class="content">
 			<div class="container-fluid">
-				<div class="col-md-3"></div>
-				<div class="col-md-4">
-					<div class="card" data-ng-show="isLoginVisible">
-						<div class="card-header" data-background-color="purple">
-							<h4 class="title">
-								<b>Login</b> <a href="javascript:void(0)" class="pull-right"
-									data-ui-sref="signup"> <b>New User ? Click Here to
-										Signup</b></a>
-							</h4>
-							<p class="category">Complete Authentication Process</p>
+				<div class="card" data-ng-show="isLoginVisible">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<img src="assets/img/VfinanceSLogo.png" width="100" height="100" class="logo-img">
+							</div>
 						</div>
 						<div class="card-content">
 							<form name="loginForm" novalidate>
@@ -40,14 +35,17 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-8">
+									<div class="col-md-12">
 										<a href="javascript:void(0)"
 											data-ng-click="isLoginVisible = !isLoginVisible"> <b>Forgot
 												Password ? Reset Here.</b></a>
 									</div>
-									<div class="col-md-4">
-										<button type="submit" class="btn btn-primary pull-right"
+									<div class="col-md-12">
+										<button type="submit" class="btn btn-block btn-primary"
 											data-ng-click="doLogin()" data-ng-disabled="isDisable">Login</button>
+									</div>
+									<div class="col-md-12 text-center">
+										<p>New to Vfinance&nbsp;&nbsp;<a href="" ui-sref="signup">Sign Up</a></p>
 									</div>
 								</div>
 								<div class="clearfix"></div>
@@ -55,13 +53,10 @@
 						</div>
 					</div>
 					<div class="card" data-ng-show="!isLoginVisible">
-						<div class="card-header" data-background-color="purple">
-							<h4 class="title">
-								<b>Forgot Password</b> <a href="javascript:void(0)" class="pull-right"
-									data-ui-sref="signup"> <b>New User ? Click Here to
-										Signup</b></a>
-							</h4>
-							<p class="category">Email Verification Process</p>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<img src="assets/img/VfinanceSLogo.png" width="100" height="100" class="logo-img">
+							</div>
 						</div>
 
 						<div class="card-content">
@@ -82,8 +77,8 @@
 										<a href="javascript:void(0)"
 											data-ng-click="isLoginVisible = !isLoginVisible"> <b>Click to Login</b></a>
 									</div>
-									<div class="col-md-4">
-										<button type="submit" class="btn btn-primary pull-right"
+									<div class="col-md-12">
+										<button type="submit" class="btn btn-block btn-primary"
 											data-ng-click="sendLink()" data-ng-disabled="isDisable">Submit</button>
 									</div>
 								</div>
@@ -91,7 +86,7 @@
 							</form>
 						</div>
 					</div>
-				</div>
+				
 			</div>
 		</div>
 	</div>

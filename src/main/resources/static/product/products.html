@@ -3,48 +3,36 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="card">
-					<div class="card-header" data-background-color="purple">
-						<h4 class="title">
-							<b>Applications </b>
-						</h4>
-						<p class="category">
-							<b>List of all Applications</b>
-						</p>
-					</div>
-					<div class="card-content">
-						<div class="panel panel-default">
-							<!-- <div class="panel-heading">
-								<b>Existing Loan</b>
-							</div> -->
-							<div class="panel-body">
-								<div class="list-group" ng-repeat="product in products">
-									<a href="javascript:void(0)"
-										class="list-group-item list-group-item-action flex-column align-items-start">
-										<h4>
+			
+				<div class="list-group" ng-repeat="product in products">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+			
 											<b>{{product.applicationTypeMstrBO.name}} </b>
 <!-- 											<small class="pull-right">{{product.createdDate | -->
 <!-- 											date : 'dd/MM/yyyy'}}</small> -->
-										</h4> 
 										
-										
-										
-										<div class="panel-body table-responsive">
-								<table class="table table-bordered">
-									<thead class="text-primary">
-										<tr>
-										<th colspan="2">
-												<select class="form-control"
+			</div>
+			<div class="panel-body">
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="list-inline list-unstyled text-right">
+											<li><input type="text" name="searchData"
+												class="form-control" data-ng-model=searchApps
+												placeholder="Type anything to search Applications"></li>
+											<li><select class="form-control"
 													data-ng-model="status"
 													data-ng-options="status as status for status in statuses"
 													data-ng-change="getBorrowerForLenderByApplicationId(products[0],status)">
-												</select>
-												</th>
-												
-											<th colspan="8"><input type="text" name="searchData"
-												class="form-control" data-ng-model=searchApps
-												placeholder="Type anything to search Applications"></th>
-										</tr>
+												</select></li>
+										</ul>
+					
+				</div>
+				<div class="col-md-12">
+					<div class="table-responsive">
+								<table class="table custom-table">
+									<thead class="text-primary">
+										
 										<tr>
 											<th>Sr No.</th>
 											<th>Name</th>
@@ -107,14 +95,19 @@
 									</tbody>
 								</table>
 							</div>
-									</a>
+				</div>
+			</div>
+														
+									
 								</div>
 								<div class="list-group" ng-if="isEmpty(products)">No
 									Products Added Yet!</div>
-							</div>
-						</div>
-					</div>
-				</div>
+			</div>
+			</div>						
+										
+										
+										
+										
 			</div>
 		</div>
 	</div>
