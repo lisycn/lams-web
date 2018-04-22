@@ -15,6 +15,17 @@ angular.module("lams").controller("brLoanProfileCtrl", [ "$scope", "$http", "$ro
 						$scope.userData = success.data.data;
 						console.log("$scope.userData-------------------------->",$scope.userData)
 						
+                                                $scope.applicationList = $scope.userData.applications;
+                                                $scope.totalExistingLoanAmount = 0;
+                                                $scope.totalExistingLoanEMI = 0;
+                                                $scope.existingLoanList = $filter('filter')($scope.applicationList,{loanTypeId : Constant.LoanType.EXISTING_LOAN});
+						for(var i = 0; i < $scope.existingLoanList.length; i++){
+							if(!$rootScope.isEmpty($scope.existingLoanList[i].loanAmount)){
+								$scope.totalExistingLoanAmount = $scope.totalExistingLoanAmount + parseFloat($scope.existingLoanList[i].loanAmount);
+								$scope.totalExistingLoanEMI = $scope.totalExistingLoanEMI + parseFloat($scope.existingLoanList[i].emi);
+							}
+						}
+                                                
 						$scope.userData.applications = $filter('filter')($scope.userData.applications, {
 							id : appId
 						});
