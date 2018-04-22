@@ -99,7 +99,7 @@
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
-											<label class="control-label">Aadhar Card Number <span
+											<label class="control-label">Aadhaar Card Number <span
 												class="text-danger">*</span></label> <input type="text"
 												class="form-control" name="aadharCardNo"
 												ng-pattern="/^[0-9]{12,12}$/"
@@ -158,7 +158,7 @@
 							<div class="col-md-6">
 								<label style="color: #555;"><b>Communication Address</b></label>
 								<div class="form-group">
-									<label class="control-label">Premises No And Building Name </label> <input
+									<label class="control-label">Premises No And Building Name <span class="text-danger">*</span></label> <input
 										type="text" class="form-control"
 										data-ng-model="userData.communicationAdd.premisesAndBuildingName" required>
 								</div>
@@ -176,7 +176,7 @@
 							<div class="col-md-3">
 								<label style="color: #555;">&nbsp;&nbsp;</label>
 								<div class="form-group">
-									<label class="control-label">Street Name</label> <input
+									<label class="control-label">Street Name <span class="text-danger">*</span></label> <input
 										type="text" class="form-control"
 										data-ng-model="userData.communicationAdd.streetName" required>
 								</div>
@@ -184,7 +184,7 @@
 							<div class="col-md-3">
 								<label style="color: #555;">&nbsp;&nbsp;</label>
 								<div class="form-group">
-									<label class="control-label">Land Mark</label> <input
+									<label class="control-label">Land Mark <span class="text-danger">*</span></label> <input
 										type="text" class="form-control"
 										data-ng-model="userData.communicationAdd.landMark" required>
 								</div>
@@ -194,22 +194,22 @@
 						<div class="row">
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">Country </label> <select
+									<label class="control-label">Country <span class="text-danger">*</span></label> <select
 										class="form-control"
 										data-ng-model="userData.communicationAdd.country.id"
 										data-ng-options="coun.id as coun.name for coun in countries"
-										data-ng-change="getStates(userData.communicationAdd.country.id,Constant.AddressType.COMMUNICATION)">
+										data-ng-change="getStates(userData.communicationAdd.country.id,Constant.AddressType.COMMUNICATION)" required>
 										<option value="">Select Country</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">State </label> <select
+									<label class="control-label">State <span class="text-danger">*</span></label> <select
 										class="form-control"
 										data-ng-model="userData.communicationAdd.state.id"
 										data-ng-options="state.id as state.name for state in commStates"
-										data-ng-change="getCities(userData.communicationAdd.state.id,Constant.AddressType.COMMUNICATION)">
+										data-ng-change="getCities(userData.communicationAdd.state.id,Constant.AddressType.COMMUNICATION)" required>
 										<option value="">Select State</option>
 									</select>
 								</div>
@@ -217,10 +217,10 @@
 
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">City </label> <select
+									<label class="control-label">City <span class="text-danger">*</span></label> <select
 										class="form-control"
 										data-ng-model="userData.communicationAdd.city.id"
-										data-ng-options="city.id as city.name for city in commCities">
+										data-ng-options="city.id as city.name for city in commCities" required>
 										<option value="">Select City</option>
 									</select>
 								</div>
@@ -228,9 +228,9 @@
 
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">Pincode </label> <input
+									<label class="control-label">Pincode <span class="text-danger">*</span></label> <input
 										type="text" class="form-control"
-										data-ng-model="userData.communicationAdd.pincode">
+										data-ng-model="userData.communicationAdd.pincode" required>
 								</div>
 							</div>
 						</div>
