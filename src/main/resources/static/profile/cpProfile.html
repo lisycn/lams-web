@@ -34,10 +34,9 @@
 							
 							<div class="col-md-3">
 								<div class="form-group">
-									<label class="control-label">GST Number <span
-										class="text-danger">*</span></label> <input type="text"
+									<label class="control-label">GST Number</label> <input type="text"
 										class="form-control" name="gstNumber"
-										data-ng-model="userData.gstNumber" required>
+										data-ng-model="userData.gstNumber">
 								</div>
 							</div>
 							<div class="col-md-3">
@@ -82,16 +81,26 @@
 						
 						<br/>
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label style="color: #555;"><b>Business Address</b> <span
 										class="text-danger">*</span></label>
 								<div class="form-group">
-									<label class="control-label">Premises No &amp; Street
+									<label class="control-label">Premises No And Building Name 
 										Name.</label> <input type="text" class="form-control"
+										data-ng-model="userData.communicationAdd.premisesAndBuildingName">
+								</div>
+							</div>
+							
+							<div class="col-md-3">
+								<label style="color: #555;">&nbsp;&nbsp;</label>
+								<div class="form-group">
+									<label class="control-label">Street Name</label> <input
+										type="text" class="form-control"
 										data-ng-model="userData.communicationAdd.streetName">
 								</div>
 							</div>
-							<div class="col-md-4">
+							
+							<div class="col-md-3">
 								<label style="color: #555;">&nbsp;&nbsp;</label>
 								<div class="form-group">
 									<label class="control-label">Land Mark</label> <input
@@ -100,7 +109,7 @@
 								</div>
 							</div>
 							
-							<div class="col-md-4">
+							<div class="col-md-3">
 							<label style="color: #555;">&nbsp;&nbsp;</label>
 								<div class="form-group">
 									<label class="control-label">Pincode  <span
