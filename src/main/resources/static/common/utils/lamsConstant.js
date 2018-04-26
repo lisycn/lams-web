@@ -48,7 +48,8 @@ app.constant('Constant', {
 	USER_TYPE : "UT",
 	AddressType : {
 		PERMANENT : 1,
-		COMMUNICATION : 2
+		COMMUNICATION : 2,
+		EMPLOYMENT_ADD : 3
 	},
 	LoanType : {
 		EXISTING_LOAN : 22,
