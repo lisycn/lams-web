@@ -91,6 +91,15 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 	            				$scope.getCities($scope.userData.communicationAdd.state.id,Constant.AddressType.COMMUNICATION);	
 	            			}
 	            		}
+	            		
+	            		if(!$rootScope.isEmpty($scope.userData.employmentAddress)){
+	            			if(!$rootScope.isEmpty($scope.userData.employmentAddress.country)){
+	            				$scope.getStates($scope.userData.employmentAddress.country.id,Constant.AddressType.EMPLOYMENT_ADD);	
+	            			}
+	            			if(!$rootScope.isEmpty($scope.userData.employmentAddress.state)){
+	            				$scope.getCities($scope.userData.employmentAddress.state.id,Constant.AddressType.EMPLOYMENT_ADD);	
+	            			}
+	            		}
 	                }else{
 	                	Notification.error(success.data.message);
 	                }
@@ -120,6 +129,7 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 
 	$scope.permStates = [];
 	$scope.commStates = [];
+	$scope.empStates = [];
 	$scope.getStates = function(countryId,type){
 		if($rootScope.isEmpty(countryId)){
 			console.warn("Country Id must not be null while getting States by Country Id====>",countryId);
@@ -129,6 +139,9 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
     		} else if(type == Constant.AddressType.COMMUNICATION){
     			$scope.commStates = [];	
     			$scope.commCities = [];
+    		} else if(type == Constant.AddressType.EMPLOYMENT_ADD){
+    			$scope.empStates = [];	
+    			$scope.empCities = [];
     		}
 			return false;
 		}
@@ -141,6 +154,9 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 	            		} else if(type == Constant.AddressType.COMMUNICATION){
 	            			$scope.commStates = [];
 	            			$scope.commStates = success.data.data;	
+	            		}  else if(type == Constant.AddressType.EMPLOYMENT_ADD){
+	            			$scope.empStates = [];
+	            			$scope.empStates = success.data.data;
 	            		} 
 	            	} else{
 	            		Notification.warning(success.data.message);
@@ -156,6 +172,7 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 	
 	$scope.permCities = [];
 	$scope.commCities = [];
+	$scope.empCities = [];
 	$scope.getCities = function(stateId,type){
 		if($rootScope.isEmpty(stateId)){
 			console.warn("State Id must not be null while getting States by State Id====>",stateId);
@@ -163,6 +180,8 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
     			$scope.permCities = [];	
     		} else if(type == Constant.AddressType.COMMUNICATION){
     			$scope.commCities = [];	
+    		} else if(type == Constant.AddressType.EMPLOYMENT_ADD){
+    			$scope.empCities = [];
     		}
 			return false;
 		}
@@ -175,6 +194,9 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 	            		} else if(type == Constant.AddressType.COMMUNICATION){
 	            			$scope.commCities = [];
 	            			$scope.commCities = success.data.data;	
+	            		}  else if(type == Constant.AddressType.EMPLOYMENT_ADD){
+	            			$scope.empCities = [];
+	            			$scope.empCities = success.data.data;
 	            		}
 	            	}else{
 	            		Notification.warning(success.data.message);
