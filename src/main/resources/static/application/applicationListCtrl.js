@@ -106,9 +106,13 @@ angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterServ
 				function(success) {
 					if (success.data.status == 200) {
 						Notification.info("Application Created  Successfully!!");
-						$state.go("web.lams.application",{appCode : $rootScope.getAppIdByAppCode(appObj.applicationTypeId) , appId : success.data.data});
-						/*$scope.getApplications();
-						$scope.hideDiv(type);*/
+						if(type == Constant.LoanType.EXISTING_LOAN || type == Constant.LoanType.CLOSED_LOAN){
+							$scope.getApplications();
+							$scope.hideDiv(type);
+						} else {
+							$state.go("web.lams.application",{appCode : $rootScope.getAppIdByAppCode(appObj.applicationTypeId) , appId : success.data.data});	
+						}
+						
 					} else {
 						Notification.warning(success.data.message);
 					}

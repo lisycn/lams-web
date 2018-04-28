@@ -428,6 +428,8 @@
 											<tr>
 												<th style="width: 5%">No.</th>
 												<th>Application Type</th>
+												<th>Bank/Financial Institution Name</th>
+												<th>Loan Account Number</th>
 												<th>Amount (Rs.)</th>
 												<th>Tenure (Month.)</th>
 												<th>Created Date</th>
@@ -439,6 +441,8 @@
 												ng-repeat="application in applicationList | filter : {loanTypeId : Constant.LoanType.CLOSED_LOAN}">
 												<td>{{$index + 1}}</td>
 												<td>{{application.applicationTypeName || Constant.NA }}</td>
+												<td>{{application.bankName || 'NA' }}</td>
+												<td>{{application.bankAccNumber || 'NA' }}</td>
 												<td>{{application.loanAmount  | currency : getCurrencySymbol()}}</td>
 												<td>{{application.tenure || '0'}}</td>
 												<td>{{application.createdDate | date : dateFormate}}</td>
@@ -509,6 +513,24 @@
 															class="text-danger">*</span></label> <input type="number"
 															class="form-control" data-ng-model="closedObj.tenure"
 															name="tenure" ng-required="true">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-3">
+													<div class="form-group">
+														<label class="control-label">Bank/Financial Institution Name </label> 
+														<input type="text"
+															class="form-control" data-ng-model="closedObj.bankName"
+															name="bankName" ng-required="false">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<label class="control-label">Loan Account Number(if available)</label>
+														 <input type="number"
+															class="form-control" data-ng-model="closedObj.bankAccNumber"
+															name="loanAccountNumber" ng-required="false">
 													</div>
 												</div>
 											</div>
