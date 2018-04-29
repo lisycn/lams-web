@@ -1,23 +1,25 @@
-
 <div class="container-fluid">
 	<div class="row">
-	<div class="col-md-12">
-		<h4 class="title">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header" data-background-color="purple">
+					<h4 class="title">
 						<b>Application Profile - {{userData.firstName}}
 							{{userData.lastName}}</b></a>
 					</h4>
 					<p class="category">
 						<b>{{userData.applications[0].applicationTypeName}}</b>
 					</p>
-	</div>
-		<div class="col-md-12">
-		<div class="panel panel-default">
+				</div>
+				<div class="card-content">
+
+					<!-- Loan Details -->
+					<div class="panel panel-default">
 						<div class="panel-heading">
 							<b>Application Details</b>
 						</div>
 						<div class="panel-body">
-						<div class="table-responsive">
-							<table class="table custom-table">
+							<table class="table table-striped table-bordered">
 								<thead class="text-primary">
 									<tr>
 										<th style="width: 5%">No.</th>
@@ -55,21 +57,20 @@
 										</td>
 									</tr>
 									<tr data-ng-if="isEmpty(userData.applications)">
-										<td colspan="6" class="text-center">
+										<td colspan="6" class="alert alert-default text-center">
 											No Applications!</td>
 									</tr>
 								</tbody>
 							</table>
-							
-						</div>
-							
+
 						</div>
 					</div>
-		<!-- Personal Details -->
+
+					<!-- Personal Details -->
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<b>Borrower Details</b> <a style="margin-top: -2px"
-								class="btn btn-xs pull-right show-more-btn" ng-click="showMore = !showMore">
+								class="btn btn-xs pull-right" ng-click="showMore = !showMore">
 								<spna ng-show="!showMore">Show More</spna> <spna
 									ng-show="showMore">Hide</spna>
 							</a>
@@ -132,7 +133,7 @@
 								<div ng-if="userData.employmentType===1">
 									<div class="col-md-4">
 										<label>Employer Name</label>
-										<div>{{userData.employeName || 'N.A'}}</div>
+										<div>{{userData.employerName || 'N.A'}}</div>
 									</div>
 
 									<div class="col-md-4">
@@ -176,7 +177,12 @@
 									<h5>Permanent Address</h5>
 								</div>
 
-								<div class="col-md-9">
+								<div class="col-md-6">
+									<label>Premises and Building Name</label>
+									<div>{{userData.permanentAdd.premisesAndBuildingName || 'N.A'}}</div>
+								</div>
+                                                            
+                                                                <div class="col-md-3">
 									<label>Street Name</label>
 									<div>{{userData.permanentAdd.streetName || 'N.A'}}</div>
 								</div>
@@ -209,6 +215,53 @@
 									<label>Pincode</label>
 									<div>{{userData.permanentAdd.pincode || 'N.A'}}</div>
 								</div>
+                                                            
+                                                                <div class="col-md-12">
+									<br>
+								</div>
+
+								<div class="col-md-12">
+									<h5>Communication Address</h5>
+								</div>
+
+								<div class="col-md-6">
+									<label>Premises and Building Name</label>
+									<div>{{userData.communicationAdd.premisesAndBuildingName || 'N.A'}}</div>
+								</div>
+                                                            
+                                                                <div class="col-md-3">
+									<label>Street Name</label>
+									<div>{{userData.communicationAdd.streetName || 'N.A'}}</div>
+								</div>
+
+								<div class="col-md-3">
+									<label>Land Mark</label>
+									<div>{{userData.communicationAdd.landMark || 'N.A'}}</div>
+								</div>
+
+								<div class="col-md-12">
+									<br>
+								</div>
+
+								<div class="col-md-3">
+									<label>City</label>
+									<div>{{userData.communicationAdd.city.name || 'N.A'}}</div>
+								</div>
+
+								<div class="col-md-3">
+									<label>State</label>
+									<div>{{userData.communicationAdd.state.name || 'N.A'}}</div>
+								</div>
+
+								<div class="col-md-3">
+									<label>Country</label>
+									<div>{{userData.communicationAdd.country.name || 'N.A'}}</div>
+								</div>
+
+								<div class="col-md-3">
+									<label>Pincode</label>
+									<div>{{userData.communicationAdd.pincode || 'N.A'}}</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -238,8 +291,94 @@
 						</div>
 
 					</div>
-					
-			
+                                        
+                                        <!--Other loan-->
+                                        <div class="panel panel-default">
+							<div class="panel-heading">
+								<b>Existing Loan</b>
+							</div>
+                                        <div class="panel-body">
+								<div>
+									<table class="table table-striped table-bordered">
+										<thead class="text-primary">
+											<tr>
+												<th style="width: 5%">No.</th>
+												<th>Application Type</th>
+												<th>Outstanding Amount (Rs.)</th>
+												<th>EMI (Rs.)</th>
+												<th>Tenure (Month)</th>
+												<th>Created Date</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr data-ng-repeat="application in applicationList | filter : {loanTypeId : Constant.LoanType.EXISTING_LOAN}">
+												<td>{{$index + 1}}</td>
+												<td>{{application.applicationTypeName || Constant.NA }}</td>
+												<td>{{application.loanAmount || 0 | currency : getCurrencySymbol()}}</td>
+												<td>{{application.emi || '0' | currency : getCurrencySymbol()}}</td>
+												<td>{{application.tenure || '0'}}</td>
+												<td>{{application.createdDate | date : dateFormate}}</td>
+											</tr>
+											
+                                                                                        <tr data-ng-if="applicationList.length > 0">
+												<th colspan="2">Total</th>
+												<th>{{totalExistingLoanAmount || 0 | currency : getCurrencySymbol()}}</th>
+												<th>{{totalExistingLoanEMI || 0 | currency : getCurrencySymbol()}}</th>
+												<td>-</td>
+												<td>-</td>
+											</tr>
+
+											<tr data-ng-if="existingAppCount < 1">
+												<td colspan="8" class="alert alert-default text-center">No
+													Application Available!</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+                                                </div>
+                                        
+                                        
+                                        <div class="panel panel-default">
+							<div class="panel-heading">
+								<b>Closed Loan</b>
+							</div>
+							<div class="panel-body">
+								<div>
+									<table class="table table-striped table-bordered">
+										<thead class="text-primary">
+											<tr>
+												<th style="width: 5%">No.</th>
+												<th>Application Type</th>
+												<th>Amount (Rs.)</th>
+												<th>Tenure (Month.)</th>
+												<th>Created Date</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr
+												ng-repeat="application in applicationList | filter : {loanTypeId : Constant.LoanType.CLOSED_LOAN}">
+												<td>{{$index + 1}}</td>
+												<td>{{application.applicationTypeName || Constant.NA }}</td>
+												<td>{{application.loanAmount  | currency : getCurrencySymbol()}}</td>
+												<td>{{application.tenure || '0'}}</td>
+												<td>{{application.createdDate | date : dateFormate}}</td>
+											</tr>
+
+											<tr data-ng-if="closedAppCount < 1">
+												<td colspan="8" class="alert alert-default text-center">No
+													Application Available!</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+                                        
+                                        
+                                        
+				</div>
+			</div>
 		</div>
 	</div>
 

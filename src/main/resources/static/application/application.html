@@ -2,10 +2,8 @@
 <div class="col-md-12 col-sm-12 col-lg-12">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-header" data-background-color="purple">
-						<h4 class="title">
+		<div class="col-md-12">
+			<h4 class="title">
 							<b>Application Details</b>
 						</h4>
 						<p class="pull-right">
@@ -18,11 +16,9 @@
 						<p class="category" data-ng-if="applicationDetails.loanTypeId == Constant.LoanType.EXISTING_LOAN || applicationDetails.loanTypeId == Constant.LoanType.CLOSED_LOAN">
 							<b>{{applicationDetails.loanTypeName}} - {{applicationDetails.applicationTypeName}}</b>
 						</p>
-
-					</div>
-					<div class="card-content">
-
-						<div class="panel panel-default" data-ng-if="applicationDetails.loanTypeId != Constant.LoanType.EXISTING_LOAN && applicationDetails.loanTypeId != Constant.LoanType.CLOSED_LOAN">
+		</div>
+			<div class="col-md-12">
+				<div class="panel panel-default" data-ng-if="applicationDetails.loanTypeId != Constant.LoanType.EXISTING_LOAN && applicationDetails.loanTypeId != Constant.LoanType.CLOSED_LOAN">
 							<div class="panel-heading">
 								<b>Lender Responses</b> <select class="form-control"
 									data-ng-model="status"
@@ -31,7 +27,7 @@
 								</select>
 							</div>
 							<div class="panel-body">
-								<table class="table table-striped table-bordered">
+								<table class="table table-striped custom-table">
 									<thead class="text-primary">
 										<tr>
 											<th style="width: 5%">No.</th>
@@ -111,7 +107,10 @@
 							</div>
 						</div>
 
-						<form name="currentForm" novalidate>
+						
+			</div>
+			<div class="col-md-12">
+			<form name="currentForm" novalidate>
 							<div class="row">
 								<div class="col-md-3">
 									<div class="form-group">
@@ -147,10 +146,10 @@
 									<div class="form-group">
 										<label class="control-label">Planning to close before
 											Disbursement <span class="text-danger">*</span>
-										</label> &nbsp&nbsp<input type="radio" ng-value="true"
+										</label> <br><input type="radio" ng-value="true"
 											data-ng-disabled="editApplicationForm"
 											data-ng-model="applicationDetails.closeBeforeDisbsmnt"
-											name="emi">Yes&nbsp&nbsp <input type="radio"
+											name="emi">Yes&nbsp;&nbsp; <input type="radio"
 											data-ng-disabled="editApplicationForm" ng-value="false"
 											data-ng-model="applicationDetails.closeBeforeDisbsmnt"
 											name="emi"> No
@@ -224,11 +223,12 @@
 							</div>
 							<div class="row"
 								ng-if="applicationDetails.loanTypeId != Constant.LoanType.EXISTING_LOAN  && applicationDetails.loanTypeId != Constant.LoanType.CLOSED_LOAN">
-								<div class="panel panel-default">
-									<div>
-										<h5>
+								<div class="col-md-12">
+									<div class="panel panel-default">
+									<div class="panel-heading">
+										
 											<b>&nbsp&nbsp&nbspFile Upload</b>
-										</h5>
+										
 									</div>
 									<div class="panel-body">
 										<div class="row" data-ng-repeat="documents in documentList">
@@ -255,7 +255,9 @@
 										</div>
 									</div>
 								</div>
-
+									
+								</div>
+								
 							</div>
 							<div class="row">
 								<div class="col-md-8"></div>
@@ -277,9 +279,7 @@
 								</div>
 							</div>
 						</form>
-
-					</div>
-				</div>
+			
 			</div>
 		</div>
 	</div>

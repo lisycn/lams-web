@@ -939,9 +939,7 @@ h2.title {
 .sidebar.active{
 	width:260px;
 }
-.main-panel.open-nav{
-	width:calc(100% - 260px);
-}
+
 
 .main-panel>.content {
     margin-top: 70px;
@@ -4875,7 +4873,7 @@ fieldset[disabled] .navbar .btn-link:focus {
     position: absolute;
     width: 100%;
     padding-top: 10px;
-    z-index: 1029;
+    
 }
 
 @media (min-width: 991px) {
@@ -6447,6 +6445,7 @@ footer .btn {
     }
     .main-panel {
         width: 100%;
+        z-index:10;
     }
     .navbar-transparent {
         padding-top: 15px;
@@ -6482,6 +6481,7 @@ footer .btn {
         position: fixed;
         display: block;
         top: 0;
+        z-index:900;
         height: 100vh;
         width: 260px;
         right: 0;

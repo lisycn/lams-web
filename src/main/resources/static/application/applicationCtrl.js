@@ -44,7 +44,7 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 					Notification.warning("Your Application is Locked !!");
 					return;
 				} else if(type == 2){
-					Notification.warning("Your Application is Already Locked !!");
+					Notification.warning("Applicant is locked. Loan inquiry is submitted to lenders. You will receive notification when there is revert from lenders. Thank you.");
 					return;
 				}
 			}
@@ -72,7 +72,7 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 					return;
 				}
 				if (!uploadAll) {
-					Notification.warning("Please Upload All Documents Before Submit Form");
+					Notification.warning("Please submit all the mandatory documents to proceed with submitting your loan inquiry with multiple lenders.");
 					return;
 				}
 				$scope.applicationDetails.isLoanDetailsComplete = true;

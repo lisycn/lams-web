@@ -1,47 +1,50 @@
 <div class="col-md-12 col-sm-12 col-lg-12">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-header" data-background-color="purple">
-						<h4 class="title">
+		<div class="col-md-12">
+			<h5 class="title">
 							<b>Applications </b>
-						</h4>
-						<p class="category">
-							<b>List of all Applications</b>
-						</p>
-					</div>
-					<div class="card-content">
-						<div class="panel panel-default">
-							<!-- <div class="panel-heading">
-								<b>Existing Loan</b>
-							</div> -->
+						</h5>
+		</div>
+			<div class="col-md-12">
+			<div class="panel panel-default">
+							<div class="panel-heading">
+								<b>List of all Applications</b>
+							</div>
 							<div class="panel-body">
 								<div class="list-group" ng-repeat="product in products">
-									<a href="javascript:void(0)"
-										class="list-group-item list-group-item-action flex-column align-items-start">
+									
 										<h4>
 											<b>{{product.applicationTypeMstrBO.name}} </b>
 											<!-- 											<small class="pull-right">{{product.createdDate | -->
 											<!-- 											date : dateFormate}}</small> -->
 										</h4>
-
-
-
-										<div class="panel-body table-responsive">
-											<table class="table table-bordered">
-												<thead class="text-primary">
-													<tr>
-														<th colspan="2"><select class="form-control"
+										<div class="row">
+<div class="col-md-6">
+<h4 class="label" ng-class="status == 'ACCEPTED' ? 'label-success' : (satus == 'RESPONDED' ? 'label-primary' : 'label-danger')">{{status}}</h4>
+														
+													
+</div>
+<div class="col-md-6">
+	<ul class="list-unstyled list-inline pull-right">
+	<li><select class="form-control"
 															data-ng-model="status"
 															data-ng-options="status as status for status in statuses"
 															data-ng-change="getBorrowerForLenderByApplicationId(products[0],status)">
-														</select></th>
-														<th>{{status}}</th>
-														<th colspan="8"><input type="text" name="searchData"
+														</select></li>
+	<li>
+	<input type="text" name="searchData"
 															class="form-control" data-ng-model=searchApps
-															placeholder="Type anything to search Applications"></th>
-													</tr>
+															placeholder="Type anything to search Applications"></li>
+	</ul>
+</div>
+														
+
+<div class="col-md-12">
+											<div class="table-responsive">
+											<table class="table custom-table">
+												<thead class="text-primary">
+													
 													<tr>
 														<th>Sr No.</th>
 														<th>Name</th>
@@ -73,12 +76,12 @@
 																data-ui-sref="web.lams.brLoanProfile({brId:application.userId, appId:application.id, appTypeId: product.id})">View</button>
 															<button class="btn btn-primary btn-sm"
 																data-toggle="modal" data-target="#responseModel"
-																data-ng-click="setApplicationData(application)">Respond</button>
+																data-ng-click="setApplicationData(application, status)">Respond</button>
 														</td>
 													</tr>
 													<tr data-ng-if="isEmpty(product.applications)">
 														<td colspan="9"
-															class="alert alert-default text-center text-danger">
+															class="text-center text-danger">
 															<span class=" text-danger">No <b>{{status}}</b>
 																Application Available!
 														</span>
@@ -102,14 +105,14 @@
 														<td>{{getEmployementType(app.application.employmentType)}}</td>
 														<td>{{app.application.leadReferenceNo}}</td>
 														<td>{{app.application.loanAmount}}</td>
-														<td>{{app.application.tenure}} Month = {{status}}</td>
+														<td>{{app.application.tenure}} Month</td>
 														<td>
 															<button class="btn btn-info btn-sm"
 																data-ui-sref="web.lams.brLoanProfile({brId:app.application.userId, appId:app.application.id, appTypeId:product.id})">View</button>
 															<button class="btn btn-success btn-sm"
 																data-ng-show="status == Constant.Status.RESPONDED"
 																data-toggle="modal" data-target="#responseModel"
-																data-ng-click="setApplicationData(app)">Responded</button>
+																data-ng-click="setApplicationData(app, status)">Responded</button>
 															<button class="btn btn-default btn-sm"
 																data-ng-show="status == Constant.Status.NOTINTERESTED">Not
 																Interested</button>
@@ -117,7 +120,7 @@
 													</tr>
 													<tr data-ng-if="isEmpty(product.applications)">
 														<td colspan="9"
-															class="alert alert-default text-center text-danger">
+															class="text-center text-danger">
 															<span class=" text-danger">No <b>{{status}}</b>
 																Application Available!
 														</span>
@@ -126,14 +129,17 @@
 												</tbody>
 											</table>
 										</div>
-									</a>
+	
+</div>
+									
+									</div>
 								</div>
 								<div class="list-group" ng-if="isEmpty(products)">No
 									Products Added Yet!</div>
 							</div>
 						</div>
-					</div>
-				</div>
+			
+				
 			</div>
 		</div>
 	</div>
