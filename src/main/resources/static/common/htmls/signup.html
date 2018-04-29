@@ -1,12 +1,12 @@
-<div class="wrapper">
-	<div class="main-panel">
+<div class="">
+	<div class="">
 		<div class="content">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-2"></div>
-					<div class="col-md-6">
+					
+					<div class="col-md-12">
 						<div class="card">
-							<div class="card-header" data-background-color="purple">
+							<!-- <div class="card-header" data-background-color="purple">
 								<h5 class="title">
 									<b>Signup </b> <a href="javascript:void(0)" class="pull-right"
 										data-ui-sref="login"><b>Already Done ? Login Here</b></a>
@@ -14,8 +14,11 @@
 								<p class="category">
 									<b>Complete Signup Process</b>
 								</p>
-							</div>
+							</div> -->
 							<div class="card-content">
+							<h5 class="title text-center">
+									<b>Signup</b>
+								</h5>
 								<form name="userForm" ng-submit="doRegister()" novalidate>
 									<div class="row">
 										<div class="col-md-6">
@@ -69,16 +72,20 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-8">
-											<div class="form-group">
-												<label class="">Accept Terms and
-													Conditions</label>&nbsp;&nbsp; <input type="checkbox"
-													data-ng-model="user.isAcceptTermCondition">
+										<div class="col-md-12">
+											<div class="checkbox">
+												<label class=""><input type="checkbox"
+													data-ng-model="user.isAcceptTermCondition">Accept Terms and
+													Conditions</label>
 											</div>
 										</div>
-										<div class="col-md-4 ">
-											<button type="submit" data-ng-disable="isDisabled" class="btn btn-primary pull-right">Sign
+										<div class="col-md-12">
+											<button type="submit" data-ng-disable="isDisabled" class="btn btn-block btn-primary">Sign
 												Up</button>
+										</div>
+										<div class="col-md-12">
+											<a href="javascript:void(0)" class="pull-right"
+										data-ui-sref="login"><b>Already Done ? Login Here</b></a>
 										</div>
 									</div>
 								</form>

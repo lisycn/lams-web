@@ -37,6 +37,9 @@ angular.module("lams").controller("productsCtrl", [ "$scope", "masterService", "
 						}else{
 							product.applications = success.data.data;
 						}
+						
+//						console.log(_.uniqBy(product.applications, 'createdBy'));
+						
 					} else {
 						Notification.warning(success.data.message);
 					}
@@ -46,10 +49,10 @@ angular.module("lams").controller("productsCtrl", [ "$scope", "masterService", "
 		};
 		
 		$scope.appData = {};
-		$scope.setApplicationData = function(app){
+		$scope.setApplicationData = function(app, status){
 			console.log("app====>",app);
-			console.log("$scope.status==>",$scope.status);
-			if($scope.status = Constant.Status.OPEN){
+			console.log("$scope.status==>",status);
+			if(status == Constant.Status.OPEN){
 				$scope.appData = {applicationMappingBO : {id : $scope.products[0].id},application:{id : app.id},canEdit : true};
 				console.log("appappapp===>",app);
 			}else{
@@ -61,7 +64,8 @@ angular.module("lams").controller("productsCtrl", [ "$scope", "masterService", "
 		}
 		
 		$scope.getEmployementType = function(id){
-			return $filter("filter")($scope.employmentTypes,{id : id},true)[0].name;
+			var employementType = $filter("filter")($scope.employmentTypes,{id : id},true)[0];
+			return employementType ? employementType.name : "N.A";
 		}
 		$scope.submitApproval = function (){
 			if (!$scope.responseForm.$valid) {

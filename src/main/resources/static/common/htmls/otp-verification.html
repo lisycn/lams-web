@@ -1,16 +1,14 @@
 <div class="wrapper">
-	<div class="main-panel">
+	<div class="">
 		<div class="content">
 			<div class="container-fluid">
-				<div class="col-md-3"></div>
-				<div class="col-md-4">
+				
+				<div class="col-md-12">
 					<div class="card">
-						<div class="card-header" data-background-color="purple">
-							<h2 class="title">OTP Verification</h2>
+						<div class="col-md-12 text-center">
+							<h5 class="title">OTP Verification</h5>
 							<p class="category">
-								Verify OTP <a href="javascript:void(0)" class="pull-right" data-ui-sref="login">
-									<b>Login</b>
-								</a>
+								Verify OTP 
 							</p>
 						</div>
 						<div class="card-content">
@@ -27,14 +25,19 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-8">
+									<div class="col-md-12">
 										<a href="javascript:void(0)" data-ng-click="resendOTP()" data-ng-disabled="isDisable">
 											<b>Not Received Yet ? Click Here to Resend</b>
 										</a>
 									</div>
-									<div class="col-md-4">
-										<button type="submit" class="btn btn-primary pull-right"
+									<div class="col-md-12">
+										<button type="submit" class="btn btn-primary btn-block"
 											data-ng-click="verifyOTP()" data-ng-disabled="isDisable">Verify OTP</button>
+									</div>
+									<div class="col-md-12">
+										<a href="javascript:void(0)" class="pull-right" data-ui-sref="login">
+									<b>Login</b>
+								</a>
 									</div>
 								</div>
 								<div class="clearfix"></div>

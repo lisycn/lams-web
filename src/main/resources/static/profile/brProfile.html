@@ -1,20 +1,19 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
-			<div class="card">
-				<div class="card-header" data-background-color="purple">
-					<h4 class="title">
+	<div class="col-md-12">
+		<h4 class="title">
 						<b>{{userData.userTypName}} Profile </b>
 					</h4>
 					<p class="category">
 						<b>Update Additional Details in Profile</b>
 					</p>
-				</div>
-				<div class="card-content">
-					<form name="userForm" data-ng-submit="updateUserDetail()"
+	</div>
+		<div class="col-md-12">
+			<form name="userForm" data-ng-submit="updateUserDetail()"
 						novalidate>
 						<div class="row">
+						
 							<div class="col-md-9">
 								<div class="row">
 									<div class="col-md-4">
@@ -139,14 +138,22 @@
 								</div>
 							</div>
 							<div class="col-md-3">
-								<div class="text-center">
+								<div class="row">
+								<div class="col-md-12 text-center">
 									<img src="{{documentResponse.filePath}}"
 										onerror="this.onerror=null; this.src='assets/img/default-pic.jpg';"
 										style="height: 200px; width: 200px" class="img-rounded"
-										alt="Cinque Terre"> <input type="file"
-										style="padding-left: 83px !important;"
+										alt="Cinque Terre"> 
+								</div>
+								<div class="col-md-12 text-center">
+									<label for="profile-pic" class="btn btn-default">Upload</label>
+										<input type="file"
+										style="padding-left: 83px !important;display:none" id="profile-pic"
 										title="Upload size limit 2 MB" upload-files id="9"
 										onchange="angular.element(this).scope().uploadAppFile(this);">
+								</div>
+									
+										
 								</div>
 
 
@@ -546,8 +553,7 @@
 							</div>
 						</div>
 					</form>
-				</div>
-			</div>
+
 		</div>
 	</div>
 </div>
