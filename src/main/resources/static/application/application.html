@@ -155,6 +155,23 @@
 											name="emi"> No
 									</div>
 								</div>
+
+								<div class="col-md-3" ng-if="applicationDetails.loanTypeId == Constant.LoanType.CLOSED_LOAN">
+									<div class="form-group">
+										<label class="control-label">Bank/Financial
+											Institution Name </label> <input type="text" class="form-control"
+											data-ng-model="applicationDetails.bankName" name="bankName" data-ng-disabled="editApplicationForm"
+											ng-required="false">
+									</div>
+								</div>
+								<div class="col-md-3" ng-if="applicationDetails.loanTypeId == Constant.LoanType.CLOSED_LOAN">
+									<div class="form-group">
+										<label class="control-label">Loan Account Number(if
+											available)</label> <input type="number" class="form-control"
+											data-ng-model="applicationDetails.bankAccNumber" data-ng-disabled="editApplicationForm"
+											name="loanAccountNumber" ng-required="false">
+									</div>
+								</div>
 							</div>
 
 							<div class="row">
