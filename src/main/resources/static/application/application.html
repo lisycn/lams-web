@@ -60,7 +60,7 @@
 <!-- 													data-ng-show="con.status == Constant.Status.RESPONDED" -->
 <!-- 													data-ng-click="updateStatus(con,Constant.Status.REJECTED)">Reject</button> -->
 												&nbsp;
-												<button class="btn btn-default btn-sm"
+												<button class="btn btn-default btn-sm" data-ng-show="con.status == Constant.Status.ACCEPTED"
 													data-ng-click="con.isView = !con.isView">{{con.isView
 													? 'Hide' : 'View'}} Lender Info</button> &nbsp;
 												<button class="btn btn-info btn-sm"
@@ -251,6 +251,10 @@
 										<div class="row" data-ng-repeat="documents in documentList">
 											<div class="col-md-3">
 												<label class="btn btn-default"> <b>{{documents.documentMstrName}}
+												<span
+														data-ng-if="documents.documentMstrId == Constant.documentType.PAN_CARD
+						|| documents.documentMstrId == Constant.documentType.AADHAR_CARD || documents.documentMstrId == Constant.documentType.LAST_3_MONTH_SALARY_SLIP || documents.documentMstrId == Constant.documentType.LAST_6_MONTHS_BANK_ACCOUNT_STATEMENT"
+														class="text-danger">*</span>
 												</b> <input type="file" title="Upload size limit 5 MB"
 													upload-files id="{{documents.documentMstrId}}"
 													data-ng-disabled="editApplicationForm"
