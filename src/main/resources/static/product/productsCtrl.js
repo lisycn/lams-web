@@ -36,10 +36,10 @@ angular.module("lams").controller("productsCtrl", [ "$scope", "masterService", "
 							product.applications = $filter("filter")(success.data.data,{isLoanDetailsLock : true});
 						}else{
 							product.applications = success.data.data;
+							product.applications = _.uniqBy(product.applications, function (obj) {
+								return obj.application.id;
+								});
 						}
-						
-//						console.log(_.uniqBy(product.applications, 'createdBy'));
-						
 					} else {
 						Notification.warning(success.data.message);
 					}
