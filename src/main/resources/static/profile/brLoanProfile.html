@@ -114,7 +114,26 @@
 								<label>Education Qualification</label>
 								<div>{{userData.eduQualification || 'N.A'}}</div>
 							</div>
-
+							
+							<div class="col-md-12">
+								<br>
+							</div>
+							
+							<div class="col-md-4">
+								<label>Date Of Birth</label>
+								<div>{{userData.birthDate | date : dateFormate}}</div>
+							</div>
+							
+							<div class="col-md-4">
+								<label>Aadhaar Card Number</label>
+								<div>{{userData.aadharCardNo || 'N.A'}}</div>
+							</div>
+							
+							<div class="col-md-4">
+								<label>PAN Number</label>
+								<div>{{userData.panCard || 'N.A'}}</div>
+							</div>
+							
 							<div class="col-md-12">
 								<br>
 							</div>
@@ -278,7 +297,7 @@
 								&nbsp;&nbsp;&nbsp;<b>{{document.documentMstrName}}</b>
 								<div class="panel-body">
 									<div class="col-md-2" data-ng-repeat="doc in document.documentResponseList" >
-										<div><a href="{{doc.filePath}}" download  class="btn btn-default"> {{doc.originalName}}</a> </div>
+										<div><a target="_blank" href="{{doc.filePath}}" download  class="btn btn-default"> {{doc.originalName}}</a> </div>
 									</div>
 									<div class="col-md-12">
 										<div class="text-center" ng-if="document.documentResponseList.length < 1">
@@ -352,7 +371,9 @@
 												<th>Application Type</th>
 												<th>Amount (Rs.)</th>
 												<th>Tenure (Month.)</th>
-												<th>Created Date</th>
+<!-- 												<th>Created Date</th> -->
+												<th>Bank Name</th>
+												<th>Account Number</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -362,7 +383,9 @@
 												<td>{{application.applicationTypeName || Constant.NA }}</td>
 												<td>{{application.loanAmount  | currency : getCurrencySymbol()}}</td>
 												<td>{{application.tenure || '0'}}</td>
-												<td>{{application.createdDate | date : dateFormate}}</td>
+<!-- 												<td>{{application.createdDate | date : dateFormate}}</td> -->
+												<td>{{application.bankName || Constant.NA}} == {{Constant.NA}}</td>
+												<td>{{application.bankAccNumber || Constant.NA}}</td>
 											</tr>
 
 											<tr data-ng-if="closedAppCount < 1">
