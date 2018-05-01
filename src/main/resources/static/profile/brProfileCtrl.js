@@ -44,6 +44,14 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 			Notification.warning("Please fill all mandatory fields");
 			return false;
 		}
+		
+		if($rootScope.isEmpty($scope.documentResponse) || $rootScope.isEmpty($scope.documentResponse.filePath)){
+			Notification.warning("Please upload pofile pic !!");
+			return false;
+		}
+		
+		
+		
 		$scope.isDisable = true;
 		
 		if(!$rootScope.isEmpty($scope.userData.employmentType)){
