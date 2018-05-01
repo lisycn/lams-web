@@ -56,6 +56,14 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
                         'common/controllers/signupCtrl.js']});
             }]
 		}
+	}).state("termServiceBR", {
+		url : '/termService_borrower',
+		templateUrl : 'common/htmls/termServiceBR.html',
+		data : {pageTitle : "Lams | Terms and Conditions"},
+	}).state("termServiceCP", {
+		url : '/termService_channel_partner',
+		templateUrl : 'common/htmls/termServiceCP.html',
+		data : {pageTitle : "Lams | Terms and Conditions"},
 	}).state("otp", {
 		url : '/otp-verification/:data',
 		templateUrl : 'common/htmls/otp-verification.html',

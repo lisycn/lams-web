@@ -39,7 +39,6 @@ angular.module("lams").controller("signupCtrl",["$scope", "$http","$rootScope","
 	                	Notification.success(Constant.ErrorMessage.SOMETHING_WENT_WRONG);
 	                }
 	     });		
-		
 	}
 	
 }]);
