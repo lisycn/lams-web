@@ -95,7 +95,7 @@
 														data-ng-repeat="app in product.applications | filter : searchApps"
 														class="bg-active">
 														<td>{{$index + 1}}</td>
-														<td>{{app.application.name || Constant.NA }}</td>
+														<td>{{app.application.firstName}} {{app.application.lastName}}</td>
 														<td>{{app.application.email}}</td>
 														<td>{{app.application.mobile}}</td>
 														<td>{{getEmployementType(app.application.employmentType)}}</td>
