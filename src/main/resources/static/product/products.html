@@ -95,11 +95,7 @@
 														data-ng-repeat="app in product.applications | filter : searchApps"
 														class="bg-active">
 														<td>{{$index + 1}}</td>
-														<td>{{ (!isEmpty(app.application.firstName) &&
-															!isEmpty(app.application.lastName) ?
-															app.application.firstName + ' ' +
-															app.application.lastName : app.application.firstName ||
-															Constant.NA )}}</td>
+														<td>{{app.application.name || Constant.NA }}</td>
 														<td>{{app.application.email}}</td>
 														<td>{{app.application.mobile}}</td>
 														<td>{{getEmployementType(app.application.employmentType)}}</td>
@@ -186,7 +182,7 @@
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
-								<label class="control-label">Processing Fees<span
+								<label class="control-label">Processing Fees(Including Taxes)<span
 									class="text-danger">*</span></label> <input type="number"
 									class="form-control" data-ng-model="appData.processingFees"
 									data-ng-disabled="!appData.canEdit" name="processingFees"
@@ -195,7 +191,7 @@
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label class="control-label">Terms & Conditions<span
+								<label class="control-label">Terms and Conditions<span
 									class="text-danger">*</span></label>
 								<textarea class="form-control"
 									data-ng-model="appData.termAndCondition"
