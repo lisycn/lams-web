@@ -250,10 +250,16 @@
 									<div class="panel-body">
 										<div class="row" data-ng-repeat="documents in documentList">
 											<div class="col-md-3">
-												<label class="btn btn-default"> <b>{{documents.documentMstrName}}
+												<label class="btn btn-default" style="white-space: pre-line;"> <b>{{documents.documentMstrName}}
 												<span
 														data-ng-if="documents.documentMstrId == Constant.documentType.PAN_CARD
-						|| documents.documentMstrId == Constant.documentType.AADHAR_CARD || documents.documentMstrId == Constant.documentType.LAST_3_MONTH_SALARY_SLIP || documents.documentMstrId == Constant.documentType.LAST_6_MONTHS_BANK_ACCOUNT_STATEMENT"
+																			|| documents.documentMstrId == Constant.documentType.AADHAR_CARD 
+																			|| documents.documentMstrId == Constant.documentType.LAST_3_MONTH_SALARY_SLIP 
+																			|| documents.documentMstrId == Constant.documentType.LAST_6_MONTHS_BANK_ACCOUNT_STATEMENT
+																			|| documents.documentMstrId == Constant.documentType.CORPORATE_BANK_ACCOUNT_STATEMENT
+																			|| documents.documentMstrId == Constant.documentType.INDIVIDUAL_ITR_SET_YEAR1 
+																			|| documents.documentMstrId == Constant.documentType.INDIVIDUAL_ITR_SET_YEAR2 
+																			|| documents.documentMstrId == Constant.documentType.INDIVIDUAL_ITR_SET_YEAR3"
 														class="text-danger">*</span>
 												</b> <input type="file" title="Upload size limit 5 MB"
 													upload-files id="{{documents.documentMstrId}}"
@@ -323,29 +329,39 @@
 				{{curSelectedLender.application}}
 				<form name="responseForm" novalidate>
 					<div class="row">
-						<div class="col-md-4">
+						<div class="col-md-12">
 							<div class="form-group">
-								<label><b>Account No :</b> 8458954899</label>
+								<label><b>Bank Account Name :</b> FINEAPPLY CONSULTANCY SOLUTIONS PRIVATE LIMITED</label>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label><b>IFSC :</b> ICICI4582</label>
+								<label><b>Bank Name :</b> HDFC BANK</label>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label><b>State :</b> Gujarat. </label>
+								<label><b>Account No :</b> 50200030744111</label>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label><b>City :</b> Ahmedabad. </label>
+								<label><b>IFSC :</b> HDFC0000227</label>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label><b>Branch :</b> Naranpura,300512. </label>
+								<label><b>State :</b> Maharashtra </label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label><b>City :</b> Mumbai </label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label><b>Branch :</b> VILE PARLE EAST </label>
 							</div>
 						</div>
 						<div class="col-md-4">

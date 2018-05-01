@@ -275,8 +275,12 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 			documentService.getUserDocument(documentId).then(
 				function(success) {
 					if (success.data.status == 200) {
-						scope.documentResponse = success.data.data;
-						console.log(success.data.data);
+						if(!$rootScope.isEmpty(success.data.data) && !$rootScope.isEmpty(success.data.data.filePath)){
+							scope.documentResponse = success.data.data;	
+						} else {
+							scope.documentResponse = {filePath :  null};
+						}
+						
 					} else {
 						Notification.warning(success.data.message);
 					}
@@ -328,14 +332,16 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 						if (response.data.status == 200) {
 							if (response.data.data.isFileUpload) {
 								Notification.info("Successfully Uploaded !!");
+								
 								if(isUserDoc){
 									$rootScope.getUserDocument(documentId,scope);
 								} else {
 									if (!$rootScope.isEmpty(scope.documentList)) {
-										var currentType = $filter('filter')(scope.documentList, {
-											documentMstrId : documentId
-										})[0];
-										currentType.documentResponseList.push(response.data.data);
+										for(var i = 0; i < scope.documentList.length;i++){
+											if(scope.documentList[i].documentMstrId == documentId){
+												scope.documentList[i].documentResponseList.push(response.data.data);		
+											}
+										}
 									}	
 								}
 								
