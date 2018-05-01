@@ -21,16 +21,16 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 						}
 						
 						if ($scope.applicationDetails.employmentType == Constant.EmploymentType.SALARIED) {
-							$scope.getDocumentList([ Constant.documentType.PHOTO_GRAPH, Constant.documentType.PAN_CARD, Constant.documentType.AADHAR_CARD, Constant.documentType.LAST_3_MONTH_SALARY_SLIP,
+							$scope.getDocumentList([ Constant.documentType.PAN_CARD, Constant.documentType.AADHAR_CARD, Constant.documentType.LAST_3_MONTH_SALARY_SLIP,
 								Constant.documentType.LAST_6_MONTHS_BANK_ACCOUNT_STATEMENT, Constant.documentType.FORM_16_OR_APPOIMENT_LETTER,
 								Constant.documentType.INVESTMENT_PROOFS, Constant.documentType.EXISTING_LOAN_DOCUMENT, Constant.documentType.OTHER_DOCUMENT ]);
 						} else if ($scope.applicationDetails.employmentType == Constant.EmploymentType.SELF_EMPLOYED) {
-							$scope.getDocumentList([ Constant.documentType.PHOTO_GRAPH, Constant.documentType.PAN_CARD, Constant.documentType.AADHAR_CARD,
+							$scope.getDocumentList([  Constant.documentType.PAN_CARD, Constant.documentType.AADHAR_CARD,
 								Constant.documentType.CORPORATE_ITR_SET_YEAR1, Constant.documentType.CORPORATE_ITR_SET_YEAR2,
 								Constant.documentType.CORPORATE_ITR_SET_YEAR3,
 								Constant.documentType.CORPORATE_BANK_ACCOUNT_STATEMENT, Constant.documentType.INDIVIDUAL_ITR_SET_YEAR1,
 								Constant.documentType.INDIVIDUAL_ITR_SET_YEAR2, Constant.documentType.INDIVIDUAL_ITR_SET_YEAR3,
-								Constant.documentType.INDIVIDUAL_BANK_ACCOUNT_STATEMENT ]);
+								Constant.documentType.INVESTMENT_PROOFS, Constant.documentType.OTHER_DOCUMENT,Constant.documentType.EXISTING_LOAN_DOCUMENT ]);
 						}
 					} else {
 						Notification.warning(success.data.message);
@@ -58,14 +58,29 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 			data.applicationTypeId = $scope.applicationTypeId;
 			var uploadAll = true;
 			for (var i = 0; i < $scope.documentList.length; i++) {
-				if($scope.documentList[i].documentMstrId == Constant.documentType.PAN_CARD
-						|| $scope.documentList[i].documentMstrId == Constant.documentType.AADHAR_CARD
-						|| $scope.documentList[i].documentMstrId == Constant.documentType.LAST_3_MONTH_SALARY_SLIP
-						|| $scope.documentList[i].documentMstrId == Constant.documentType.LAST_6_MONTHS_BANK_ACCOUNT_STATEMENT){
-					if ($scope.documentList[i].documentResponseList.length == 0) {
-						uploadAll = false;
+				
+				if ($scope.applicationDetails.employmentType == Constant.EmploymentType.SALARIED) {
+					if($scope.documentList[i].documentMstrId == Constant.documentType.PAN_CARD
+							|| $scope.documentList[i].documentMstrId == Constant.documentType.AADHAR_CARD
+							|| $scope.documentList[i].documentMstrId == Constant.documentType.LAST_3_MONTH_SALARY_SLIP
+							|| $scope.documentList[i].documentMstrId == Constant.documentType.LAST_6_MONTHS_BANK_ACCOUNT_STATEMENT){
+						if ($scope.documentList[i].documentResponseList.length == 0) {
+							uploadAll = false;
+						}
+					}	
+				} else if ($scope.applicationDetails.employmentType == Constant.EmploymentType.SELF_EMPLOYED) {
+					if($scope.documentList[i].documentMstrId == Constant.documentType.PAN_CARD
+							|| $scope.documentList[i].documentMstrId == Constant.documentType.AADHAR_CARD
+							|| $scope.documentList[i].documentMstrId == Constant.documentType.CORPORATE_BANK_ACCOUNT_STATEMENT
+							|| $scope.documentList[i].documentMstrId == Constant.documentType.INDIVIDUAL_ITR_SET_YEAR1
+							|| $scope.documentList[i].documentMstrId == Constant.documentType.INDIVIDUAL_ITR_SET_YEAR2
+							|| $scope.documentList[i].documentMstrId == Constant.documentType.INDIVIDUAL_ITR_SET_YEAR3){
+						if ($scope.documentList[i].documentResponseList.length == 0) {
+							uploadAll = false;
+						}
 					}
 				}
+				
 				
 			}
 			$scope.applicationDetails.isUploadComplete = uploadAll;
