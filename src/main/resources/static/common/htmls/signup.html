@@ -26,7 +26,7 @@
 												<!-- <label class="control-label">Company (disabled)</label> -->
 												<select data-ng-model="user.userType"
 													data-ng-options="user.id as user.value for user in userTypes"
-													class="form-control" data-ng-disabled>
+													class="form-control">
 												</select>
 											</div>
 										</div>
@@ -75,8 +75,10 @@
 										<div class="col-md-12">
 											<div class="checkbox">
 												<label class=""><input type="checkbox"
-													data-ng-model="user.isAcceptTermCondition">Accept Terms and
-													Conditions</label>
+													data-ng-model="user.isAcceptTermCondition">
+													<a data-ng-if="Constant.UserType.CHANNEL_PARTNER.id == user.userType" href="javascript:void(0)" data-ui-sref="termServiceCP">Accept Terms and Conditions</a>
+													<a data-ng-if="Constant.UserType.BORROWER.id == user.userType" href="javascript:void(0)" data-ui-sref="termServiceBR">Accept Terms and Conditions</a>
+													</label>
 											</div>
 										</div>
 										<div class="col-md-12">
