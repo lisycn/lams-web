@@ -155,10 +155,10 @@
 										<div>{{userData.employerName || 'N.A'}}</div>
 									</div>
 
-									<div class="col-md-4">
-										<label>Employment Address</label>
-										<div>{{userData.employmentAddress || 'N.A'}}</div>
-									</div>
+<!-- 									<div class="col-md-4"> -->
+<!-- 										<label>Employment Address</label> -->
+<!-- 										<div>{{userData.employmentAddress || 'N.A'}}</div> -->
+<!-- 									</div> -->
 
 									<div class="col-md-12">
 										<br>
@@ -182,11 +182,35 @@
 										<div>{{userData.entityName || 'N.A'}}</div>
 									</div>
 
-									<div class="col-md-4">
-										<label>Employment Address</label>
-										<div>{{userData.employmentAddress || 'N.A'}}</div>
-									</div>
+<!-- 									<div class="col-md-4"> -->
+<!-- 										<label>Employment Address</label> -->
+<!-- 										<div>{{userData.employmentAddress || 'N.A'}}</div> -->
+<!-- 									</div> -->
 								</div>
+								
+							<div class="col-md-12">
+									<br>
+								</div>
+								
+							<div class="col-md-12">
+									<h5>Employment Address</h5>
+								</div>							
+							<div data-ng-if="userData.employmentType == 2 || userData.employmentType == 1">
+							<div class="col-md-6">
+								<label>Premises No And Building</label>
+								<div>{{userData.employmentAddress.premisesAndBuildingName || 'N.A'}}</div>
+							</div>
+
+							<div class="col-md-3">
+								<label>Street Name </label>
+								<div>{{userData.employmentAddress.streetName || 'N.A'}}</div>
+							</div>
+							<div class="col-md-3">
+								<label>Land Mark</label>
+								<div>{{userData.employmentAddress.landMark || 'N.A'}}</div>
+							</div>
+						</div>
+								
 
 								<div class="col-md-12">
 									<br>
