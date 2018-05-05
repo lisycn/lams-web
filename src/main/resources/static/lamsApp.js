@@ -108,9 +108,9 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
             'header@web': {
                 templateUrl: 'common/htmls/header.html',
             },
-//            'footer@web': {
-//                templateUrl: 'common/htmls/footer.html',
-//            },
+// 'footer@web': {
+// templateUrl: 'common/htmls/footer.html',
+// },
             'sidebar@web': {
                 templateUrl: 'common/htmls/sidebar.html',
                 controller : 'sideBarCtrl'
@@ -307,20 +307,24 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 } ]);
 
 app.run(['$rootScope', function($rootScope) {
-//	$scope.open = function() {
-//	    $scope.popup1.opened = true;
-//	  };
+// $scope.open = function() {
+// $scope.popup1.opened = true;
+// };
 }]);
 
-	//app.config(['$stateProvider', '$httpProvider', '$locationProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$ocLazyLoadProvider',
-	//	function ($stateProvider, $httpProvider, $locationProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $ocLazyLoadProvider) {
+	// app.config(['$stateProvider', '$httpProvider', '$locationProvider',
+	// '$urlRouterProvider', '$controllerProvider', '$compileProvider',
+	// '$filterProvider', '$provide', '$ocLazyLoadProvider',
+	// function ($stateProvider, $httpProvider, $locationProvider,
+	// $urlRouterProvider, $controllerProvider, $compileProvider,
+	// $filterProvider, $provide, $ocLazyLoadProvider) {
 	//
-	//		app.controller = $controllerProvider.register;
-	//		app.directive = $compileProvider.directive;
-	//		app.filter = $filterProvider.register;
-	//		app.factory = $provide.factory;
-	//		app.service = $provide.service;
-	//		app.constant = $provide.constant;
-	//		app.value = $provide.value;
+	// app.controller = $controllerProvider.register;
+	// app.directive = $compileProvider.directive;
+	// app.filter = $filterProvider.register;
+	// app.factory = $provide.factory;
+	// app.service = $provide.service;
+	// app.constant = $provide.constant;
+	// app.value = $provide.value;
 	//		
-	//	}]);
+	// }]);
