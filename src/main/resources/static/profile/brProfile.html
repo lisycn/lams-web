@@ -393,7 +393,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-3" ng-show="userData.employmentType == 1">
+							<div class="col-md-3" ng-if="userData.employmentType == 1">
 								<div class="form-group">
 									<label class="control-label">Employer Name <span
 										class="text-danger">*</span></label> <input type="text"
@@ -411,7 +411,7 @@
 								</div>
 							</div>
 
-							<div class="col-md-3" ng-show="userData.employmentType == 1">
+							<div class="col-md-3" ng-if="userData.employmentType == 1">
 								<div class="form-group">
 									<label class="control-label">Total Work Experience</label> <input
 										type="text" class="form-control"
