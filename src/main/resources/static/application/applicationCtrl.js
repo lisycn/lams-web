@@ -1,10 +1,17 @@
-angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService", "$rootScope", "Notification", "applicationService", "Constant", "$filter", "$stateParams", "documentService",
-	function($scope, masterService, $rootScope, Notification, applicationService, Constant, $filter, $stateParams, documentService) {
+angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService", "$rootScope", "Notification", "applicationService", "Constant", "$filter", "$stateParams", "documentService","$state",
+	function($scope, masterService, $rootScope, Notification, applicationService, Constant, $filter, $stateParams, documentService,$state) {
 
 		$scope.applicationTypeCode = $stateParams.appCode;
 		$scope.applicationTypeId = $rootScope.getAppTypeIdByCode($scope.applicationTypeCode);
 		$scope.applicationId = $stateParams.appId;
-		$scope.editApplicationForm = true;
+		if($stateParams.mode == Constant.mode.EDIT){
+			$scope.editApplicationForm = false;	
+		} else if($stateParams.mode == Constant.mode.VIEW){
+			$scope.editApplicationForm = true;
+		} else {
+			$scope.editApplicationForm = true;
+		}
+		
 		$scope.connections = [];
 		$scope.statuses = [ Constant.Status.RESPONDED, Constant.Status.ACCEPTED, Constant.Status.REJECTED ];
 		$scope.status = Constant.Status.RESPONDED;
@@ -105,7 +112,12 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 					if (success.data.status == 200) {
 						Notification.info("Successfully updated application !!");
 						if (type == 1) {
-							$scope.editApplicationForm = !$scope.editApplicationForm;
+							if($stateParams.mode == Constant.mode.EDIT){
+								$state.go("web.lams.application",{mode : Constant.mode.VIEW,appCode : $scope.applicationTypeCode , appId : $scope.applicationId},{reload: true});
+							} else {
+								$scope.editApplicationForm = !$scope.editApplicationForm;	
+							}
+							
 						}
 					} else {
 						Notification.warning(success.data.message);
