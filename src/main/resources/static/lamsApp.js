@@ -288,7 +288,7 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
             }]
 		}
 	}).state("web.lams.application", {
-    	url : '/application/:appCode/:appId',
+    	url : '/application/:mode/:appCode/:appId',
     	views :  {
     		'content@web' :  {
     			templateUrl : 'application/application.html',

@@ -110,7 +110,7 @@ angular.module("lams").controller("applicationListCtrl", [ "$scope", "masterServ
 							$scope.getApplications();
 							$scope.hideDiv(type);
 						} else {
-							$state.go("web.lams.application",{appCode : $rootScope.getAppIdByAppCode(appObj.applicationTypeId) , appId : success.data.data});	
+							$state.go("web.lams.application",{mode : Constant.mode.EDIT,appCode : $rootScope.getAppIdByAppCode(appObj.applicationTypeId) , appId : success.data.data});	
 						}
 						
 					} else {

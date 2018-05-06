@@ -41,7 +41,7 @@
 												<td>{{application.tenure || '0'}}</td>
 												<td>{{application.createdDate | date : dateFormate}}</td>
 												<td><button class="btn btn-primary btn-sm"
-														data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})">View</button>
+														data-ui-sref="web.lams.application({mode : Constant.mode.VIEW,appCode : application.applicationTypeCode, appId : application.id})">View</button>
 														
 														<button class="btn btn-infos btn-sm" data-ng-click="deleteApplication(application.id)">Delete</button>
 												</td>
@@ -64,9 +64,9 @@
 								</div>
 								<!-- <div class="list-group"
 									ng-repeat="application in applicationList | filter : {loanTypeId : Constant.LoanType.EXISTING_LOAN}">
-									data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})"
+									data-ui-sref="web.lams.application({mode : Constant.mode.VIEW,appCode : application.applicationTypeCode, appId : application.id})"
 									<a href="javascript:void(0)"
-										data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})"
+										data-ui-sref="web.lams.application({mode : Constant.mode.VIEW,appCode : application.applicationTypeCode, appId : application.id})"
 										class="list-group-item list-group-item-action flex-column align-items-start">
 										<h4 class="list-group-item-heading">
 											<b>{{application.applicationTypeName}}</b>
@@ -254,7 +254,7 @@
 												<td>{{application.tenure || '0'}}</td>
 												<td>{{application.createdDate | date : dateFormate}}</td>
 												<td><button class="btn btn-primary btn-sm"
-														data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})"
+														data-ui-sref="web.lams.application({mode : Constant.mode.VIEW,appCode : application.applicationTypeCode, appId : application.id})"
 														data-toggle="modal" data-target="#responseModel">View</button>
 											</tr>
 
@@ -268,7 +268,7 @@
 								<!-- <div class="list-group"
 									ng-repeat="application in applicationList  | filter : {loanTypeId : Constant.LoanType.CURRENT_LOAN}">
 									<a href="javascript:void(0)"
-										data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})"
+										data-ui-sref="web.lams.application({mode : Constant.mode.VIEW,appCode : application.applicationTypeCode, appId : application.id})"
 										class="list-group-item list-group-item-action flex-column align-items-start">
 										<h4 class="list-group-item-heading">
 											<b>{{application.applicationTypeName}}
@@ -446,7 +446,7 @@
 												<td>{{application.tenure || '0'}}</td>
 												<td>{{application.createdDate | date : dateFormate}}</td>
 												<td><button class="btn btn-primary btn-sm"
-														data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})">View</button>
+														data-ui-sref="web.lams.application({mode : Constant.mode.VIEW,appCode : application.applicationTypeCode, appId : application.id})">View</button>
 														<button class="btn btn-infos btn-sm" data-ng-click="deleteApplication(application.id)">Delete</button>
 											</tr>
 
@@ -460,7 +460,7 @@
 								<!-- <div class="list-group"
 									ng-repeat="application in applicationList  | filter : {loanTypeId : Constant.LoanType.CLOSED_LOAN}">
 									<a href="javascript:void(0)"
-										data-ui-sref="web.lams.application({appCode : application.applicationTypeCode, appId : application.id})"
+										data-ui-sref="web.lams.application({mode : Constant.mode.VIEW,appCode : application.applicationTypeCode, appId : application.id})"
 										class="list-group-item list-group-item-action flex-column align-items-start">
 										<h4 class="list-group-item-heading">
 											<b>{{application.applicationTypeName}}</b>
