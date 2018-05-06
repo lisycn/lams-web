@@ -188,6 +188,7 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 		$scope.setLenderInfo = function(con, status) {
 			$scope.curSelectedLender.con = con;
 			$scope.curSelectedLender.status = status;
+			$scope.curSelectedLender.processingFees = con.processingFees;
 		}
 
 	} ]);
