@@ -1,4 +1,9 @@
-
+<style>
+.btn-default {
+    background-color: #fbf9f9 !important;
+    color: #000 !important;
+}
+</style>
 <div class="container-fluid">
 	<div class="row">
 	<div class="col-md-12">
@@ -71,7 +76,8 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<label class="control-label">Date Of Birth <span
-												class="text-danger">*</span></label> <input ng-focus="open()"
+												class="text-danger">*</span></label> 
+												<input ng-focus="open()"
 												type="text" name="birthDate" class="form-control"
 												uib-datepicker-popup="dd/MM/yyyy"
 												data-ng-model="userData.birthDate" is-open="popup.opened"
