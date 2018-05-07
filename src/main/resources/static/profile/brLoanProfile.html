@@ -3,7 +3,7 @@
 	<div class="row">
 	<div class="col-md-12">
 		<h4 class="title">
-						<b>Application Profile - {{userData.firstName}}
+						<b>Application Profile - {{userData.firstName}} {{userData.middleName}}
 							{{userData.lastName}}</b></a>
 					</h4>
 					<p class="category">
@@ -408,7 +408,7 @@
 												<td>{{application.loanAmount  | currency : getCurrencySymbol()}}</td>
 												<td>{{application.tenure || '0'}}</td>
 <!-- 												<td>{{application.createdDate | date : dateFormate}}</td> -->
-												<td>{{application.bankName || Constant.NA}} == {{Constant.NA}}</td>
+												<td>{{application.bankName || Constant.NA}}</td>
 												<td>{{application.bankAccNumber || Constant.NA}}</td>
 											</tr>
 

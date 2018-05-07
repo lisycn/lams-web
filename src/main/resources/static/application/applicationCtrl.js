@@ -33,10 +33,11 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 								Constant.documentType.INVESTMENT_PROOFS, Constant.documentType.EXISTING_LOAN_DOCUMENT, Constant.documentType.OTHER_DOCUMENT ]);
 						} else if ($scope.applicationDetails.employmentType == Constant.EmploymentType.SELF_EMPLOYED) {
 							$scope.getDocumentList([  Constant.documentType.PAN_CARD, Constant.documentType.AADHAR_CARD,
+								Constant.documentType.INDIVIDUAL_ITR_SET_YEAR1,
+								Constant.documentType.INDIVIDUAL_ITR_SET_YEAR2, Constant.documentType.INDIVIDUAL_ITR_SET_YEAR3,
+								Constant.documentType.CORPORATE_BANK_ACCOUNT_STATEMENT,
 								Constant.documentType.CORPORATE_ITR_SET_YEAR1, Constant.documentType.CORPORATE_ITR_SET_YEAR2,
 								Constant.documentType.CORPORATE_ITR_SET_YEAR3,
-								Constant.documentType.CORPORATE_BANK_ACCOUNT_STATEMENT, Constant.documentType.INDIVIDUAL_ITR_SET_YEAR1,
-								Constant.documentType.INDIVIDUAL_ITR_SET_YEAR2, Constant.documentType.INDIVIDUAL_ITR_SET_YEAR3,
 								Constant.documentType.INVESTMENT_PROOFS, Constant.documentType.OTHER_DOCUMENT,Constant.documentType.EXISTING_LOAN_DOCUMENT ]);
 						}
 					} else {
