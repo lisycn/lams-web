@@ -1,6 +1,32 @@
+<style>
+.sidebar .logo img{
+	display:none;
+}
+.sidebar.active .logo img{
+	display:inline-block;
+}
+.sidebar.active .logo .first-letter{
+	display:none !important;
+}
+.sidebar .logo .first-letter{
+	display:block;
+}
+.first-letter{
+margin:0;
+font-size:30px;
+color:red;
 
-<div class="logo">
-	<h2 class="text-center">L<span class="other-partn-name">AMS</span></h2>
+}
+.logo{
+height:90px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+</style>
+<div class="logo text-center">
+	<img src="assets/img/VfinanceSLogo.png" width="150">
+	<h1 class="first-letter">V</h1>
 </div>
 <div class="sidebar-wrapper" data-ng-if="user.userType == Constant.UserType.BORROWER.id">
 	<ul class="nav">

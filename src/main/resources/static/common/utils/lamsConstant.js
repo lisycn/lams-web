@@ -16,6 +16,9 @@ app.constant('Constant', {
 			id : -1,
 			value : 'All'
 		}
+	}, mode : {
+		VIEW : "view",
+		EDIT : "edit"
 	},
 	Template : {
 		SMS  : "sms.ftl"

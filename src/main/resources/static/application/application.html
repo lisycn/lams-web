@@ -60,10 +60,10 @@
 <!-- 													data-ng-show="con.status == Constant.Status.RESPONDED" -->
 <!-- 													data-ng-click="updateStatus(con,Constant.Status.REJECTED)">Reject</button> -->
 												&nbsp;
-												<button class="btn btn-default btn-sm" data-ng-show="con.status == Constant.Status.ACCEPTED"
+												<!--<button class="btn btn-default btn-sm" data-ng-if="con.status == Constant.Status.ACCEPTED"
 													data-ng-click="con.isView = !con.isView">{{con.isView
-													? 'Hide' : 'View'}} Lender Info</button> &nbsp;
-												<button class="btn btn-info btn-sm"
+													? 'Hide' : 'View'}} Lender Info</button> &nbsp; -->
+												<button class="btn btn-info btn-sm" data-ng-if="con.status == Constant.Status.ACCEPTED"
 													data-ng-click="setLenderInfo(con,con.status)"
 													data-toggle="modal" data-target="#responseModel">View
 													Payment Info</button></td>
@@ -322,7 +322,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">
-					Kindly deposit <b>Rs. 5000</b> to below Account No
+					Please Pay the Processing Fees Mentioned by the Selected Lender to the Following Bank Account
 				</h4>
 			</div>
 			<div class="modal-body">
@@ -366,7 +366,7 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label><b>Amount :</b> Rs.5000 </label>
+								<label><b>Amount :</b> Rs.{{curSelectedLender.processingFees}} </label>
 							</div>
 						</div>
 					</div>

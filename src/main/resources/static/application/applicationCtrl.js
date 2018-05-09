@@ -1,10 +1,17 @@
-angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService", "$rootScope", "Notification", "applicationService", "Constant", "$filter", "$stateParams", "documentService",
-	function($scope, masterService, $rootScope, Notification, applicationService, Constant, $filter, $stateParams, documentService) {
+angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService", "$rootScope", "Notification", "applicationService", "Constant", "$filter", "$stateParams", "documentService","$state",
+	function($scope, masterService, $rootScope, Notification, applicationService, Constant, $filter, $stateParams, documentService,$state) {
 
 		$scope.applicationTypeCode = $stateParams.appCode;
 		$scope.applicationTypeId = $rootScope.getAppTypeIdByCode($scope.applicationTypeCode);
 		$scope.applicationId = $stateParams.appId;
-		$scope.editApplicationForm = true;
+		if($stateParams.mode == Constant.mode.EDIT){
+			$scope.editApplicationForm = false;	
+		} else if($stateParams.mode == Constant.mode.VIEW){
+			$scope.editApplicationForm = true;
+		} else {
+			$scope.editApplicationForm = true;
+		}
+		
 		$scope.connections = [];
 		$scope.statuses = [ Constant.Status.RESPONDED, Constant.Status.ACCEPTED, Constant.Status.REJECTED ];
 		$scope.status = Constant.Status.RESPONDED;
@@ -26,10 +33,11 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 								Constant.documentType.INVESTMENT_PROOFS, Constant.documentType.EXISTING_LOAN_DOCUMENT, Constant.documentType.OTHER_DOCUMENT ]);
 						} else if ($scope.applicationDetails.employmentType == Constant.EmploymentType.SELF_EMPLOYED) {
 							$scope.getDocumentList([  Constant.documentType.PAN_CARD, Constant.documentType.AADHAR_CARD,
+								Constant.documentType.INDIVIDUAL_ITR_SET_YEAR1,
+								Constant.documentType.INDIVIDUAL_ITR_SET_YEAR2, Constant.documentType.INDIVIDUAL_ITR_SET_YEAR3,
+								Constant.documentType.CORPORATE_BANK_ACCOUNT_STATEMENT,
 								Constant.documentType.CORPORATE_ITR_SET_YEAR1, Constant.documentType.CORPORATE_ITR_SET_YEAR2,
 								Constant.documentType.CORPORATE_ITR_SET_YEAR3,
-								Constant.documentType.CORPORATE_BANK_ACCOUNT_STATEMENT, Constant.documentType.INDIVIDUAL_ITR_SET_YEAR1,
-								Constant.documentType.INDIVIDUAL_ITR_SET_YEAR2, Constant.documentType.INDIVIDUAL_ITR_SET_YEAR3,
 								Constant.documentType.INVESTMENT_PROOFS, Constant.documentType.OTHER_DOCUMENT,Constant.documentType.EXISTING_LOAN_DOCUMENT ]);
 						}
 					} else {
@@ -105,7 +113,12 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 					if (success.data.status == 200) {
 						Notification.info("Successfully updated application !!");
 						if (type == 1) {
-							$scope.editApplicationForm = !$scope.editApplicationForm;
+							if($stateParams.mode == Constant.mode.EDIT){
+								$state.go("web.lams.application",{mode : Constant.mode.VIEW,appCode : $scope.applicationTypeCode , appId : $scope.applicationId},{reload: true});
+							} else {
+								$scope.editApplicationForm = !$scope.editApplicationForm;	
+							}
+							
 						}
 					} else {
 						Notification.warning(success.data.message);
@@ -188,6 +201,7 @@ angular.module("lams").controller("applicationCtrl", [ "$scope", "masterService"
 		$scope.setLenderInfo = function(con, status) {
 			$scope.curSelectedLender.con = con;
 			$scope.curSelectedLender.status = status;
+			$scope.curSelectedLender.processingFees = con.processingFees;
 		}
 
 	} ]);

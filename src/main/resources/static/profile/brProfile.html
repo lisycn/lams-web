@@ -1,4 +1,9 @@
-
+<style>
+.btn-default {
+    background-color: #fbf9f9 !important;
+    color: #000 !important;
+}
+</style>
 <div class="container-fluid">
 	<div class="row">
 	<div class="col-md-12">
@@ -71,7 +76,8 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<label class="control-label">Date Of Birth <span
-												class="text-danger">*</span></label> <input ng-focus="open()"
+												class="text-danger">*</span></label> 
+												<input ng-focus="open()"
 												type="text" name="birthDate" class="form-control"
 												uib-datepicker-popup="dd/MM/yyyy"
 												data-ng-model="userData.birthDate" is-open="popup.opened"
@@ -393,7 +399,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-3" ng-show="userData.employmentType == 1">
+							<div class="col-md-3" ng-if="userData.employmentType == 1">
 								<div class="form-group">
 									<label class="control-label">Employer Name <span
 										class="text-danger">*</span></label> <input type="text"
@@ -411,7 +417,7 @@
 								</div>
 							</div>
 
-							<div class="col-md-3" ng-show="userData.employmentType == 1">
+							<div class="col-md-3" ng-if="userData.employmentType == 1">
 								<div class="form-group">
 									<label class="control-label">Total Work Experience</label> <input
 										type="text" class="form-control"
@@ -464,6 +470,7 @@
 							</div>
 						</div> -->
 						
+						<br/>
 						<div class="row" data-ng-if="userData.employmentType == 2 || userData.employmentType == 1">
 							<div class="col-md-6">
 								<label style="color: #555;"><b>Employment Address</b></label>
