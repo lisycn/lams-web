@@ -156,7 +156,7 @@ app.run([ '$rootScope', '$state', '$stateParams', '$http', '$timeout', "$interva
 			$rootScope.getLoggedInUserDetail();
 			$rootScope.getSalutations(Constant.Mode.ACTIVE.id);
 			$rootScope.getBanks(Constant.Mode.ACTIVE.id);
-			$rootScope.getApplicationTypes(Constant.Mode.ACTIVE.id);
+			$rootScope.getApplicationTypes(Constant.Mode.BOTH.id);
 			$rootScope.getBusinessTypes(Constant.Mode.ACTIVE.id);
 		}
 

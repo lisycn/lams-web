@@ -38,7 +38,7 @@ app.constant('Constant', {
 			id : 1,
 			value : "INActive"
 		},BOTH :{
-			id : 2,
+			id : -1,
 			value : "Both"
 		}
 	},
