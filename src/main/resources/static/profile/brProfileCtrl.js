@@ -46,7 +46,7 @@ angular.module("lams").controller("brProfileCtrl",["$scope", "$http","$rootScope
 		}
 		
 		if($rootScope.isEmpty($scope.documentResponse) || $rootScope.isEmpty($scope.documentResponse.filePath)){
-			Notification.warning("Please upload pofile pic !!");
+			Notification.warning("Please upload profile pic !!");
 			return false;
 		}
 		
