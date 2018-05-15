@@ -53,7 +53,7 @@ angular.module("lams").controller("productsCtrl", [ "$scope", "masterService", "
 			console.log("app====>",app);
 			console.log("$scope.status==>",status);
 			if(status == Constant.Status.OPEN){
-				$scope.appData = {applicationMappingBO : {id : $scope.products[0].id},application:{id : app.id},canEdit : true};
+				$scope.appData = {applicationMappingBO : {id : $scope.products[0].id},application:app,canEdit : true};
 				console.log("appappapp===>",app);
 			}else{
 				console.log("appappapp===>",app);
