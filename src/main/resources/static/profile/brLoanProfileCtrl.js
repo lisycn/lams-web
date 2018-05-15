@@ -82,6 +82,9 @@ angular.module("lams").controller("brLoanProfileCtrl", [ "$scope", "$http", "$ro
 			Notification.warning("Please fill all mandatory fields");
 			return false;
 		}
+		
+		console.log($scope.respond)
+		return false;
 		applicationService.saveApprovalRequest($scope.respond).then(
 	            function(success) {
 	            	if(success.data.status == 200){
